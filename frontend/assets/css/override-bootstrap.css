@@ -1,0 +1,48 @@
+hr {
+  max-width: 50px;
+  border-width: 3px;
+  border-color: #fff7f6;
+}
+
+section {
+  padding: 2rem 0;
+}
+
+@media (min-width:1200px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 857px;
+  }
+}
+
+span.overlay-text  {
+  
+   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+   /* -webkit-text-stroke-width: 0px;
+   -webkit-text-stroke-color: black; */
+    font-family: Open Sans;
+    font-size: 20px;
+    text-shadow: 2px 2px 1px rgb(0, 0, 0);
+    /* background-color:rgba(255, 255, 255, 0.3);/*background color and opacity together*/
+   */
+}
+
+h1.overlay-text{
+  color: black;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+
+}
+
+section{padding:2rem 0}
+
+/* header.masthead{padding-top:10rem;padding-bottom:0px};
+
+section.masthead{padding-top:10rem;padding-bottom:0px}; */
+
+.container{
+  
+  border-color: blue;
+  border-radius: 5em;
+}
+
