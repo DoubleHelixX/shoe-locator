@@ -23,7 +23,28 @@ span.overlay-text  {
     font-size: 20px;
     text-shadow: 2px 2px 1px rgb(0, 0, 0);
     /* background-color:rgba(255, 255, 255, 0.3);/*background color and opacity together*/
-   */
+   
+}
+
+span.title-display-text{
+width: 7em;
+position: relative;
+top: 5em;
+-webkit-text-fill-color: white; /* Will override color (regardless of order) */
+font-family: Open Sans;
+text-shadow: 2px 2px 1px rgb(0, 0, 0);
+font-size: 50px;
+border: outset;
+border-radius: 30%;
+border-color: rgb(233, 216, 216);
+display:flex; 
+margin: auto;
+justify-content: center;
+
+}
+@media screen and (max-width:992px){
+
+  span.title-display-text{ top: 2em;}
 }
 
 h1.overlay-text{
@@ -40,9 +61,17 @@ section{padding:2rem 0}
 
 section.masthead{padding-top:10rem;padding-bottom:0px}; */
 
-.container{
-  
-  border-color: blue;
+.container-add-on{
+  border: outset;
+  border-color: rgb(233, 216, 216);
   border-radius: 5em;
 }
 
+body{
+  background-image: url(../img/eligant-white.jpg);
+  -webkit-background-composite: 0.5;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #cccccc;
+}
