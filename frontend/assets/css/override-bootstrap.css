@@ -42,10 +42,11 @@ margin: auto;
 justify-content: center;
 
 }
-@media screen and (max-width:992px){
+@media screen and (max-width:992px) {
 
   span.title-display-text{ top: 2em;}
 }
+
 
 h1.overlay-text{
   color: black;
