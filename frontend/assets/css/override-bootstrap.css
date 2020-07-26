@@ -69,10 +69,41 @@ section.masthead{padding-top:10rem;padding-bottom:0px}; */
 }
 
 body{
-  background-image: url(../img/eligant-white.jpg);
+  /* background-image: url(../img/eligant-white.jpg); */
   -webkit-background-composite: 0.5;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #cccccc;
+  background-color:white
 }
+
+section{
+  background-color: white
+}
+header{
+  background-color: white;
+}
+
+
+  [contenteditable="true"]:active,
+  [contenteditable="true"]:focus{
+  border: dotted pink;
+  /* outline:groove white;
+  outline-offset: 2em; */
+ 
+  }
+
+  [contenteditable="true"]:focus::before{
+    content: '🤔';  
+    background: rgb(0, 0, 0);
+    
+  }
+
+  .table-edit{
+
+  }
+  
+  table{
+    background-color: white;
+    border: double green 2px;
+  }

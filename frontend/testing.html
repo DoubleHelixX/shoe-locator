@@ -1,0 +1,58 @@
+<head>
+    <!-- jquery framework load -->
+    <script src="js/jquery-2.1.0.min.js"></script>
+    
+    <!-- plugin tableEdit load -->
+    <script src="js/tableEdit-0.1.js"></script>
+    
+    <!-- load plugin for element -->
+    <script>
+    $(function(){
+            $("#tableEdit").tableEdit({
+                        columnsTr: "2,3", //null = all columns editable
+                        enableDblClick: true, //enable edit td with dblclick
+                        callback: function(e){
+                            console.log(e.city);
+                            console.log(e.age);
+                            /*
+                             * code for ajax
+                             */
+                        }, 
+                        activeMasks: function(){
+                           console.log("function enable masks");
+                           /*
+                            * function for active masks
+                            */
+                        }
+                    });
+    })
+    </script>
+    </head>
+    
+    <body>
+        <table id="tableEdit" align="center" >
+                <thead>
+                    <tr>
+                        <th>Edit</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="javascript:;" class="btEdit">Edit</a></td>  <!-- class btEdit to button edit this row -->
+                        <td ref="type:text, name:nome, class:nomeClasse, id:nomeId">Samuel</td> <!-- ref define all attributes of new input -->
+                        <td ref="type:text, name:age, class:ageClasse, id:ageId">26</td> <!-- ref define all attributes of new input -->
+                        <td ref="type:text, name:city, class:cityClasse, id:cityId">Jundiaí</td> <!-- ref define all attributes of new input -->
+                    </tr>
+                    <tr>
+                        <td><a href="javascript:;" class="btEdit">Edit</a></td>
+                        <td>Joana</td>
+                        <td>28</td>
+                        <td>Campinas</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+    </body>
