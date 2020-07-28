@@ -8,214 +8,305 @@ section {
   padding: 2rem 0;
 }
 
-@media (min-width:1200px) {
-  .container, .container-lg, .container-md, .container-sm, .container-xl {
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
     max-width: 857px;
   }
 }
 
-span.overlay-text  {
-  
-   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-   /* -webkit-text-stroke-width: 0px;
+@media (max-width: 1875px) {
+  .container-dropdown-btn {
+    position: fixed;
+    top: 22.875rem;
+    left: 18vw;
+    width: 100vw;
+    display: block;
+    min-width: 1668;
+  }
+}
+
+@media (max-width: 1668px) {
+  .container-dropdown-btn {
+    position: fixed;
+    top: 22.875rem;
+    left: 15vw;
+    width: 100vw;
+    display: block;
+    min-width: 1542px;
+  }
+}
+
+@media (max-width: 1542px) {
+  .container-dropdown-btn {
+    position: fixed;
+    top: 22.875rem;
+    left: 13vw;
+    width: 100vw;
+    display: block;
+    min-width: 1450px;
+  }
+}
+
+@media (max-width: 1450px) {
+  .container-dropdown-btn {
+    position: fixed;
+    top: 22.875rem;
+    left: 10vw;
+    width: 100vw;
+    display: block;
+    min-width: 1350px;
+  }
+}
+
+@media (max-width: 1350px) {
+  .container-dropdown-btn {
+    position: fixed;
+    top: 22.875rem;
+    left: 7vw;
+    width: 100vw;
+    display: block;
+    min-width: 1250px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .container-dropdown-btn {
+    position: fixed;
+    top: 22.875rem;
+    left: 5vw;
+    width: 100vw;
+    display: block;
+    min-width: 1202px;
+  }
+}
+
+@media (max-width: 1202px) {
+  .container-dropdown-btn {
+    position: fixed;
+    top: 18.875rem;
+    left: 0vw;
+    width: 100vw;
+    display: block;
+    min-width: 992px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container-dropdown-btn {
+    position: fixed;
+    top: 10.875rem;
+    left: 0vw;
+    width: 100vw;
+    display: block;
+  }
+}
+
+/* 
+  .container-dropdown-btn{
+    background-color: gray;
+    position: fixed;
+    top: 22.875rem;
+    padding-left: 10vw;
+    width: 100vw;
+    display: inline-block;
+
+  } */
+
+span.overlay-text {
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  /* -webkit-text-stroke-width: 0px;
    -webkit-text-stroke-color: black; */
-    font-family: Open Sans;
-    font-size: 20px;
-    text-shadow: 2px 2px 1px rgb(0, 0, 0);
-    /* background-color:rgba(255, 255, 255, 0.3);/*background color and opacity together*/
-   
+  font-family: Open Sans;
+  font-size: 20px;
+  text-shadow: 2px 2px 1px rgb(0, 0, 0);
+  /* background-color:rgba(255, 255, 255, 0.3);/*background color and opacity together*/
 }
 
-span.title-display-text{
-width: 7em;
-position: relative;
-top: 5em;
--webkit-text-fill-color: white; /* Will override color (regardless of order) */
-font-family: Open Sans;
-text-shadow: 2px 2px 1px rgb(0, 0, 0);
-font-size: 50px;
-border: outset;
-border-radius: 30%;
-border-color: rgb(233, 216, 216);
-display:flex; 
-margin: auto;
-justify-content: center;
-
+span.title-display-text {
+  width: 7em;
+  position: relative;
+  top: 5em;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  font-family: Open Sans;
+  text-shadow: 2px 2px 1px rgb(0, 0, 0);
+  font-size: 50px;
+  border: outset;
+  border-radius: 30%;
+  border-color: rgb(233, 216, 216);
+  display: flex;
+  margin: auto;
+  justify-content: center;
 }
-@media screen and (max-width:992px) {
-
-  span.title-display-text{ top: 2em;}
+@media screen and (max-width: 992px) {
+  span.title-display-text {
+    top: 2em;
+  }
 }
 
-
-h1.overlay-text{
+h1.overlay-text {
   color: black;
   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
-
 }
 
-section{padding:2rem 0}
+section {
+  padding: 2rem 0;
+}
 
 /* header.masthead{padding-top:10rem;padding-bottom:0px};
 
 section.masthead{padding-top:10rem;padding-bottom:0px}; */
 
-.container-add-on{
+.container-add-on {
   border: outset;
   border-color: rgb(233, 216, 216);
   border-radius: 5em;
 }
 
-body{
+body {
   /* background-image: url(../img/eligant-white.jpg); */
   -webkit-background-composite: 0.5;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color:white
-}
-
-section{
-  background-color: white
-}
-header{
   background-color: white;
 }
 
+section {
+  background-color: white;
+}
+header {
+  background-color: white;
+}
 
-  [contenteditable="true"]:active,
-  [contenteditable="true"]:focus{
+[contenteditable="true"]:active,
+[contenteditable="true"]:focus {
   border: dotted pink;
   /* outline:groove white;
   outline-offset: 2em; */
- 
-  }
-
-  [contenteditable="true"]:focus::before{
-    content: '🤔';  
-    background: rgb(0, 0, 0);
-    
-  }
-
-  .table-edit{
-
-  }
-  
-  .table-edit{
-    background-color: white;
-    border: double green 2px;
-  }
-
-  .table-delete{
-    background-color: white;
-    border: double rgb(214, 0, 0) 2px;
-  }
-
-  .table-norm{
-    background-color: white;
-    border: double rgb(0, 0, 0) 2px;
-  }
-
-  .buttons{
-    width: 7em;
-    position: relative;
-    left: 18.5rem;
-    top: 0.75rem;
-    display:flex; 
-    margin: auto;
-    justify-content: center;
-  
-
-  }
-
-  .table-responsive{
-    position: relative;
-    display:flex; 
-    margin: auto;
-  }
-  .card-category{
-    color: rgb(40, 40, 209);
-  }
-
-  .btn-success{
-    margin-right: 15px;
-    padding-right: 20px;
-    padding-left: 20px;
-
-  }
-  .table-title{
-    width: 7em;
-    position: relative;
-    top: 45px;
-    -webkit-text-fill-color: rgb(0, 90, 173); /* Will override color (regardless of order) */
-    font-family: Open Sans;
-    border-color: rgb(25, 216, 216);
-    display:flex; 
-    margin: auto;
-    justify-content: center;
-    
 }
 
-header.masthead p{
+[contenteditable="true"]:focus::before {
+  content: "🤔";
+  background: rgb(0, 0, 0);
+}
+
+.table-edit {
+}
+
+.table-edit {
+  background-color: white;
+  border: double green 2px;
+}
+
+.table-delete {
+  background-color: white;
+  border: double rgb(214, 0, 0) 2px;
+}
+
+.table-norm {
+  background-color: white;
+  border: double rgb(0, 0, 0) 2px;
+}
+
+.buttons {
+  width: 7em;
+  position: relative;
+  left: 18.5rem;
+  top: 0.75rem;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.table-responsive {
+  position: relative;
+  display: flex;
+  margin: auto;
+}
+.card-category {
+  color: rgb(40, 40, 209);
+}
+
+.btn-success {
+  margin-right: 15px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.table-title {
+  width: 7em;
+  position: relative;
+  top: 45px;
+  -webkit-text-fill-color: rgb(
+    0,
+    90,
+    173
+  ); /* Will override color (regardless of order) */
+  font-family: Open Sans;
+  border-color: rgb(25, 216, 216);
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+header.masthead p {
   font-size: 26px;
   font-weight: bolder;
 }
 
-.header-title{
+.header-title {
   color: rgb(5, 0, 0);
 }
 
+@media screen and (max-width: 991px) {
+  #mainNav {
+    background-color: rgba(0, 0, 0, 0.527);
+  }
 
-
-@media screen and (max-width:991px) {
-#mainNav{
-background-color: rgba(0, 0, 0, 0.527);
-
+  .header-title {
+    color: rgb(255, 255, 255);
+  }
 }
 
-.header-title{
-  color: rgb(255, 255, 255);
+.divider {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: double;
+  border-color: rgba(128, 128, 128, 0.459);
+  border-bottom: 1px !important;
 }
 
+.dropdown {
+  -webkit-text-fill-color: rgb(0, 90, 173);
 }
 
-.container-dropdown-btn{
-    position: fixed;
-    top: 22.875rem;
-    
+a {
+  -webkit-text-fill-color: rgb(0, 90, 173);
 }
 
-.divider{
-  width:100%; 
-margin:0; 
-padding:0; 
-border:solid; 
-border-color: rgba(128, 128, 128, 0.459);
-border-bottom: 1px !important;
-
-}
-
-.dropdown{
--webkit-text-fill-color: rgb(0, 90, 173);
-
-}
-
-a{
--webkit-text-fill-color: rgb(0, 90, 173);
-}
-
-li{
+li {
   display: flex;
- justify-content: center;
+  justify-content: center;
+  font-size: 1em;
+  padding: 0.25em 1em;
+  line-height: 1em;
+}
+.dropdown-menu {
+  padding: 0;
+  max-height: 4.5em; /* 1.5 x 3 */
+  overflow-y: auto;
 }
 
 li.selected {
-background-color: rgba(161, 217, 255, 0.692);
+  background-color: rgba(161, 217, 255, 0.692);
 }
 
 li.nonselected {
-  background-color: white
-  
+  background-color: white;
 }
