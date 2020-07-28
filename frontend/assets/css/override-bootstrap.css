@@ -103,7 +103,62 @@ header{
 
   }
   
-  table{
+  .table-edit{
     background-color: white;
     border: double green 2px;
   }
+
+  .table-delete{
+    background-color: white;
+    border: double rgb(214, 0, 0) 2px;
+  }
+
+  .table-norm{
+    background-color: white;
+    border: double rgb(0, 0, 0) 2px;
+  }
+
+  .buttons{
+    width: 7em;
+    position: relative;
+    left: 18.5rem;
+    top: 0.75rem;
+    display:flex; 
+    margin: auto;
+    justify-content: center;
+  
+
+  }
+
+  .table-responsive{
+    position: relative;
+    display:flex; 
+    margin: auto;
+  }
+  .card-category{
+    color: rgb(40, 40, 209);
+  }
+
+  .btn-success{
+    margin-right: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
+
+  }
+  .table-title{
+    width: 7em;
+    position: relative;
+    top: 45px;
+    -webkit-text-fill-color: rgb(0, 90, 173); /* Will override color (regardless of order) */
+    font-family: Open Sans;
+    border-color: rgb(25, 216, 216);
+    display:flex; 
+    margin: auto;
+    justify-content: center;
+    
+}
+
+header.masthead p{
+  font-size: 26px;
+  font-weight: bolder;
+}
