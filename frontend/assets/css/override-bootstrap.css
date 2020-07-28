@@ -8,6 +8,15 @@ section {
   padding: 2rem 0;
 }
 
+.container-dropdown-btn {
+  position: fixed;
+  left: 8vw;
+  top: 7.2200rem;
+  width: 100vw;
+  display: block;
+  min-width: 1668;
+}
+
 @media (min-width: 1200px) {
   .container,
   .container-lg,
@@ -18,11 +27,21 @@ section {
   }
 }
 
-@media (max-width: 1875px) {
+@media (max-width: 2000px) {
   .container-dropdown-btn {
     position: fixed;
-    top: 22.875rem;
-    left: 18vw;
+    left: 8vw;
+    top: 7.2200rem;
+    width: 100vw;
+    display: block;
+    width: fit-content;
+  }
+}
+@media (max-width: 1825px) {
+  .container-dropdown-btn {
+    position: fixed;
+    left: 8vw;
+    top: 7.2200rem;
     width: 100vw;
     display: block;
     min-width: 1668;
@@ -32,9 +51,9 @@ section {
 @media (max-width: 1668px) {
   .container-dropdown-btn {
     position: fixed;
-    top: 22.875rem;
-    left: 15vw;
-    width: 100vw;
+    left: 8vw;
+      top: 7.2200rem;
+     width: 100vw;
     display: block;
     min-width: 1542px;
   }
@@ -43,8 +62,8 @@ section {
 @media (max-width: 1542px) {
   .container-dropdown-btn {
     position: fixed;
-    top: 22.875rem;
-    left: 13vw;
+    left: 8vw;
+        top: 7.2200rem;
     width: 100vw;
     display: block;
     min-width: 1450px;
@@ -54,8 +73,8 @@ section {
 @media (max-width: 1450px) {
   .container-dropdown-btn {
     position: fixed;
-    top: 22.875rem;
-    left: 10vw;
+     top: 7.2200rem;
+    left: 8vw;
     width: 100vw;
     display: block;
     min-width: 1350px;
@@ -65,8 +84,9 @@ section {
 @media (max-width: 1350px) {
   .container-dropdown-btn {
     position: fixed;
-    top: 22.875rem;
-    left: 7vw;
+     top: 7.2200rem;
+    left: 8vw;
+
     width: 100vw;
     display: block;
     min-width: 1250px;
@@ -76,8 +96,8 @@ section {
 @media (max-width: 1250px) {
   .container-dropdown-btn {
     position: fixed;
-    top: 22.875rem;
-    left: 5vw;
+     top: 7.2200rem;
+    left: 8vw;
     width: 100vw;
     display: block;
     min-width: 1202px;
@@ -87,21 +107,31 @@ section {
 @media (max-width: 1202px) {
   .container-dropdown-btn {
     position: fixed;
-    top: 18.875rem;
-    left: 0vw;
+     top: 7.2200rem;
+   left: 8vw;
     width: 100vw;
     display: block;
     min-width: 992px;
   }
 }
 
+@media (max-width: 1169px) {
+  .container-dropdown-btn {
+    position: fixed;
+    top: 7.2200rem;   left: 8vw;
+    width: 100vw;
+    display: block;
+  }
+}
+
 @media (max-width: 992px) {
   .container-dropdown-btn {
     position: fixed;
-    top: 10.875rem;
-    left: 0vw;
+    top: 7.2200rem;
+    left: 8vw;
     width: 100vw;
     display: block;
+    
   }
 }
 
@@ -179,10 +209,22 @@ body {
 
 section {
   background-color: white;
+  padding-top: 5rem;
+  left: auto;
+
 }
 header {
   background-color: white;
+  padding-top: 5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-bottom: 5rem;
+  left: auto;
+
+
 }
+
+
 
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus {
@@ -238,9 +280,13 @@ header {
   padding-right: 20px;
   padding-left: 20px;
 }
-.table-title {
+
+section.table-title, .table-title {
+  font-size: 27px;
+  font-weight: bolder;
   width: 7em;
   position: relative;
+  display: block;
   top: 45px;
   -webkit-text-fill-color: rgb(
     0,
@@ -259,9 +305,34 @@ header.masthead p {
   font-weight: bolder;
 }
 
+header.masthead{
+    padding-top: 0rem;
+    padding-left: 20rem;
+    padding-right: 20rem;
+    padding-bottom: 0rem;
+    margin-top: 20px;
+
+}
+
+section.masthead{
+  padding-top: 0rem;
+  padding-left: 20rem;
+  padding-right: 20rem;
+  padding-bottom: 0rem;
+margin-top: 15px;
+}
+
 .header-title {
   color: rgb(5, 0, 0);
 }
+.classA{
+  padding-right: 50px;
+}
+
+.classB{
+  padding-left: 50px;
+}
+
 
 @media screen and (max-width: 991px) {
   #mainNav {
@@ -310,3 +381,4 @@ li.selected {
 li.nonselected {
   background-color: white;
 }
+
