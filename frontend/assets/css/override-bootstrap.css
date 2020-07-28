@@ -180,3 +180,42 @@ background-color: rgba(0, 0, 0, 0.527);
 }
 
 }
+
+.container-dropdown-btn{
+    position: fixed;
+    top: 22.875rem;
+    
+}
+
+.divider{
+  width:100%; 
+margin:0; 
+padding:0; 
+border:solid; 
+border-color: rgba(128, 128, 128, 0.459);
+border-bottom: 1px !important;
+
+}
+
+.dropdown{
+-webkit-text-fill-color: rgb(0, 90, 173);
+
+}
+
+a{
+-webkit-text-fill-color: rgb(0, 90, 173);
+}
+
+li{
+  display: flex;
+ justify-content: center;
+}
+
+li.selected {
+background-color: rgba(161, 217, 255, 0.692);
+}
+
+li.nonselected {
+  background-color: white
+  
+}
