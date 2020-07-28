@@ -162,3 +162,21 @@ header.masthead p{
   font-size: 26px;
   font-weight: bolder;
 }
+
+.header-title{
+  color: rgb(5, 0, 0);
+}
+
+
+
+@media screen and (max-width:991px) {
+#mainNav{
+background-color: rgba(0, 0, 0, 0.527);
+
+}
+
+.header-title{
+  color: rgb(255, 255, 255);
+}
+
+}
