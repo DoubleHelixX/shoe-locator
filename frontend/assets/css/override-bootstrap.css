@@ -191,7 +191,7 @@ section.masthead{padding-top:10rem;padding-bottom:0px}; */
   border: outset;
   border-color: rgb(233, 216, 216);
   border-radius: 5em;
-  
+  margin: 2rem;
 }
 
 .container-add-on2, img {
@@ -420,43 +420,16 @@ li.nonselected {
 
 @import url('https://fonts.googleapis.com/css?family=Damion|Muli:400,600');
 
-h2 {
-    font-family: 'Damion', cursive;
-    font-weight: 400;
-    color: #166bda;
-    font-size: 35px;
-    text-align: center;
-    position: relative;
-}
-h2:before {
-    position: absolute;
-    content: '';
-    width: 100%;
-    left: 0;
-    top: 22px;
-    background: #4c87af;
-    height: 1px;
-}
-h2 i {
-    font-style: normal;
-    background: #fff;
-    position: relative;
-    padding: 10px;
-}
+
 :focus{outline: none;}
 
 /* necessary to give position: relative to parent. */
-input[type="text"]{font: 15px/24px 'Muli', sans-serif; color: rgb(255, 255, 255); width: 100%; box-sizing: border-box; letter-spacing: 1px; min-width: 10rem; max-width: 12rem; display: block;
-  margin : 0 auto;}
 
 :focus{outline: none;}
 
-.col-3{max-width: 0; width: 37.33%; padding-top: 1rem; padding-left: 40%; } /* necessary to give position: relative to parent. */
-input[type="text"]{
-  font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px; min-width: 10rem;  max-width: 12rem;   display: block;
-  margin : 0 auto;
+.col-3{float: left; width: 27.33%; margin: 40px 3%; position: relative;} /* necessary to give position: relative to parent. */
+input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px; border: none;}
 
-}
 
 .effect-8 ~ .focus-border:before,
 .effect-8 ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px; background-color: #1e90b3; transition: 0.3s;}
@@ -468,4 +441,5 @@ input[type="text"]{
 .effect-8:focus ~ .focus-border:after{width: 100%; transition: 0.3s;}
 .effect-8:focus ~ .focus-border i:before,
 .effect-8:focus ~ .focus-border i:after{height: 100%; transition: 0.4s;}
+
 
