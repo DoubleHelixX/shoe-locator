@@ -4,9 +4,7 @@ hr {
   border-color: #fff7f6;
 }
 
-section {
-  padding: 2rem 0;
-}
+
 
 .container-dropdown-btn {
   position: fixed;
@@ -184,9 +182,6 @@ h1.overlay-text {
   -webkit-text-stroke-color: black;
 }
 
-section {
-  padding: 2rem 0;
-}
 
 /* header.masthead{padding-top:10rem;padding-bottom:0px};
 
@@ -205,6 +200,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-color: white;
+  font-size: 13px;
 }
 
 section {
@@ -259,7 +255,7 @@ header {
 .buttons {
   width: 7em;
   position: relative;
-  left: 18.5rem;
+  left: 15.5rem;
   top: 0.75rem;
   display: flex;
   margin: auto;
@@ -303,14 +299,20 @@ section.table-title, .table-title {
 header.masthead p {
   font-size: 26px;
   font-weight: bolder;
+  padding-top:6rem;
 }
 
+.table-header{
+position: block;
+right: 10rem;
+}
 header.masthead{
     padding-top: 0rem;
     padding-left: 20rem;
     padding-right: 20rem;
     padding-bottom: 0rem;
     margin-top: 20px;
+   
 
 }
 
@@ -325,13 +327,37 @@ margin-top: 15px;
 .header-title {
   color: rgb(5, 0, 0);
 }
-.classA{
-  padding-right: 50px;
+/* 
+.re-size{
+width: 1rem!important;
+height: 1rem;
 }
 
-.classB{
-  padding-left: 50px;
+.bayA{
+  padding-right: 50px;
+  size: 1rem;
 }
+
+.bayB{
+  padding-left: 50px;
+  size: 1rem;
+
+} */
+
+
+
+td.edit { resize: horizontal; overflow: hidden;  }
+td.norm { resize: none; overflow: visible;}
+ 
+
+ 
+/* container, .container, section, .section, header, .header,.text-primary,.my-auto .card-body,.masthead ,.text-center, .text-white ,.d-flex ,.re-size{
+
+  size: 1px;
+  height: 1px;
+  width: 1px;
+
+} */
 
 
 @media screen and (max-width: 991px) {
