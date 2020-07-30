@@ -36,7 +36,7 @@ hr {
   }
 }
 .col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
-a{
+.btnDiv{
   margin-left: 21rem;
 }
 
@@ -51,9 +51,9 @@ a{
   }
 
 .col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
-a{
+.btnDiv{
   margin-left: 21rem;
-  margin-top:-5rem
+  margin-top:-2rem
 
 }
 }
@@ -67,7 +67,7 @@ a{
     min-width: 1668;
   }
 .col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
-a{
+.btnDiv{
   margin-left: 21rem;
 }
 }
@@ -159,7 +159,7 @@ a{
     display: block;
   }
 .col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
-a{
+.btnDiv{
   margin-left: 21rem
 }
 
@@ -176,7 +176,7 @@ a{
     
   }
 .col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
-a{
+.btnDiv{
   margin-left: 7.5rem
 }
 
@@ -347,11 +347,7 @@ header {
   color: rgb(40, 40, 209);
 }
 
-.btn-success {
-  margin-right: 15px;
-  padding-right: 20px;
-  padding-left: 20px;
-}
+yy
 
 section.table-title, .table-title {
   font-size: 27px;
