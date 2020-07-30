@@ -25,6 +25,21 @@ hr {
   }
 }
 
+@media (min-width: 100px) {
+  .container-dropdown-btn {
+    position: fixed;
+    left: 8vw;
+    top: 7.2200rem;
+    width: 100vw;
+    display: block;
+    width: fit-content;
+  }
+}
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+a{
+  margin-left: 21rem;
+}
+
 @media (max-width: 2000px) {
   .container-dropdown-btn {
     position: fixed;
@@ -34,6 +49,13 @@ hr {
     display: block;
     width: fit-content;
   }
+
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+a{
+  margin-left: 21rem;
+  margin-top:-5rem
+
+}
 }
 @media (max-width: 1825px) {
   .container-dropdown-btn {
@@ -44,6 +66,10 @@ hr {
     display: block;
     min-width: 1668;
   }
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+a{
+  margin-left: 21rem;
+}
 }
 
 @media (max-width: 1668px) {
@@ -55,6 +81,8 @@ hr {
     display: block;
     min-width: 1542px;
   }
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+
 }
 
 @media (max-width: 1542px) {
@@ -66,6 +94,8 @@ hr {
     display: block;
     min-width: 1450px;
   }
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+
 }
 
 @media (max-width: 1450px) {
@@ -77,6 +107,8 @@ hr {
     display: block;
     min-width: 1350px;
   }
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+
 }
 
 @media (max-width: 1350px) {
@@ -89,6 +121,8 @@ hr {
     display: block;
     min-width: 1250px;
   }
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+
 }
 
 @media (max-width: 1250px) {
@@ -100,6 +134,8 @@ hr {
     display: block;
     min-width: 1202px;
   }
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+
 }
 
 @media (max-width: 1202px) {
@@ -111,6 +147,8 @@ hr {
     display: block;
     min-width: 992px;
   }
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+
 }
 
 @media (max-width: 1169px) {
@@ -120,6 +158,12 @@ hr {
     width: 100vw;
     display: block;
   }
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+a{
+  margin-left: 21rem
+}
+
+
 }
 
 @media (max-width: 992px) {
@@ -131,6 +175,29 @@ hr {
     display: block;
     
   }
+.col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 18rem;} /* necessary to give position: relative to parent. */
+a{
+  margin-left: 7.5rem
+}
+
+
+}
+
+
+
+@media (max-width: 767px) {
+  .col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 7rem;} /* necessary to give position: relative to parent. */
+
+}
+
+@media (max-width: 640px) {
+  .col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 10rem;} /* necessary to give position: relative to parent. */
+
+}
+
+@media (max-width: 387px) {
+  .col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 5rem;} /* necessary to give position: relative to parent. */
+
 }
 
 /* 
@@ -198,8 +265,11 @@ section.masthead{padding-top:10rem;padding-bottom:0px}; */
   padding-top: 5rem;
   size: 12px;
   background:transparent;
-  place-items: center;
  
+}
+
+img{
+  min-width: 680px
 }
 
 body {
@@ -242,8 +312,6 @@ header {
   background: rgb(0, 0, 0);
 }
 
-.table-edit {
-}
 
 .table-edit {
   background-color: white;
@@ -427,19 +495,15 @@ li.nonselected {
 
 :focus{outline: none;}
 
-.col-3{float: left; width: 27.33%; margin: 40px 3%; position: relative;} /* necessary to give position: relative to parent. */
-input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px; border: none;}
+input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;  border: none;}
 
 
 .effect-8 ~ .focus-border:before,
-.effect-8 ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px; background-color: #1e90b3; transition: 0.3s;}
+.effect-8 ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px; background-color: #1e90b3; transition: 0.3s; left:8px;}
 .effect-8 ~ .focus-border:after{top: auto; bottom: 0; left: auto; right: 0;}
 .effect-8 ~ .focus-border i:before,
-.effect-8 ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 0; background-color: #1e90b3; transition: 0.4s;}
+.effect-8 ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 0; background-color: #1e90b3; left:8px; transition: 0.4s;}
 .effect-8 ~ .focus-border i:after{left: auto; right: 0; top: auto; bottom: 0;}
 .effect-8:focus ~ .focus-border:before,
 .effect-8:focus ~ .focus-border:after{width: 100%; transition: 0.3s;}
-.effect-8:focus ~ .focus-border i:before,
-.effect-8:focus ~ .focus-border i:after{height: 100%; transition: 0.4s;}
-
-
+.effect-8:focus ~ .focus-border i:before,.effect-8:focus ~ .focus-border i:after{height: 100%; transition: 0.4s;}
