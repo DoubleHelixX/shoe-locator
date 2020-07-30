@@ -1,40 +1,112 @@
-from sqlalchemy import Column, String, create_engine
-from flask_sqlalchemy import SQLAlchemy
+#----------------------------------------------------------------------------#
+# Imports
+#----------------------------------------------------------------------------#
+# migration file import - manage.py class can alternately run as a script instead as well
+import os
 import json
+import dateutil.parser
+import babel
+from flask_moment import Moment
+from flask_sqlalchemy import SQLAlchemy
+import logging
+from logging import Formatter, FileHandler
+from flask_wtf import FlaskForm
+# from forms import *
+from colorama import Fore , Style
+from sqlalchemy import Column, String, Integer, create_engine
+#----------------------------------------------------------------------------#
+# App Config.
+#----------------------------------------------------------------------------#
 
-database_path = os.environ['DATABASE_URL']
-
+# app.config.from_object('config')
+# db = SQLAlchemy(app)
+database_name = "shoe_locate"
+database_path = "postgresql+psycopg2://{}:{}@{}/{}".format('postgres', '1','localhost:5432', database_name)
 db = SQLAlchemy()
 
 '''
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
-def setup_db(app, database_path=database_path):
+def setup_db(app):
+  try:
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
     db.create_all()
+    return True
+  except:
+    return False
+
+#----------------------------------------------------------------------------#
+# Models.
+#----------------------------------------------------------------------------#
 
 
-'''
-Person
-Have title and release year
-'''
-class Person(db.Model):  
-  __tablename__ = 'People'
+class Bay(db.Model):
+  __tablename__ = 'bays'
 
-  id = Column(Integer, primary_key=True)
-  name = Column(String)
-  catchphrase = Column(String)
+  id = db.Column(db.Integer, primary_key=True)
+  bay = db.Column(db.Integer, nullable=False)
+  section = db.Column(db.String(120), nullable=False)
+  name = db.Column(db.String)
+  style = db.Column(db.String(120), nullable=False, unique=True)
+  row = db.Column(db.String(120), nullable=False)
+  col = db.Column(db.String(120), nullable=False)
+  notes = db.Column(db.String(120))
+  img = db.Column(db.String(120))
+  
+  def __repr__(self):
+    return f'<Bay {self.id} {self.name}>'
+  
+  def __init__(self, bay, section, name, style, row, col, notes, img):
+    self.bay = bay
+    self.section = section
+    self.name =name
+    self.style = style
+    self.row = row
+    self.col = col
+    self.notes = notes
+    self.img = img
 
-  def __init__(self, name, catchphrase=""):
-    self.name = name
-    self.catchphrase = catchphrase
+  def insert(self):
+    db.session.add(self)
+    db.session.commit()
+    
+  def update(self):
+    db.session.commit()
+
+  def delete(self):
+    db.session.delete(self)
+    db.session.commit()
 
   def format(self):
     return {
       'id': self.id,
+      'bay': self.bay,
+      'section': self.section,
       'name': self.name,
-      'catchphrase': self.catchphrase}
+      'style': self.style,
+      'row': self.row,
+      'col': self.col,
+      'notes': self.notes,
+      'img': self.img
+    }
+
+#----------------------------------------------------------------------------#
+# Filters.
+#----------------------------------------------------------------------------#
+
+
+def format_datetime(value, format='medium'):
+  date = dateutil.parser.parse(value)
+  if format == 'full':
+      format = "EEEE MMMM, d, y 'at' h:mma"
+  elif format == 'medium':
+      format = "EE MM, dd, y h:mma"
+  return babel.dates.format_datetime(date, format)
+
+
+app.jinja_env.filters['datetime'] = format_datetime
+
