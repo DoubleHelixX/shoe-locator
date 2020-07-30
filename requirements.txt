@@ -1,0 +1,14 @@
+flask
+sqlalchemy
+Flask-SQLAlchemy
+Flask-Migrate 
+babel
+python-dateutil==2.6.0
+flask-moment
+flask-wtf
+flask-script
+colorama
+psycopg2
+
+-U Jinja2
+-U flask-cors

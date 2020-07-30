@@ -1,0 +1,42 @@
+{% extends "layout.html %}
+{% block title %}DashBoard - Shoe Locator{% endblock %}
+{% block content %}
+    
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <div><h1 class ="header-title">Reebok Shoe Locate</div>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto"> </ul>
+            </div>
+        </div>
+        
+    </nav>
+    <span class = "  title-display-text  "> DASHBOARD</span>
+
+    <header class="masthead text-center text-white d-flex" style="box-shadow: 0px 0px;">
+        <div class="container container-add-on my-auto" style="background: url(assets/img/cat.jpg) center / cover no-repeat;">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h1 class="text-uppercase overlay-text"><strong style="text-shadow: 0px 0px;box-shadow: 0px 0px;">Find Shoe</strong></h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-lg-8 mx-auto">
+                <span class = "overlay-text " >Searching for a shoe &amp; you just can't seem to find it? Don't worry I'm here to help!</span>
+            </div><a class="btn btn-light btn-xl sr-button" role="button" data-aos="zoom-in" data-aos-duration="400" data-aos-once="true" href="#">Find a Shoe</a>
+        </div>
+        
+        <div class="container container-add-on my-auto" style="background: url(assets/img/owly.png) center / cover no-repeat; ">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h1 class="text-uppercase overlay-text"><strong style="text-shadow: 0px 0px;">Manage bays</strong></h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-lg-8 mx-auto">
+                <span  class = "overlay-text">Manage your shoe bay database here! -- For managers only</span>
+            </div><a class="btn btn-light btn-xl sr-button" role="button" data-aos="zoom-in" data-aos-duration="400" data-aos-once="true" href="#">Manage Shoe Bays</a>
+        </div>
+    </header>
+
+    {% endblock  %}
