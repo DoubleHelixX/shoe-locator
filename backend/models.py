@@ -1,43 +1,31 @@
-#----------------------------------------------------------------------------#
-# Imports
-#----------------------------------------------------------------------------#
-# migration file import - manage.py class can alternately run as a script instead as well
 import os
-import json
-import dateutil.parser
-import babel
-from flask_moment import Moment
-from flask_sqlalchemy import SQLAlchemy
-import logging
-from logging import Formatter, FileHandler
-from flask_wtf import FlaskForm
-# from forms import *
-from colorama import Fore , Style
 from sqlalchemy import Column, String, Integer, create_engine
-#----------------------------------------------------------------------------#
-# App Config.
-#----------------------------------------------------------------------------#
+from flask_sqlalchemy import SQLAlchemy
+import json
 
-# app.config.from_object('config')
-# db = SQLAlchemy(app)
 database_name = "shoe_locate"
 database_path = "postgresql+psycopg2://{}:{}@{}/{}".format('postgres', '1','localhost:5432', database_name)
+
 db = SQLAlchemy()
 
 '''
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
-def setup_db(app):
+def setup_db(app, database_path=database_path):
   try:
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
     db.create_all()
+    # BOOTSTRAP DB migration command with migration file
+    migration = m.migration(app, db)
     return True
   except:
     return False
+
+
 
 #----------------------------------------------------------------------------#
 # Models.
@@ -99,14 +87,14 @@ class Bay(db.Model):
 #----------------------------------------------------------------------------#
 
 
-def format_datetime(value, format='medium'):
-  date = dateutil.parser.parse(value)
-  if format == 'full':
-      format = "EEEE MMMM, d, y 'at' h:mma"
-  elif format == 'medium':
-      format = "EE MM, dd, y h:mma"
-  return babel.dates.format_datetime(date, format)
+# def format_datetime(value, format='medium'):
+#   date = dateutil.parser.parse(value)
+#   if format == 'full':
+#       format = "EEEE MMMM, d, y 'at' h:mma"
+#   elif format == 'medium':
+#       format = "EE MM, dd, y h:mma"
+#   return babel.dates.format_datetime(date, format)
 
 
-app.jinja_env.filters['datetime'] = format_datetime
+# app.jinja_env.filters['datetime'] = format_datetime
 
