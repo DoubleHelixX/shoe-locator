@@ -41,6 +41,14 @@ def create_app(test_config=None):
     @app.route('/')
     def index():
         return render_template('index.html')
+    
+    @app.route('/a')
+    def associate():
+        return render_template('associate-view.html')
+    
+    @app.route('/m')
+    def manager():
+        return render_template('manager-view.html')
 
 
     #  Venues
