@@ -3,8 +3,13 @@ hr {
   border-width: 3px;
   border-color: #fff7f6;
 }
+.owl_img{
+  background: url("/static/assets/img/owly.png") center / cover no-repeat; 
+}
 
-
+.cat_img{
+  background: url("/static/assets/img/cat.jpg") center / cover no-repeat; 
+}
 
 .container-dropdown-btn {
   position: fixed;

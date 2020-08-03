@@ -2,6 +2,7 @@ import os
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
+import manage as m
 
 database_name = "shoe_locate"
 database_path = "postgresql+psycopg2://{}:{}@{}/{}".format('postgres', '1','localhost:5432', database_name)
