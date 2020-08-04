@@ -21,7 +21,7 @@ def create_app(test_config=None):
     '''
     @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
     '''
-    #CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
     
 
     '''
@@ -42,15 +42,43 @@ def create_app(test_config=None):
     def index():
         return render_template('index.html')
     
-    @app.route('/a')
-    def associate():
+    @app.route('/associate')
+    def AssociateView():
         return render_template('associate-view.html')
     
-    @app.route('/m')
-    def manager():
+    @app.route('/manager')
+    def ManagerView():
         return render_template('manager-view.html')
 
 
+    @app.route('/shoe/<string:style_code>')
+    def GetShoe(style_code):
+        try:
+            listOfShoes=[]
+            flashOutput=[]
+            receivedShoe = Bay.query.filter(Bay.style == style_code).order_by(Bay.bay).all()  
+            
+            for shoe in receivedShoe:
+                listOfShoes.append(Bay.format(shoe))
+                flashOutput.append('Bay:' + Bay.bay + ' Row: '+ Bay.row + ' Col: '+ Bay.col)
+            
+            flashListToStr = ' '.join([str(value) for value in flashOutput]) 
+            listToStr = ' '.join([str(value) for value in listOfShoes])                  
+            flash(flashListToStr)
+            
+        except expression as identifier:
+            pass
+        finally:
+            return jsonify({
+                'success': True,
+                'bay_info': listOfShoes,
+                'total_bay_results': len(listOfShoes),
+                })
+        
+
+       
+    
+    
     #  Venues
     #  ----------------------------------------------------------------
 
