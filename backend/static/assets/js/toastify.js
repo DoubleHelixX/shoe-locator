@@ -73,7 +73,7 @@
 
       // Creating the DOM object
       var divElement = document.createElement("div");
-      divElement.className = "tZoastify on " + this.options.className;
+      divElement.className = "toastify on " + this.options.className;
 
       // Positioning toast to left or right or center
       if (!!this.options.position) {

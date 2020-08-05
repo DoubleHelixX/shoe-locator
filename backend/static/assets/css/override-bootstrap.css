@@ -501,12 +501,12 @@ li.nonselected {
 
 :focus{outline: none;}
 
-.effect-8 input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;  border: none; }
+.effect-8 input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;  border: none!important; }
 
 
 
 .effect-8 ~ .focus-border:before,
-.effect-8 ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px; background-color: #1e90b3; transition: 0.3s; left:7px;}
+.effect-8 ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px; background-color: #1e90b3; transition: 0.3s; left:8px;}
 .effect-8 ~ .focus-border:after{top: auto; bottom: 0; left: auto; right: 0;}
 .effect-8 ~ .focus-border i:before,
 .effect-8 ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 0; background-color: #1e90b3; left:8px; transition: 0.4s;}
@@ -514,6 +514,21 @@ li.nonselected {
 .effect-8:focus ~ .focus-border:before,
 .effect-8:focus ~ .focus-border:after{width: 100%; transition: 0.3s;}
 .effect-8:focus ~ .focus-border i:before,.effect-8:focus ~ .focus-border i:after{height: 100%; transition: 0.4s;}
+
+input, textarea {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+}
+
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
 
 .hidden {
   display: none;

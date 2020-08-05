@@ -20,7 +20,6 @@
                 
             
             </img>
-            <div class="searchContent"></div>
                 <div class="col-3">
                     <input class="effect-8 " id="stylecode " onkeyup="return (tfSubmit(event,this))" type="text" placeholder="Enter Style Code #">
                     <span class="focus-border">
@@ -47,8 +46,9 @@
         var keyCode2 = (window.event) ? e.which : e.keyCode;
         if (keyCode == 13 || keyCode2==13){
             //alert('sds', str.value);
-            let inputValue=str.value;
-            searchShoeAsync(inputValue);
+      
+            searchShoeAsync(str.value);
+            str.value='';
         }
     }
        
@@ -104,11 +104,13 @@ function searchShoeAsync(inputValue=null){
             var myToast = Toastify({
             text: 'Bay:  '+ obj.bay_info[0].bay + '  Row:  '+ obj.bay_info[0].row +'  Col:  '+ obj.bay_info[0].col,
             duration: 4000,
-            backgroundColor: "-webkit-linear-gradient(315deg, #121213, #ffffff)",
+            backgroundColor: "-webkit-linear-gradient(315deg,#ffffff, #121213, #121213,#ffffff)",
             gravity: "bottom",
             position: "center"
             })
             myToast.showToast();
+           
+          
             console.log('Here:' , ' Bay:  ', obj.bay_info[0].bay, '  Row:  ', obj.bay_info[0].row, ' Col: ', obj.bay_info[0].col);
           }).catch (function (error) {
             errorDiv.innerHTML = "something went wrong with the  Fetch  error- POST method- "; //fill error div content with correct message
