@@ -53,8 +53,7 @@ def create_app(test_config=None):
 
     @app.route('/shoe/<style_code>', methods =['GET'])
     def GetShoe(style_code):
-        print('>>>4', style_code)
-        
+        #print('>>>4', style_code)
         try:
             listOfShoes=[]
             flashOutput=[]
@@ -78,20 +77,54 @@ def create_app(test_config=None):
                 })
         
 
+    
        
     
     
-    #  Venues
+    #  Error Handlers
     #  ----------------------------------------------------------------
 
+@app.errorhandler(404)
+  def not_found(error):
+    return jsonify({
+      "success": False, 
+      "error": 404,
+      "message": "resource or url not found"
+      }), 404
 
-    # @app.errorhandler(404)
-    # def not_found_error(error):
-    #     return render_template('errors/404.html'), 404
+  @app.errorhandler(422)
+  def unprocessable(error):
+    return jsonify({
+      "success": False, 
+      "error": 422,
+      "message": "unprocessable"
+      }), 422
+    
+  @app.errorhandler(405)
+  def unprocessable(error):
+    return jsonify({
+      "success": False, 
+      "error": 405,
+      "message": "method not allowed"
+      }), 405
 
-    # @app.errorhandler(500)
-    # def server_error(error):
-    #     return render_template('errors/500.html'), 500
+  @app.errorhandler(400)
+  def bad_request(error):
+    return jsonify({
+      "success": False, 
+      "error": 400,
+      "message": "bad request"
+      }), 400
+
+
+  @app.errorhandler(500)
+  def server_error(error):
+    return jsonify({
+      "success": False, 
+      "error": 500,
+      "message": "Something is wrong with the server configuration"
+      }), 500
+    
 
 
     if not app.debug:
