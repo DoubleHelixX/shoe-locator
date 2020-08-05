@@ -51,8 +51,10 @@ def create_app(test_config=None):
         return render_template('manager-view.html')
 
 
-    @app.route('/shoe/<string:style_code>')
+    @app.route('/shoe/<style_code>', methods =['GET'])
     def GetShoe(style_code):
+        print('>>>4', style_code)
+        
         try:
             listOfShoes=[]
             flashOutput=[]
@@ -64,10 +66,10 @@ def create_app(test_config=None):
             
             flashListToStr = ' '.join([str(value) for value in flashOutput]) 
             listToStr = ' '.join([str(value) for value in listOfShoes])                  
-            flash(flashListToStr)
+            flash('sdsds')
             
         except expression as identifier:
-            pass
+            flash('Shoe not in Records')
         finally:
             return jsonify({
                 'success': True,
