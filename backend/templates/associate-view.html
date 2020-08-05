@@ -100,11 +100,14 @@ function searchShoeSync(inputValue=null){
           errorDiv.innerHTML = "";
           fetch("/shoe/" + inputValue, {
             method: "GET",
-          }).then(function (jsonResponse) {
-            alert(jsonResponse["bay_info"]);
-            //location.reload();
-            
-          });
+          }).then(response => 
+    response.json().then(data => ({
+        data: data,
+        status: response.status
+    })
+).then(res => {
+    alert(res.status, res.data)
+}));
         }
       }
 
