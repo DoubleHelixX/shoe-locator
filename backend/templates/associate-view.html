@@ -46,9 +46,9 @@
         var keyCode = (window.Event) ? e.which : e.keyCode;
         var keyCode2 = (window.event) ? e.which : e.keyCode;
         if (keyCode == 13 || keyCode2==13){
-            //alert('sds');
+            //alert('sds', str.value);
             let inputValue=str.value;
-            searchShoeSync(inputValue);
+            searchShoeAsync(inputValue);
         }
     }
        
@@ -73,7 +73,7 @@
 //         triggerEvent(el, 'onkeyup');       
 //     }
 
-function searchShoeSync(inputValue=null){
+function searchShoeAsync(inputValue=null){
         //alert(inputValue);
 
         let errorDiv = document.getElementById("error"); //Error block / debugger
@@ -98,20 +98,23 @@ function searchShoeSync(inputValue=null){
 
           errorDiv.className = "hidden";
           errorDiv.innerHTML = "";
-          fetch("/shoe/" + inputValue, {
-            method: "GET",
-          }).then(response => 
-    response.json().then(data => ({
-        data: data,
-        status: response.status
-    })
-).then(res => {
-    alert(res.status, res.data)
-}));
+          fetch("/shoe/" + inputValue, {method: "GET"},).then(function(response){
+            return response.json();
+          }).then(function(obj){
+            console.log('Here:' , 'Bay: ', obj.bay_info[0].bay, ' Row: ', obj.bay_info[0].row, ' Col: ', obj.bay_info[0].col);
+          }).catch (function (error) {
+            errorDiv.innerHTML = "something went wrong with the  Fetch  error- POST method- "; //fill error div content with correct message
+            errorDiv.className = ""; //show the div element - unhidden
+            console.error(error);
+            
+          });
+
+          
         }
       }
+      
 
-    function searchShoeAsync(inputValue=null){
+    function searchShoeAsync2(inputValue=null){
         //alert(inputValue);
 
         let errorDiv = document.getElementById("error"); //Error block / debugger
@@ -143,7 +146,7 @@ function searchShoeSync(inputValue=null){
           }).catch(function (e) {
               errorDiv.innerHTML = "something went wrong with the  Fetch  error- POST method- "; //fill error div content with correct message
               errorDiv.className = ""; //show the div element - unhidden
-              alert(e);
+              console.error(e);
           });
         }
       }
