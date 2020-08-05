@@ -101,7 +101,15 @@ function searchShoeAsync(inputValue=null){
           fetch("/shoe/" + inputValue, {method: "GET"},).then(function(response){
             return response.json();
           }).then(function(obj){
-            console.log('Here:' , 'Bay: ', obj.bay_info[0].bay, ' Row: ', obj.bay_info[0].row, ' Col: ', obj.bay_info[0].col);
+            var myToast = Toastify({
+            text: 'Bay:  '+ obj.bay_info[0].bay + '  Row:  '+ obj.bay_info[0].row +'  Col:  '+ obj.bay_info[0].col,
+            duration: 4000,
+            backgroundColor: "-webkit-linear-gradient(315deg, #121213, #ffffff)",
+            gravity: "bottom",
+            position: "center"
+            })
+            myToast.showToast();
+            console.log('Here:' , ' Bay:  ', obj.bay_info[0].bay, '  Row:  ', obj.bay_info[0].row, ' Col: ', obj.bay_info[0].col);
           }).catch (function (error) {
             errorDiv.innerHTML = "something went wrong with the  Fetch  error- POST method- "; //fill error div content with correct message
             errorDiv.className = ""; //show the div element - unhidden
