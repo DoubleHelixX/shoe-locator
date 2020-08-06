@@ -51,7 +51,7 @@ class Bay(db.Model):
   def __repr__(self):
     return f'<Bay {self.id} {self.name}>'
   
-  def __init__(self, bay, section, name, style, row, col, notes, img):
+  def __init__(self, bay, section, name, style, row, col, notes, img, gender):
     self.bay = bay
     self.section = section
     self.name =name
@@ -60,6 +60,8 @@ class Bay(db.Model):
     self.col = col
     self.notes = notes
     self.img = img
+    self.gender = gender
+    
 
   def insert(self):
     db.session.add(self)
@@ -82,7 +84,8 @@ class Bay(db.Model):
       'row': self.row,
       'col': self.col,
       'notes': self.notes,
-      'img': self.img
+      'img': self.img,
+      'gender': self.gender
     }
 
 #----------------------------------------------------------------------------#

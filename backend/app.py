@@ -98,39 +98,45 @@ def create_app(test_config=None):
             
 
 
-    # @app.route('/bay/<string:bay>', methods =['GET'])
-    # def ShowBay(bay):
-    #     bayData =[]
+    @app.route('/bay/<string:bay>', methods =['GET'])
+    def ShowBay(bay):
+        bayData =[]
         
-    #     # *See if data is being passed and accepted through the url.*
-    #     #print('>>>Bay #: ',bay)
-    #     unprocessable = False
-    #     searchFailure = False
+        # *See if data is being passed and accepted through the url.*
+        #print('>>>Bay #: ',bay)
+        unprocessable = False
+        searchFailure = False
         
-    #     try:
-    #         bayData = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
+        try:
+            if bay == 'all':
+                listOfBays = Bay.query.order_by(Bay.bay).all()  
+            else:
+                listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
             
-    #         if len(bayData):   
-    #             for shoe in bayData:
-    #                 bayData.append(Bay.format(shoe))
-    #         else:  
-    #             print('>>> no such Bay. Length is: ' , len(receivedShoe))
-    #             searchFailure=True
+            if len(listOfBays):   
+                for shoe in listOfBays:
+                    print('>>>1', listOfBays)
+                    bayData.append(Bay.format(shoe))
+                    print('>>>2', shoe)
+                    
+            else:  
+                print('>>> no such Bay. Length is: ' , len(listOfBays))
+                searchFailure=True
                 
-    #     except expression as identifier:
-    #         unprocessable = true
-    #         print('except Expression: ', identifier)
-    #     finally:
-    #         if searchFailure:
-    #             abort(404)
-    #         elif unprocessable:
-    #             abort(422)
-    #         else:
-    #             return jsonify({
-    #                 'success': True,
-    #                 'bay_info': bayData,
-    #                 'total_shoe_results': len(bayData),
-    #                 })
+        except:
+            unprocessable = true
+            print('Error Message: ', sys.exc_info())
+        finally:
+            if searchFailure:
+                abort(404)
+            elif unprocessable:
+                abort(422)
+            else:
+                return jsonify({
+                    'success': True,
+                    'bay_info': bayData,
+                    'total_bay_results': len(listOfBays)
+                    })
     
     #  ----------------------------------------------------------------
     #  Error Handlers
