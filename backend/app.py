@@ -132,11 +132,93 @@ def create_app(test_config=None):
             elif unprocessable:
                 abort(422)
             else:
+                responseData=[{ 
+                                'success': True,
+                                'bay_info': bayData,
+                                'total_bay_results': len(listOfBays)
+                                }]
+                return render_template('manager-view.html', responseData=responseData)
+    
+    @app.route('/manager/bays/<string:bay>', methods =['GET'])
+    def EditBayAsync(bay):
+        bayData =[]
+        
+        # *See if data is being passed and accepted through the url.*
+        #print('>>>Bay #: ',bay)
+        unprocessable = False
+        searchFailure = False
+        
+        try:
+            if bay == 'all':
+                listOfBays = Bay.query.order_by(Bay.bay).all()  
+            else:
+                listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
+            
+            if len(listOfBays):   
+                for shoe in listOfBays:
+                    print('>>>1', listOfBays)
+                    bayData.append(Bay.format(shoe))
+                    print('>>>2', shoe)
+                    
+            else:  
+                print('>>> no such Bay. Length is: ' , len(listOfBays))
+                searchFailure=True
+                
+        except:
+            unprocessable = true
+            print('Error Message: ', sys.exc_info())
+        finally:
+            if searchFailure:
+                abort(404)
+            elif unprocessable:
+                abort(422)
+            else:
                 return jsonify({
                     'success': True,
                     'bay_info': bayData,
                     'total_bay_results': len(listOfBays)
                     })
+    
+    # @app.route('/manager/bays/<string:bay>', methods =['GET'])
+    # def EditBayAsync(bay):
+    #     bayData =[]
+        
+    #     # *See if data is being passed and accepted through the url.*
+    #     #print('>>>Bay #: ',bay)
+    #     unprocessable = False
+    #     searchFailure = False
+        
+    #     try:
+    #         if bay == 'all':
+    #             listOfBays = Bay.query.order_by(Bay.bay).all()  
+    #         else:
+    #             listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
+            
+    #         if len(listOfBays):   
+    #             for shoe in listOfBays:
+    #                 print('>>>1', listOfBays)
+    #                 bayData.append(Bay.format(shoe))
+    #                 print('>>>2', shoe)
+                    
+    #         else:  
+    #             print('>>> no such Bay. Length is: ' , len(listOfBays))
+    #             searchFailure=True
+                
+    #     except:
+    #         unprocessable = true
+    #         print('Error Message: ', sys.exc_info())
+    #     finally:
+    #         if searchFailure:
+    #             abort(404)
+    #         elif unprocessable:
+    #             abort(422)
+    #         else:
+    #             return jsonify({
+    #                 'success': True,
+    #                 'bay_info': bayData,
+    #                 'total_bay_results': len(listOfBays)
+    #                 })
+    
     
     #  ----------------------------------------------------------------
     #  Error Handlers
