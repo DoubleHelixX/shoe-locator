@@ -101,17 +101,38 @@ function searchShoeAsync(inputValue=null){
           fetch("/shoe/" + inputValue, {method: "GET"},).then(function(response){
             return response.json();
           }).then(function(obj){
-            var myToast = Toastify({
-            text: 'Bay:  '+ obj.bay_info[0].bay + '  Row:  '+ obj.bay_info[0].row +'  Col:  '+ obj.bay_info[0].col,
-            duration: 4000,
-            backgroundColor: "-webkit-linear-gradient(315deg,#ffffff, #121213, #121213,#ffffff)",
-            gravity: "bottom",
-            position: "center"
-            })
-            myToast.showToast();
-           
-          
-            console.log('Here:' , ' Bay:  ', obj.bay_info[0].bay, '  Row:  ', obj.bay_info[0].row, ' Col: ', obj.bay_info[0].col);
+            if (obj.success == false && obj.error == "404"){
+              var myToast = Toastify({
+              text: 'Shoe Not in our Database',
+              duration: 4000,
+              backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+              gravity: "bottom",
+              position: "center"
+              })
+              myToast.showToast();
+            }
+            else if (obj.success == false && obj.error == "422"){
+                  var myToast = Toastify({
+                  text: 'Unprocessable: Try again if it repeats contact webmaster',
+                  duration: 4000,
+                  backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+                  gravity: "bottom",
+                  position: "center"
+                  })
+                  myToast.showToast();
+                }
+            else{
+              var myToast = Toastify({
+              text: 'Bay:  '+ obj.bay_info[0].bay + '  Row:  '+ obj.bay_info[0].row +'  Col:  '+ obj.bay_info[0].col,
+              duration: 4000,
+              backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
+              gravity: "bottom",
+              position: "center",
+              
+              })
+              myToast.showToast();
+              console.log('Here:' , ' Bay:  ', obj.bay_info[0].bay, '  Row:  ', obj.bay_info[0].row, ' Col: ', obj.bay_info[0].col);
+            }
           }).catch (function (error) {
             errorDiv.innerHTML = "something went wrong with the  Fetch  error- POST method- "; //fill error div content with correct message
             errorDiv.className = ""; //show the div element - unhidden

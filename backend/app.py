@@ -53,78 +53,93 @@ def create_app(test_config=None):
 
     @app.route('/shoe/<style_code>', methods =['GET'])
     def GetShoe(style_code):
-        #print('>>>4', style_code)
+        # *See if data is being passed and accepted through the url.*
+        #print('>>>Shoe code: ', style_code)
+        unprocessable = False
+        searchFailure = False
         try:
             listOfShoes=[]
             flashOutput=[]
             receivedShoe = Bay.query.filter(Bay.style == style_code).order_by(Bay.bay).all()  
             
-            for shoe in receivedShoe:
-                listOfShoes.append(Bay.format(shoe))
-                flashOutput.append('Bay:' + Bay.bay + ' Row: '+ Bay.row + ' Col: '+ Bay.col)
-            
-            flashListToStr = ' '.join([str(value) for value in flashOutput]) 
-            listToStr = ' '.join([str(value) for value in listOfShoes])                  
-            flash('sdsds')
+            if len(receivedShoe):   
+                for shoe in receivedShoe:
+                    listOfShoes.append(Bay.format(shoe))
+                    flashOutput.append('Bay:' + Bay.bay + ' Row: '+ Bay.row + ' Col: '+ Bay.col)
+            else:  
+                print('>>> no shoe results. Length is: ' , len(receivedShoe))
+                searchFailure=True
+           
+            # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
+            #flashListToStr = ' '.join([str(value) for value in flashOutput]) 
+            #listToStr = ' '.join([str(value) for value in listOfShoes])                  
+            #flash(flashListToStr)
             
         except expression as identifier:
-            flash('Shoe not in Records')
+            #flash('Shoe not in Records')
+            unprocessable = true
+            print('except Expression: ', identifier)
         finally:
-            return jsonify({
-                'success': True,
-                'bay_info': listOfShoes,
-                'total_bay_results': len(listOfShoes),
-                })
-        
+            if searchFailure:
+                abort(404)
+            elif unprocessable:
+                abort(422)
+            else:
+                return jsonify({
+                    'success': True,
+                    'bay_info': listOfShoes,
+                    'total_bay_results': len(listOfShoes),
+                    })
+            
 
-    
+
        
     
     
     #  Error Handlers
     #  ----------------------------------------------------------------
 
-@app.errorhandler(404)
-  def not_found(error):
-    return jsonify({
-      "success": False, 
-      "error": 404,
-      "message": "resource or url not found"
-      }), 404
+    @app.errorhandler(404)
+    def not_found(error):
+        return jsonify({
+        "success": False, 
+        "error": 404,
+        "message": "resource or url not found"
+        }), 404
 
-  @app.errorhandler(422)
-  def unprocessable(error):
-    return jsonify({
-      "success": False, 
-      "error": 422,
-      "message": "unprocessable"
-      }), 422
-    
-  @app.errorhandler(405)
-  def unprocessable(error):
-    return jsonify({
-      "success": False, 
-      "error": 405,
-      "message": "method not allowed"
-      }), 405
+    @app.errorhandler(422)
+    def unprocessable(error):
+        return jsonify({
+        "success": False, 
+        "error": 422,
+        "message": "unprocessable"
+        }), 422
+        
+    @app.errorhandler(405)
+    def unprocessable(error):
+        return jsonify({
+        "success": False, 
+        "error": 405,
+        "message": "method not allowed"
+        }), 405
 
-  @app.errorhandler(400)
-  def bad_request(error):
-    return jsonify({
-      "success": False, 
-      "error": 400,
-      "message": "bad request"
-      }), 400
+    @app.errorhandler(400)
+    def bad_request(error):
+        return jsonify({
+        "success": False, 
+        "error": 400,
+        "message": "bad request"
+        }), 400
 
 
-  @app.errorhandler(500)
-  def server_error(error):
-    return jsonify({
-      "success": False, 
-      "error": 500,
-      "message": "Something is wrong with the server configuration"
-      }), 500
-    
+    @app.errorhandler(500)
+    def server_error(error):
+        return jsonify({
+        "success": False, 
+        "error": 500,
+        "message": "Something is wrong with the server configuration"
+        }), 500
+        
 
 
     if not app.debug:
