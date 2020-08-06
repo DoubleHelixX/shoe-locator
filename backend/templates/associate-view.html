@@ -98,7 +98,7 @@ function searchShoeAsync(inputValue=null){
 
           errorDiv.className = "hidden";
           errorDiv.innerHTML = "";
-          fetch("/shoe/" + inputValue, {method: "GET"},).then(function(response){
+          fetch("associate/shoe/" + inputValue, {method: "GET"},).then(function(response){
             return response.json();
           }).then(function(obj){
             if (obj.success == false && obj.error == "404"){

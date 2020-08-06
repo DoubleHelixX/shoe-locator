@@ -51,7 +51,7 @@ def create_app(test_config=None):
         return render_template('manager-view.html')
 
 
-    @app.route('/shoe/<style_code>', methods =['GET'])
+    @app.route('/associate/shoe/<style_code>', methods =['GET'])
     def GetShoe(style_code):
         # *See if data is being passed and accepted through the url.*
         #print('>>>Shoe code: ', style_code)
@@ -98,7 +98,7 @@ def create_app(test_config=None):
             
 
 
-    @app.route('/bay/<string:bay>', methods =['GET'])
+    @app.route('/manager/bay/<string:bay>', methods =['GET'])
     def ShowBay(bay):
         bayData =[]
         
