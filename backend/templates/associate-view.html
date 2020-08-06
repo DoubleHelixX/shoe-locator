@@ -122,16 +122,22 @@ function searchShoeAsync(inputValue=null){
                   myToast.showToast();
                 }
             else{
-              var myToast = Toastify({
-              text: 'Bay:  '+ obj.bay_info[0].bay + '  Row:  '+ obj.bay_info[0].row +'  Col:  '+ obj.bay_info[0].col,
-              duration: 4000,
-              backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
-              gravity: "bottom",
-              position: "center",
-              
-              })
-              myToast.showToast();
-              console.log('Here:' , ' Bay:  ', obj.bay_info[0].bay, '  Row:  ', obj.bay_info[0].row, ' Col: ', obj.bay_info[0].col);
+              //console.log(obj.total_shoe_results, obj.shoe_info[0]);
+            
+              for(let i=0; i < obj.total_shoe_results; i++){
+                console.log(i, obj.total_shoe_results, obj.shoe_info[i]);
+                var myToast = Toastify({
+                text: 'Bay:  '+ obj.shoe_info[i].bay + '  Row:  '+ obj.shoe_info[i].row +'  Col:  '+ obj.shoe_info[i].col,
+                duration: 4000,
+                backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
+                gravity: "bottom",
+                position: "center",
+                
+                });
+                myToast.showToast();
+                console.log('Here:' , ' Bay:  ', obj.shoe_info[i].bay, '  Row:  ', obj.shoe_info[i].row, ' Col: ', obj.shoe_info[i].col);
+
+              }
             }
           }).catch (function (error) {
             errorDiv.innerHTML = "something went wrong with the  Fetch  error- POST method- "; //fill error div content with correct message

@@ -41,11 +41,12 @@ class Bay(db.Model):
   bay = db.Column(db.Integer, nullable=False)
   section = db.Column(db.String(120), nullable=False)
   name = db.Column(db.String)
-  style = db.Column(db.String(120), nullable=False, unique=True)
+  style = db.Column(db.String(120), nullable=False)
   row = db.Column(db.String(120), nullable=False)
   col = db.Column(db.String(120), nullable=False)
   notes = db.Column(db.String(120))
   img = db.Column(db.String(500), nullable = True)
+  gender = db.Column(db.CHAR(1))
   
   def __repr__(self):
     return f'<Bay {self.id} {self.name}>'

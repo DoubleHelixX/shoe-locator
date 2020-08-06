@@ -59,13 +59,18 @@ def create_app(test_config=None):
         searchFailure = False
         try:
             listOfShoes=[]
-            flashOutput=[]
+            
+            # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
+            #flashOutput=[]
+            
             receivedShoe = Bay.query.filter(Bay.style == style_code).order_by(Bay.bay).all()  
             
             if len(receivedShoe):   
                 for shoe in receivedShoe:
                     listOfShoes.append(Bay.format(shoe))
-                    flashOutput.append('Bay:' + Bay.bay + ' Row: '+ Bay.row + ' Col: '+ Bay.col)
+                   
+                    # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
+                    #flashOutput.append('Bay:' + Bay.bay + ' Row: '+ Bay.row + ' Col: '+ Bay.col)
             else:  
                 print('>>> no shoe results. Length is: ' , len(receivedShoe))
                 searchFailure=True
@@ -87,15 +92,47 @@ def create_app(test_config=None):
             else:
                 return jsonify({
                     'success': True,
-                    'bay_info': listOfShoes,
-                    'total_bay_results': len(listOfShoes),
+                    'shoe_info': listOfShoes,
+                    'total_shoe_results': len(listOfShoes),
                     })
             
 
 
-       
+    # @app.route('/bay/<string:bay>', methods =['GET'])
+    # def ShowBay(bay):
+    #     bayData =[]
+        
+    #     # *See if data is being passed and accepted through the url.*
+    #     #print('>>>Bay #: ',bay)
+    #     unprocessable = False
+    #     searchFailure = False
+        
+    #     try:
+    #         bayData = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
+            
+    #         if len(bayData):   
+    #             for shoe in bayData:
+    #                 bayData.append(Bay.format(shoe))
+    #         else:  
+    #             print('>>> no such Bay. Length is: ' , len(receivedShoe))
+    #             searchFailure=True
+                
+    #     except expression as identifier:
+    #         unprocessable = true
+    #         print('except Expression: ', identifier)
+    #     finally:
+    #         if searchFailure:
+    #             abort(404)
+    #         elif unprocessable:
+    #             abort(422)
+    #         else:
+    #             return jsonify({
+    #                 'success': True,
+    #                 'bay_info': bayData,
+    #                 'total_shoe_results': len(bayData),
+    #                 })
     
-    
+    #  ----------------------------------------------------------------
     #  Error Handlers
     #  ----------------------------------------------------------------
 
