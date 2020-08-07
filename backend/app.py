@@ -107,6 +107,7 @@ def create_app(test_config=None):
         unprocessable = False
         searchFailure = False
         bayCategories=None
+        listOfBays=None
         
         try:
             if bay == 'all':
@@ -114,17 +115,15 @@ def create_app(test_config=None):
             else:
                 listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
             
-            
-            
-            
-            print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
             if len(listOfBays):   
                 for shoe in listOfBays:
                     #print('>>>1', listOfBays)
                     bayData.append(Bay.format(shoe))
                     #print('>>>2', shoe)
                     distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
-                    bayCategories = [ 'Bay: ' + str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
+                    bayCategories = [str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
+                    print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
+                    
                     
             else:  
                 print('>>> no such Bay. Length is: ' , len(listOfBays))
@@ -139,12 +138,12 @@ def create_app(test_config=None):
             elif unprocessable:
                 abort(422)
             else:
-                responseData=[{ 
+                responseData={ 
                                 'success': True,
                                 'bay_info': bayData,
                                 'bay_categories': bayCategories,
                                 'total_bay_results': len(listOfBays)
-                                }]
+                                }
                 return render_template('manager-view.html', responseData=responseData)
     
     
@@ -157,6 +156,7 @@ def create_app(test_config=None):
         unprocessable = False
         searchFailure = False
         bayCategories=None
+        listOfBays=None
         try:
             if bay == 'all':
                 listOfBays = Bay.query.order_by(Bay.bay).all()  
@@ -171,6 +171,7 @@ def create_app(test_config=None):
                     #print('>>>2', shoe)
                     distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
                     bayCategories = [ 'Bay: ' + str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
+                    #print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
             
                    
             else:  

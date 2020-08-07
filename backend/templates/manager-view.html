@@ -19,18 +19,12 @@
         <button class="btn btn-default dropdown-toggle" type="dd-button" data-toggle="dropdown">Bay Selection
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li class = "selected"><a href="#">All Bays</a></li>
+          <!-- onclick="return getBays({{responseData.bay_info[0].bay}});" -->
+          <li class = "selected"><a href="" onclick="return getBays('all');" >All Bays</a></li>
           <li class="divider"></li>
-          <li class = "nonselected"><a href="#">HTML</a></li>
-          <li class = "nonselected"><a href="#">CSS</a></li>
-          <li class = "nonselected"><a href="#">JavaScript</a></li>
-          <li class = "nonselected"><a href="#">JavaScript</a></li>
-          <li class = "nonselected"><a href="#">JavaScript</a></li>
-          <li class = "nonselected"><a href="#">HTML</a></li>
-          <li class = "nonselected"><a href="#">CSS</a></li>
-          <li class = "nonselected"><a href="#">JavaScript</a></li>
-          <li class = "nonselected"><a href="#">JavaScript</a></li>
-          <li class = "nonselected"><a href="#">JavaScript</a></li>
+          {% for bay in responseData.bay_categories %}
+          <li class = "nonselected"><a href="" onclick="return getBays({{bay}});">{{bay}}</a></li>
+		    	{% endfor %}
         </ul>
       </div>
     </div>
@@ -1155,5 +1149,11 @@
         </div>
       </div>
     </section> 
-  
+    <script>
+      function getBays(data){
+      var bay_info= data;
+      alert(bay_info);
+      console.log(bay_info);
+      }
+    </script>
     {% endblock  %}
