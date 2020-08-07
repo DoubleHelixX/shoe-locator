@@ -658,3 +658,29 @@ input:-webkit-autofill:active  {
 }
 
 
+/* .items li { display: inline;} */
+
+.hover_img  td {position:absolute; display:none; z-index:99; }
+
+td:hover .hover_img { 
+  display:inline; 
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: visible; 
+  position: fixed; 
+  padding: 5px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-25%, -65%);
+  
+}
+
+
+.hover_img img {
+  height: 150%;
+  width: 150%;
+}
+
+.hover_img img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}

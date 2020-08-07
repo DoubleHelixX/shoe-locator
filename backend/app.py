@@ -121,8 +121,8 @@ def create_app(test_config=None):
                     bayData.append(Bay.format(shoe))
                     #print('>>>2', shoe)
                     distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
-                    bayCategories = [str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
-                    print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
+                    bayCategories = ['Bay: ' + str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
+                    #print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
                     
                     
             else:  
