@@ -106,6 +106,7 @@ def create_app(test_config=None):
         #print('>>>Bay #: ',bay)
         unprocessable = False
         searchFailure = False
+        bayCategories=None
         
         try:
             if bay == 'all':
@@ -113,11 +114,17 @@ def create_app(test_config=None):
             else:
                 listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
             
+            
+            
+            
+            print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
             if len(listOfBays):   
                 for shoe in listOfBays:
-                    print('>>>1', listOfBays)
+                    #print('>>>1', listOfBays)
                     bayData.append(Bay.format(shoe))
-                    print('>>>2', shoe)
+                    #print('>>>2', shoe)
+                    distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
+                    bayCategories = [ 'Bay: ' + str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
                     
             else:  
                 print('>>> no such Bay. Length is: ' , len(listOfBays))
@@ -135,9 +142,11 @@ def create_app(test_config=None):
                 responseData=[{ 
                                 'success': True,
                                 'bay_info': bayData,
+                                'bay_categories': bayCategories,
                                 'total_bay_results': len(listOfBays)
                                 }]
                 return render_template('manager-view.html', responseData=responseData)
+    
     
     @app.route('/manager/bays/<string:bay>', methods =['GET'])
     def EditBayAsync(bay):
@@ -147,19 +156,23 @@ def create_app(test_config=None):
         #print('>>>Bay #: ',bay)
         unprocessable = False
         searchFailure = False
-        
+        bayCategories=None
         try:
             if bay == 'all':
                 listOfBays = Bay.query.order_by(Bay.bay).all()  
             else:
                 listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
             
+            
             if len(listOfBays):   
                 for shoe in listOfBays:
-                    print('>>>1', listOfBays)
+                   #print('>>>1', listOfBays)
                     bayData.append(Bay.format(shoe))
-                    print('>>>2', shoe)
-                    
+                    #print('>>>2', shoe)
+                    distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
+                    bayCategories = [ 'Bay: ' + str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
+            
+                   
             else:  
                 print('>>> no such Bay. Length is: ' , len(listOfBays))
                 searchFailure=True
@@ -176,6 +189,7 @@ def create_app(test_config=None):
                 return jsonify({
                     'success': True,
                     'bay_info': bayData,
+                    'bay_categories': bayCategories,
                     'total_bay_results': len(listOfBays)
                     })
     
