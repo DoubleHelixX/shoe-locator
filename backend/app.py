@@ -111,9 +111,9 @@ def create_app(test_config=None):
         
         try:
             if bay == 'all':
-                listOfBays = Bay.query.order_by(Bay.bay).all()  
+                listOfBays = Bay.query.order_by(Bay.bay , Bay.section).all()  
             else:
-                listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
+                listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.section).all()  
             
             if len(listOfBays):   
                 for shoe in listOfBays:

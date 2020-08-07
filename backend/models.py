@@ -85,7 +85,7 @@ class Bay(db.Model):
       'col': self.col,
       'notes': self.notes,
       'img': self.img,
-      'gender': self.gender
+      'gender': self.gender.upper()
     }
 
 #----------------------------------------------------------------------------#

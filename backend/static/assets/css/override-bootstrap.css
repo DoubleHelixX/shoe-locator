@@ -10,7 +10,15 @@ hr {
 .cat_img{
   background: url("/static/assets/img/cat.jpg") center / cover no-repeat; 
 }
-
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 857px;
+  }
+}
 .container-dropdown-btn {
   position: fixed;
   left: 8vw;
@@ -24,15 +32,6 @@ hr {
   padding-right: 1rem;
   padding-left: 1rem;
 
-}
-@media (min-width: 1200px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl {
-    max-width: 857px;
-  }
 }
 
 @media (min-width: 100px) {
@@ -193,6 +192,11 @@ hr {
 
 }
 
+.container{
+max-height: 100%;
+width: 1200px;
+max-width: 100%;
+}
 
 
 @media (max-width: 767px) {
@@ -300,10 +304,7 @@ section {
 }
 header {
   background-color: white;
-  padding-top: 5rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
-  padding-bottom: 5rem;
+ 
   left: auto;
 
 
@@ -356,13 +357,14 @@ header {
 .card-category {
   color: rgb(40, 40, 209);
 }
-
-yy
-
-section.table-title, .table-title {
+.card-body{
+  padding-left: 0;
+  padding-right: 0;
+}
+.table-title {
   font-size: 27px;
   font-weight: bolder;
-  width: 7em;
+  max-width: 100%;
   position: relative;
   display: block;
   top: 45px;
@@ -394,7 +396,8 @@ header.masthead{
     padding-right: 20rem;
     padding-bottom: 0rem;
     margin-top: 20px;
-   
+    max-width: 2075px;
+    width: 2220px;
 
 }
 
@@ -404,6 +407,8 @@ section.masthead{
   padding-right: 20rem;
   padding-bottom: 0rem;
 margin-top: 15px;
+max-width: 2075px;
+width: 2220px;
 }
 
 .header-title {
@@ -429,7 +434,7 @@ height: 1rem;
 
 
 td.edit { resize: horizontal; overflow: hidden;  }
-td.norm { resize: none; overflow: visible;}
+td.norm { resize: ""; overflow: visible;}
  
 
  
@@ -536,6 +541,7 @@ input:-webkit-autofill:active  {
   
 }
 
+/** ======== For flash messaging ============== */
 .fade.in {
   opacity: 1;
 }
@@ -656,9 +662,13 @@ input:-webkit-autofill:active  {
   background-repeat: repeat-x;
   border-color: #dca7a7;
 }
+/** ================END====================== */
 
 
 /* .items li { display: inline;} */
+/* td{
+  width: 100%;
+} */
 
 td .hover_img  {position:absolute; display:none; z-index:99; }
 
@@ -681,4 +691,3 @@ td:hover .hover_img {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 
 }
-

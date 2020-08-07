@@ -29,71 +29,73 @@
       </div>
     </div>
       {% for bay in responseData.bay_categories %}
-      
+        {%if (loop.index%2 != 0) and (loop.index < 3) %}
         <header class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
-          {% set count = 0 %}
-          {% if count < 2 %}    
+        {%elif (loop.index%2 != 0) and (loop.index > 2) %}
+        <section class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+        {%endif%}
+        
+   
           <div class= "bayA container my-auto">
             <div class="table-header my-auto">
               <p class="table-title">BAY: {{bay}}</p>
-              <div class = "buttons"> 
+              <div class = "buttons d-flex my-auto"> 
                 <button type="button" rel="tooltip" class="btn btn-success">
                 <i class="material-icons">Edit</i>
                 </button>
                 <button type="button" rel="tooltip" class="btn btn-danger">
                   <i class="material-icons">Delete</i>
                 </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class=" my-auto">
+                <table class="table table-norm">
+                  <thead class=" text-primary">
+                    <th>Section</th>
+                    <th>Name</th>
+                    <th>Style# </th>
+                    <th> Row</th>
+                    <th>Coloumn</th>
+                    <th>Notes</th>
+                    <th>Gender</th>
+                    <th>View</th>
+                  </thead>
+                  <tbody>
+                    {% for shoe in responseData.bay_info  %}
+                      {% if shoe.bay == bay|int %}
+                        <tr>
+                          
+                          <td class = "norm" contenteditable="false"> {{ shoe.section}} </td>
+                          <td class = "norm" contenteditable="false"> {{ shoe.name}} </td>
+                          <td class="text-primary norm" contenteditable="false"> {{ shoe.style}} </td>
+                          <td class = "norm " contenteditable="false"> {{ shoe.row}} </td>
+                          <td class = "norm" contenteditable="false">{{ shoe.col}} </td>
+                          <td class = "edit" contenteditable="false">  {{shoe.notes}} </td>
+                          <td class = "norm" contenteditable="false">  {{shoe.gender}} </td>
+                          <td class = "norm hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                            👀 	
+                          {%if shoe.img%}
+                            <span class="hover_img">
+                              <img src= "{{shoe.img}}" alt="image"/>
+                            </span>
+                          {%endif%}
+                          </td>
+
+                        </tr>
+                      {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-          <div class="card-body">
-            <div class="container my-auto">
-              <table class="table table-norm">
-                <thead class=" text-primary">
-                  <th>Section</th>
-                  <th>Name</th>
-                  <th>Style Code</th>
-                  <th> Row</th>
-                  <th>Coloumn</th>
-                  <th>Notes</th>
-                  <th>Gender</th>
-                  <th>View</th>
-                </thead>
-                <tbody>
-                  {% for shoe in responseData.bay_info  %}
-                  {% if shoe.bay == bay|int %}
-                  <tr>
-                    
-                    <td class = "norm" contenteditable="false"> {{ shoe.section}} </td>
-                    <td class = "norm" contenteditable="false"> {{ shoe.name}} </td>
-                    <td class="text-primary norm" contenteditable="false"> {{ shoe.style}} </td>
-                    <td class = "norm " contenteditable="false"> {{ shoe.row}} </td>
-                    <td class = "norm" contenteditable="false">{{ shoe.col}}</td>
-                    <td class = "norm" contenteditable="false">  {{shoe.notes}}</td>
-                    <td class = "norm" contenteditable="false">  {{shoe.gender}}</td>
-                    <td class = "norm hover_img" data-img="{{shoe.img}}" contenteditable="false">
-                      👀 	
-                    {%if shoe.img%}
-                      <span class="hover_img">
-                        <img src= "{{shoe.img}}" alt="image"/>
-                      </span>
-                    {%endif%}
-                    </td>
+    {%if (loop.index%2 ==0) and (loop.index < 3)%}
+        </header> 
+    {%elif (loop.index%2 ==0) and (loop.index > 2)%}
+    </section> 
+    {%endif%}
 
-                  </tr>
-                  {% endif %}
-                  {% endfor %}
-
-                </tbody>
-            </table>
-                  {% set count = count+1 %}
-    
-
-            </div>
-          </div>
-        </div>
-      </div>
-      {%endif%}
-    </header> 
     {% endfor %}
 
 
