@@ -35,7 +35,7 @@
           {% if count < 2 %}    
           <div class= "bayA container my-auto">
             <div class="table-header my-auto">
-              <p class="table-title">{{bay}}</p>
+              <p class="table-title">BAY: {{bay}}</p>
               <div class = "buttons"> 
                 <button type="button" rel="tooltip" class="btn btn-success">
                 <i class="material-icons">Edit</i>
@@ -59,28 +59,29 @@
                   <th>View</th>
                 </thead>
                 <tbody>
-          {% for shoe in responseData.bay_info %}
-              
+                  {% for shoe in responseData.bay_info  %}
+                  {% if shoe.bay == bay|int %}
                   <tr>
-
-                    <td class = "norm" contenteditable="false"> {{shoe.section}} </td>
-                    <td class = "norm" contenteditable="false"> {{shoe.name}} </td>
-                    <td class="text-primary norm" contenteditable="false"> {{shoe.style}} </td>
-                    <td class = "norm " contenteditable="false"> {{shoe.row}} </td>
-                    <td class = "norm" contenteditable="false">{{shoe.col}}</td>
-                    <td class = "norm" contenteditable="false"> shoe.notes</td>
-                    <td class = "norm" contenteditable="false"> shoe.gender</td>
+                    
+                    <td class = "norm" contenteditable="false"> {{ shoe.section}} </td>
+                    <td class = "norm" contenteditable="false"> {{ shoe.name}} </td>
+                    <td class="text-primary norm" contenteditable="false"> {{ shoe.style}} </td>
+                    <td class = "norm " contenteditable="false"> {{ shoe.row}} </td>
+                    <td class = "norm" contenteditable="false">{{ shoe.col}}</td>
+                    <td class = "norm" contenteditable="false">  {{shoe.notes}}</td>
+                    <td class = "norm" contenteditable="false">  {{shoe.gender}}</td>
                     <td class = "norm hover_img" data-img="{{shoe.img}}" contenteditable="false">
                       👀 	
-                      {%if shoe.img%}
-                      <!-- <span class="hover_img">
+                    {%if shoe.img%}
+                      <span class="hover_img">
                         <img src= "{{shoe.img}}" alt="image"/>
-                      </span> -->
+                      </span>
                     {%endif%}
                     </td>
 
                   </tr>
-            {% endfor %}
+                  {% endif %}
+                  {% endfor %}
 
                 </tbody>
             </table>
