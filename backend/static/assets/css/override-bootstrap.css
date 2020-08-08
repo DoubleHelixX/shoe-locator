@@ -206,6 +206,24 @@ max-width: 100%;
 
 }
 
+.container_sm{
+  max-height: 100%;
+  width: 800px;
+  max-width: 100%;
+  padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    color: #fff!important;
+    text-align: center!important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+    font-size: 13px;
+    webkit-tap-highlight-color: transparent;
+  }
+
 
 @media (max-width: 767px) {
   .col-3{ width: 27.33%; margin: 40px 3%; min-width: 10rem; position: relative; top:-2rem; margin-left: 7rem;} /* necessary to give position: relative to parent. */
@@ -389,6 +407,12 @@ header {
 }
 
 header.masthead p {
+  font-size: 26px;
+  font-weight: bolder;
+  padding-top:6rem;
+}
+
+section.masthead p {
   font-size: 26px;
   font-weight: bolder;
   padding-top:6rem;
