@@ -140,6 +140,7 @@ def create_app(test_config=None):
             else:
                 responseData={ 
                                 'success': True,
+                                'baySelected': bay,
                                 'bay_info': bayData,
                                 'bay_categories': bayCategories,
                                 'total_bay_results': len(listOfBays)

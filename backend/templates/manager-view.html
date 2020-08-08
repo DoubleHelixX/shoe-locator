@@ -20,14 +20,15 @@
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
           <!-- onclick="return getBays({{responseData.bay_info[0].bay}});" -->
-          <li class = "selected"><a href="" onclick="return getBays('all');" >All Bays</a></li>
+          <li class = "selected"><a href="all"  >All Bays</a></li>
           <li class="divider"></li>
           {% for bay in responseData.bay_categories %}
-          <li class = "nonselected"><a href="" onclick="return getBays({{bay}});">{{bay}}</a></li>
+          <li class = "nonselected"><a href="{{bay}}" >Bay: {{bay}} </a> </li>
 		    	{% endfor %}
         </ul>
       </div>
     </div>
+    {% if responseData.baySelected == 'all' %}
       {% for bay in responseData.bay_categories %}
         {%if (loop.index%2 != 0) and (loop.index < 3) %}
         <header class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
@@ -90,14 +91,72 @@
               </div>
             </div>
           </div>
-    {%if (loop.index%2 ==0) and (loop.index < 3)%}
-        </header> 
-    {%elif (loop.index%2 ==0) and (loop.index > 2)%}
-    </section> 
+      {%if (loop.index%2 ==0) and (loop.index < 3)%}
+          </header> 
+      {%elif (loop.index%2 ==0) and (loop.index > 2)%}
+      </section> 
+      {%endif%}
+
+      {% endfor %}
+
+    {%else%}
+
+   <header class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+      <div class= "bayA container my-auto">
+        <div class="table-header my-auto">
+          <p class="table-title">BAY: {{responseData.baySelected}}</p>
+          <div class = "buttons"> 
+            <button type="button" rel="tooltip" class="btn btn-success">
+            <i class="material-icons">Edit</i>
+            </button>
+            <button type="button" rel="tooltip" class="btn btn-danger">
+              <i class="material-icons">Delete</i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class=" my-auto">
+            <table class="table table-norm">
+              <thead class=" text-primary">
+                <th>Section</th>
+                <th>Name</th>
+                <th>Style# </th>
+                <th> Row</th>
+                <th>Coloumn</th>
+                <th>Notes</th>
+                <th>Gender</th>
+                <th>View</th>
+              </thead>
+              <tbody>
+                {% for shoe in responseData.bay_info  %}
+                    <tr>
+                      
+                      <td class = "norm" contenteditable="false"> {{ shoe.section}} </td>
+                      <td class = "norm" contenteditable="false"> {{ shoe.name}} </td>
+                      <td class="text-primary norm" contenteditable="false"> {{ shoe.style}} </td>
+                      <td class = "norm " contenteditable="false"> {{ shoe.row}} </td>
+                      <td class = "norm" contenteditable="false">{{ shoe.col}} </td>
+                      <td class = "edit" contenteditable="false">  {{shoe.notes}} </td>
+                      <td class = "norm" contenteditable="false">  {{shoe.gender}} </td>
+                      <td class = "norm hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                        👀 	
+                      {%if shoe.img%}
+                        <span class="hover_img">
+                          <img src= "{{shoe.img}}" alt="image"/>
+                        </span>
+                      {%endif%}
+                      </td>
+
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      </header> 
+
     {%endif%}
-
-    {% endfor %}
-
 
     <script>
       function getBays(data){
