@@ -10,6 +10,13 @@ hr {
 .cat_img{
   background: url("/static/assets/img/cat.jpg") center / cover no-repeat; 
 }
+
+@media (min-width: 992px){
+header.masthead {
+  height: auto!important;
+}
+}
+
 @media (min-width: 1200px) {
   .container,
   .container-lg,
@@ -196,6 +203,7 @@ hr {
 max-height: 100%;
 width: 1200px;
 max-width: 100%;
+
 }
 
 
@@ -436,6 +444,7 @@ height: 1rem;
 td.edit { resize: horizontal; overflow: hidden;  }
 td.norm { resize: ""; overflow: visible;}
  
+
 
  
 /* container, .container, section, .section, header, .header,.text-primary,.my-auto .card-body,.masthead ,.text-center, .text-white ,.d-flex ,.re-size{
@@ -690,4 +699,9 @@ td:hover .hover_img {
 
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 
+}
+
+.my-auto{
+  margin-top: 0;
+  margin-bottom: 0!important;
 }
