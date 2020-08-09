@@ -41,17 +41,17 @@
             <div class="table-header my-auto">
               <p class="table-title">BAY: {{bay}}</p>
               <div class = "buttons"> 
-                <button type="button" rel="tooltip" class="btn btn-success">
+                <button type="button" rel="tooltip" id = 'editBtn' onclick="return editBay('{{bay}}')" class="btn btn-success " value='edit'>
                 <i class="material-icons">Edit</i>
                 </button>
-                <button type="button" rel="tooltip" class="btn btn-danger">
+                <button type="button" rel="tooltip" id = 'deleteBtn' class="btn btn-danger" value='delete'>
                   <i class="material-icons">Delete</i>
                 </button>
               </div>
             </div>
             <div class="card-body">
               <div class=" my-auto">
-                <table class="table table-norm">
+                <table class="table table-norm {{bay}}">
                   <thead class=" text-primary">
                     <th>Section</th>
                     <th>Name</th>
@@ -67,14 +67,14 @@
                       {% if shoe.bay == bay|int %}
                         <tr>
                           
-                          <td class = "norm" contenteditable="false"> {{ shoe.section}} </td>
-                          <td class = "norm" contenteditable="false"> {{ shoe.name}} </td>
-                          <td class="text-primary norm" contenteditable="false"> {{ shoe.style}} </td>
-                          <td class = "norm " contenteditable="false"> {{ shoe.row}} </td>
-                          <td class = "norm" contenteditable="false">{{ shoe.col}} </td>
-                          <td class = "edit" contenteditable="false">  {{shoe.notes}} </td>
-                          <td class = "norm" contenteditable="false">  {{shoe.gender}} </td>
-                          <td class = "norm hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                          <td  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
+                          <td  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
+                          <td  class="text-primary norm style_bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td>
+                          <td  class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
+                          <td  class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
+                          <td  class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
+                          <td  class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
+                          <td  class = "norm img_bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
                             👀 	
                           {%if shoe.img%}
                             <span class="hover_img">
@@ -106,17 +106,19 @@
         <div class="table-header my-auto">
           <p class="table-title">BAY: {{responseData.baySelected}}</p>
           <div class = "buttons"> 
-            <button type="button" rel="tooltip" class="btn btn-success">
+            <button type="button" rel="tooltip" id = 'editBtn' onclick="return editBay('{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
+
             <i class="material-icons">Edit</i>
             </button>
-            <button type="button" rel="tooltip" class="btn btn-danger">
+            <button type="button" rel="tooltip" id = 'deleteBtn' class="btn btn-danger" value='delete'>
+
               <i class="material-icons">Delete</i>
             </button>
           </div>
         </div>
         <div class="card-body">
           <div class=" my-auto">
-            <table class="table table-norm">
+            <table class="table table-norm {{responseData.baySelected}}">
               <thead class=" text-primary">
                 <th>Section</th>
                 <th>Name</th>
@@ -131,14 +133,14 @@
                 {% for shoe in responseData.bay_info  %}
                     <tr>
                       
-                      <td class = "norm" contenteditable="false"> {{ shoe.section}} </td>
-                      <td class = "norm" contenteditable="false"> {{ shoe.name}} </td>
-                      <td class="text-primary norm" contenteditable="false"> {{ shoe.style}} </td>
-                      <td class = "norm " contenteditable="false"> {{ shoe.row}} </td>
-                      <td class = "norm" contenteditable="false">{{ shoe.col}} </td>
-                      <td class = "edit" contenteditable="false">  {{shoe.notes}} </td>
-                      <td class = "norm" contenteditable="false">  {{shoe.gender}} </td>
-                      <td class = "norm hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                      <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.section}} </td>
+                          <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.name}} </td>
+                          <td  class="text-primary norm style_bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.style}} </td>
+                          <td  class = "norm bay_{{responseData.baySelected}} " contenteditable="false"> {{ shoe.row}} </td>
+                          <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false">{{ shoe.col}} </td>
+                          <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.notes}} </td>
+                          <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.gender}} </td>
+                          <td  class = "norm img_bay_{{responseData.baySelected}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
                         👀 	
                       {%if shoe.img%}
                         <span class="hover_img">
@@ -159,10 +161,82 @@
     {%endif%}
 
     <script>
-      function getBays(data){
-      var bay_info= data;
-      alert(bay_info);
-      console.log(bay_info);
+      function editBay(bay){
+        
+        let table = document.getElementsByClassName(bay);
+        console.log(bay , 'lll', table)
+          
+        let editBtn = document.getElementById('editBtn');
+        let x = 'bay_' + bay;
+        let y = 'style_bay_'+bay;
+        let z = 'img_bay_'+bay
+        let tr = document.getElementsByClassName(x);
+        let trStyle = document.getElementsByClassName(y);
+        let trImg =  document.getElementsByClassName(z);
+
+        if (editBtn.value == 'edit'){
+          alert('in here');
+
+          for (let j=0; j < table.length; j++) {
+          table[j].className = 'table table-edit';
+          }
+
+          for (let i=0; i < tr.length; i++) {
+          tr[i].contentEditable= true;
+          tr[i].className= 'edit ' + x;
+          console.log(tr, '||' , trStyle , '||', trImg);
+          }
+
+          trStyle.contentEditable= true;
+          trStyle.className= 'text-primary edit ' + y;
+
+          trImg.contentEditable= true;
+          trImg.className= 'hover_img edit ' + z;
+          
+         
+        }
+
+
+        // fetch("/manager/bay/" + data, {
+            //post request to that route
+            // method: "PATCH",
+            // body: JSON.stringify({}),
+            // headers: {
+            //   "Content-Type": "application/json",
+            // },).then(function(response){
+        //       return response.json();
+        //     }).then(function(obj){
+        //       if (obj.success == false && obj.error == "404"){
+        //         var myToast = Toastify({
+        //         text: 'Shoe Not in our Database',
+        //         duration: 4000,
+        //         backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+        //         gravity: "bottom",
+        //         position: "center"
+        //         });
+        //         myToast.showToast();
+        //       }
+        //       else if (obj.success == false && obj.error == "422"){
+        //             var myToast = Toastify({
+        //             text: 'Unprocessable: Try again if it repeats contact webmaster',
+        //             duration: 4000,
+        //             backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+        //             gravity: "bottom",
+        //             position: "center"
+        //             });
+        //             myToast.showToast();
+        //           }
+        //       else
+        //         window.location.reload(false); 
+
+        //     }).catch (function (error) {
+        //         console.error(error);
+        //         window.location.reload(false); 
+              
+        //     });
+
       }
+
+  
     </script>
     {% endblock  %}

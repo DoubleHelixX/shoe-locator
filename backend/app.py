@@ -99,7 +99,7 @@ def create_app(test_config=None):
 
 
     @app.route('/manager/bay/<string:bay>', methods =['GET'])
-    def ShowBay(bay):
+    def ShowBay(bay='all'):
         bayData =[]
         
         # *See if data is being passed and accepted through the url.*
@@ -148,53 +148,6 @@ def create_app(test_config=None):
                 return render_template('manager-view.html', responseData=responseData)
     
     
-    @app.route('/manager/bays/<string:bay>', methods =['GET'])
-    def EditBayAsync(bay):
-        bayData =[]
-        
-        # *See if data is being passed and accepted through the url.*
-        #print('>>>Bay #: ',bay)
-        unprocessable = False
-        searchFailure = False
-        bayCategories=None
-        listOfBays=None
-        try:
-            if bay == 'all':
-                listOfBays = Bay.query.order_by(Bay.bay).all()  
-            else:
-                listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
-            
-            
-            if len(listOfBays):   
-                for shoe in listOfBays:
-                   #print('>>>1', listOfBays)
-                    bayData.append(Bay.format(shoe))
-                    #print('>>>2', shoe)
-                    distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
-                    bayCategories = [ 'Bay: ' + str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
-                    #print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
-            
-                   
-            else:  
-                print('>>> no such Bay. Length is: ' , len(listOfBays))
-                searchFailure=True
-                
-        except:
-            unprocessable = true
-            print('Error Message: ', sys.exc_info())
-        finally:
-            if searchFailure:
-                abort(404)
-            elif unprocessable:
-                abort(422)
-            else:
-                return jsonify({
-                    'success': True,
-                    'bay_info': bayData,
-                    'bay_categories': bayCategories,
-                    'total_bay_results': len(listOfBays)
-                    })
-    
     # @app.route('/manager/bays/<string:bay>', methods =['GET'])
     # def EditBayAsync(bay):
     #     bayData =[]
@@ -203,19 +156,25 @@ def create_app(test_config=None):
     #     #print('>>>Bay #: ',bay)
     #     unprocessable = False
     #     searchFailure = False
-        
+    #     bayCategories=None
+    #     listOfBays=None
     #     try:
     #         if bay == 'all':
     #             listOfBays = Bay.query.order_by(Bay.bay).all()  
     #         else:
     #             listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
             
+            
     #         if len(listOfBays):   
     #             for shoe in listOfBays:
-    #                 print('>>>1', listOfBays)
+    #                #print('>>>1', listOfBays)
     #                 bayData.append(Bay.format(shoe))
-    #                 print('>>>2', shoe)
-                    
+    #                 #print('>>>2', shoe)
+    #                 distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
+    #                 bayCategories = [ 'Bay: ' + str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
+    #                 #print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
+            
+                   
     #         else:  
     #             print('>>> no such Bay. Length is: ' , len(listOfBays))
     #             searchFailure=True
@@ -232,8 +191,61 @@ def create_app(test_config=None):
     #             return jsonify({
     #                 'success': True,
     #                 'bay_info': bayData,
+    #                 'bay_categories': bayCategories,
     #                 'total_bay_results': len(listOfBays)
     #                 })
+    
+    # body: JSON.stringify({
+    #           //stringify json object
+    #           description: descriptionValue, //get value of the description text field
+    #         }), 
+    # description = request.get_json()['description'] #get the dictionary/object of key description #sycnously way -> .form.get('description', '')  #'' <-- default in case value is empty) # data submitted via the form (string text)
+
+    @app.route('/manager/bay/edit', methods =['PATCH'])
+    def EditBay(bay): 
+        # *See if data is being passed and accepted through the url.*
+        #print('>>>Bay #: ',bay)
+        unprocessable = False
+        searchFailure = False
+        bayCategories=None
+        listOfBays=None
+        bayID = request.get_json()['ID'] #get the dictionary/object of key description #sycnously way -> .form.get('description', '')  #'' <-- default in case value is empty) # data submitted via the form (string text)
+        data = request.get_json()['data']
+        
+        try:
+            outdatedShoes = []
+            updatedShoes = []
+            if len(outdatedBay):                
+                for shoe in data:
+                    xID = shoe.id
+                    xCol = shoe.col
+                    xValue = shoe.value
+                    updatedShoe = Bay.query.filter(Bay.id == xID).all()
+                    outdatedShoes.append(updatedShoe)
+                    updatedShoe[xCol]= xValue
+                    updatedShoe.update()
+                    updatedShoes.append(Bay.query.filter(Bay.id == xID).all())
+            else:  
+                print('>>> no such Bay. Length is: ' , len(outdatedBay))
+                searchFailure=True 
+        except:
+            unprocessable = true
+            print('Error Message: ', sys.exc_info())
+        finally:
+            if searchFailure:
+                abort(404)
+            elif unprocessable:
+                abort(422)
+            else:
+                responseData={ 
+                                'success': True,
+                                'bay':bayID,
+                                'outdated_shoes': outdatedShoes,
+                                'updated_shoes': updatedShoes,
+                                'total_bay_results': len(updatedShoes)
+                                }
+                return jsonify(responseData)
+
     
     
     #  ----------------------------------------------------------------

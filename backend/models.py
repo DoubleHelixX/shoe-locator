@@ -68,6 +68,7 @@ class Bay(db.Model):
     db.session.commit()
     
   def update(self):
+    db.session.update(self)
     db.session.commit()
 
   def delete(self):
