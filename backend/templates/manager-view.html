@@ -108,7 +108,7 @@
           <div class = "buttons"> 
             <button type="button" rel="tooltip" id = 'editBtn' onclick="return editBay('{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
 
-            <i class="material-icons">Edit</i>
+            <i  class="material-icons editTxt{{responseData.baySelected}}">Edit</i>
             </button>
             <button type="button" rel="tooltip" id = 'deleteBtn' class="btn btn-danger" value='delete'>
 
@@ -164,7 +164,7 @@
       function editBay(bay){
         
         let table = document.getElementsByClassName(bay);
-        console.log(bay , 'lll', table)
+        //console.log(bay , 'lll', table)
           
         let editBtn = document.getElementById('editBtn');
         let x = 'bay_' + bay;
@@ -174,17 +174,21 @@
         let trStyle = document.getElementsByClassName(y);
         let trImg =  document.getElementsByClassName(z);
 
-        if (editBtn.value == 'edit'){
-          alert('in here');
+        let editTxt = document.getElementsByClassName('editTxt'+bay);
+        alert(editTxt.item.);        
 
+        
+        if (editBtn.value == 'edit'){
+          //alert('in here');
+          editBtn.value = 'save'
           for (let j=0; j < table.length; j++) {
-          table[j].className = 'table table-edit';
+          table[j].className = 'table table-edit ' + bay;
           }
 
           for (let i=0; i < tr.length; i++) {
           tr[i].contentEditable= true;
           tr[i].className= 'edit ' + x;
-          console.log(tr, '||' , trStyle , '||', trImg);
+          //console.log(tr, '||' , trStyle , '||', trImg);
           }
 
           trStyle.contentEditable= true;
@@ -192,8 +196,30 @@
 
           trImg.contentEditable= true;
           trImg.className= 'hover_img edit ' + z;
-          
          
+        }
+        else if (editBtn.value == 'save'){
+          //alert(editBtn.value);
+          editBtn.value = 'edit'
+          for (let j=0; j < table.length; j++) {
+          //console.log('BEFORE: ' , table[j].className)
+          table[j].className = 'table table-norm ' + bay;
+          //console.log('AFTER: ' , table[j].className)
+
+          }
+
+          for (let i=0; i < tr.length; i++) {
+          tr[i].contentEditable= false;
+          tr[i].className= 'norm ' + x;
+          //console.log(tr, '||' , trStyle , '||', trImg);
+          }
+
+          trStyle.contentEditable= false;
+          trStyle.className= 'text-primary norm ' + y;
+
+          trImg.contentEditable= false;
+          trImg.className= 'hover_img norm ' + z;
+
         }
 
 

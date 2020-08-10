@@ -352,7 +352,7 @@ header {
 
 .table-edit {
   background-color: white;
-  border: double green 2px;
+  border: double green 5px;
 }
 
 .table-delete {
