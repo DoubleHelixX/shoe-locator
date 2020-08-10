@@ -42,7 +42,7 @@
               <p class="table-title">BAY: {{bay}}</p>
               <div class = "buttons"> 
                 <button type="button" rel="tooltip" id = 'editBtn' onclick="return editBay('{{bay}}')" class="btn btn-success " value='edit'>
-                <i class="material-icons">Edit</i>
+                <i  id = "editTxt{{bay}}" class="material-icons">Edit</i>
                 </button>
                 <button type="button" rel="tooltip" id = 'deleteBtn' class="btn btn-danger" value='delete'>
                   <i class="material-icons">Delete</i>
@@ -67,14 +67,14 @@
                       {% if shoe.bay == bay|int %}
                         <tr>
                           
-                          <td  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
-                          <td  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
-                          <td  class="text-primary norm style_bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td>
-                          <td  class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
-                          <td  class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
-                          <td  class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
-                          <td  class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
-                          <td  class = "norm img_bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
+                          <td data-id="{{shoe.id}}"   class="text-primary norm style_bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm img_bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
                             👀 	
                           {%if shoe.img%}
                             <span class="hover_img">
@@ -108,7 +108,7 @@
           <div class = "buttons"> 
             <button type="button" rel="tooltip" id = 'editBtn' onclick="return editBay('{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
 
-            <i  class="material-icons editTxt{{responseData.baySelected}}">Edit</i>
+            <i  id = "editTxt{{responseData.baySelected}}" class="material-icons">Edit</i>
             </button>
             <button type="button" rel="tooltip" id = 'deleteBtn' class="btn btn-danger" value='delete'>
 
@@ -133,14 +133,14 @@
                 {% for shoe in responseData.bay_info  %}
                     <tr>
                       
-                      <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.section}} </td>
-                          <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.name}} </td>
-                          <td  class="text-primary norm style_bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.style}} </td>
-                          <td  class = "norm bay_{{responseData.baySelected}} " contenteditable="false"> {{ shoe.row}} </td>
-                          <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false">{{ shoe.col}} </td>
-                          <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.notes}} </td>
-                          <td  class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.gender}} </td>
-                          <td  class = "norm img_bay_{{responseData.baySelected}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.section}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.name}} </td>
+                          <td data-id="{{shoe.id}}"   class = "text-primary norm style_bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.style}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{responseData.baySelected}} " contenteditable="false"> {{ shoe.row}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{responseData.baySelected}}" contenteditable="false">{{ shoe.col}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.notes}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.gender}} </td>
+                          <td data-id="{{shoe.id}}"   class = "norm img_bay_{{responseData.baySelected}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
                         👀 	
                       {%if shoe.img%}
                         <span class="hover_img">
@@ -174,12 +174,12 @@
         let trStyle = document.getElementsByClassName(y);
         let trImg =  document.getElementsByClassName(z);
 
-        let editTxt = document.getElementsByClassName('editTxt'+bay);
-        alert(editTxt.item.);        
+        let editTxt = document.getElementById('editTxt'+bay);
 
         
         if (editBtn.value == 'edit'){
           //alert('in here');
+          editTxt.textContent = 'save';
           editBtn.value = 'save'
           for (let j=0; j < table.length; j++) {
           table[j].className = 'table table-edit ' + bay;
@@ -201,6 +201,7 @@
         else if (editBtn.value == 'save'){
           //alert(editBtn.value);
           editBtn.value = 'edit'
+          editTxt.textContent = 'edit';
           for (let j=0; j < table.length; j++) {
           //console.log('BEFORE: ' , table[j].className)
           table[j].className = 'table table-norm ' + bay;
