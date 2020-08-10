@@ -262,12 +262,12 @@
             }
 
            //**** Format Table Data ****//
-              let tableData= [];
+              let tableData= [{'bay': bay ,'data' : []}];
               let incrementRow =0;
               for (let i = 0; i < tableRow.length; i++){
-                tableData.push({
+                tableData[0].data.push(
+                  {
                     'shoe_id': tableRow[i].getAttribute('data-id'),
-                    'bay': bay ,
                     'section': ""  ,
                     'name':  "" ,
                     'style': ""  ,
@@ -276,63 +276,66 @@
                     'notes':  "" ,
                     'gender':  "" ,
                     'img':  "" 
-                });
+                  }
+                );
 
-                tableData[i].section= rowData[i+incrementRow];
-                tableData[i].name= rowData[i+1+incrementRow];
-                tableData[i].style= rowData[i+2+incrementRow];
-                tableData[i].row= rowData[i+3+incrementRow];
-                tableData[i].col= rowData[i+4+incrementRow];
-                tableData[i].notes= rowData[i+5+incrementRow];
-                tableData[i].gender= rowData[i+6+incrementRow];
-                tableData[i].img= rowData[i+7+incrementRow];
+                tableData[0].data[i].section= rowData[i+incrementRow];
+                tableData[0].data[i].name= rowData[i+1+incrementRow];
+                tableData[0].data[i].style= rowData[i+2+incrementRow];
+                tableData[0].data[i].row= rowData[i+3+incrementRow];
+                tableData[0].data[i].col= rowData[i+4+incrementRow];
+                tableData[0].data[i].notes= rowData[i+5+incrementRow];
+                tableData[0].data[i].gender= rowData[i+6+incrementRow];
+                tableData[0].data[i].img= rowData[i+7+incrementRow];
                 incrementRow +=7;
 
               }
-              console.log(tableData);
+               console.log(tableData);
+              // fetch("/manager/bay/" + data, {
+              //   post request to that route
+              //   method: "PATCH",
+              //   body: JSON.stringify({}),
+              //   headers: {
+              //     "Content-Type": "application/json",
+              //   },).then(function(response){
+              //     return response.json();
+              //   }).then(function(obj){
+              //     if (obj.success == false && obj.error == "404"){
+              //       var myToast = Toastify({
+              //       text: 'Shoe Not in our Database',
+              //       duration: 4000,
+              //       backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+              //       gravity: "bottom",
+              //       position: "center"
+              //       });
+              //       myToast.showToast();
+              //     }
+              //     else if (obj.success == false && obj.error == "422"){
+              //           var myToast = Toastify({
+              //           text: 'Unprocessable: Try again if it repeats contact webmaster',
+              //           duration: 4000,
+              //           backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+              //           gravity: "bottom",
+              //           position: "center"
+              //           });
+              //           myToast.showToast();
+              //         }
+              //     else
+              //       window.location.reload(false); 
+              //     }).catch (function (error) {
+              //         console.error(error);
+              //         window.location.reload(false); 
+                    
+              //     });
+
             activeBay="";
+
               
           }
 
         
 
-          // fetch("/manager/bay/" + data, {
-              //post request to that route
-              // method: "PATCH",
-              // body: JSON.stringify({}),
-              // headers: {
-              //   "Content-Type": "application/json",
-              // },).then(function(response){
-          //       return response.json();
-          //     }).then(function(obj){
-          //       if (obj.success == false && obj.error == "404"){
-          //         var myToast = Toastify({
-          //         text: 'Shoe Not in our Database',
-          //         duration: 4000,
-          //         backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
-          //         gravity: "bottom",
-          //         position: "center"
-          //         });
-          //         myToast.showToast();
-          //       }
-          //       else if (obj.success == false && obj.error == "422"){
-          //             var myToast = Toastify({
-          //             text: 'Unprocessable: Try again if it repeats contact webmaster',
-          //             duration: 4000,
-          //             backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
-          //             gravity: "bottom",
-          //             position: "center"
-          //             });
-          //             myToast.showToast();
-          //           }
-          //       else
-          //         window.location.reload(false); 
-
-          //     }).catch (function (error) {
-          //         console.error(error);
-          //         window.location.reload(false); 
-                
-          //     });
+          
         }
 
         else
