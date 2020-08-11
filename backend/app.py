@@ -208,7 +208,7 @@ def create_app(test_config=None):
     #         }), 
     # description = request.get_json()['description'] #get the dictionary/object of key description #sycnously way -> .form.get('description', '')  #'' <-- default in case value is empty) # data submitted via the form (string text)
 
-    @app.route('/manager/bay/edit', methods =['PATCH'])
+    @app.route('/manager/bay', methods =['PATCH'])
     def EditBay(): 
         # *See if data is being passed and accepted through the url.*
         #print('>>>Bay #: ',bay)
@@ -227,7 +227,7 @@ def create_app(test_config=None):
             for updatedShoe in data:
                 print('@shoe: ', updatedShoe )
                 
-                outdatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id']) , Bay.bay==bayID)).one_or_none()
+                outdatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id'].strip()) , Bay.bay==bayID)).one_or_none()
                 outdated_bay.append(Bay.format(outdatedShoe))
                 print('@shoe: ', outdatedShoe )
                 print('@OutdatedBay: ', outdated_bay )
@@ -327,7 +327,59 @@ def create_app(test_config=None):
                                 }
                 return jsonify(responseData)
 
-    
+    @app.route('/manager/bay', methods =['POST'])
+    def CreateBay(): 
+        # *See if data is being passed and accepted through the url.*
+        #print('>>>Bay #: ',bay)
+        unprocessable = False
+        existFailure = False
+        bayCategories=None
+        listOfBays=None
+        created=None
+        bayID=int(request.get_json()['bay'].strip())
+        data = request.get_json()['data']
+        try:
+            print('@bay' , bayID)
+            createdBay=[]
+            exist = Bay.query.filter(Bay.bay==bayID).all()
+            print('@ exist' ,exist)
+            if not exist:
+                for shoe in data:
+                    #print('@ shoe', shoe)
+                    toBeCreated = Bay(bay=bayID, section=shoe['section'].strip() , name=shoe['name'].strip() , style=shoe['style'].strip() , row=shoe['row'].strip() , col=shoe['col'].strip() , notes=shoe['notes'].strip() , img=shoe['img'].strip() , gender=shoe['gender'].strip() )
+                    # print('@ created', toBeCreated)
+                    
+                    toBeCreated.insert()
+            
+                created = Bay.query.filter(Bay.bay==bayID).all()
+                
+                if created:
+                    for shoe in created:
+                        createdBay.append(Bay.format(shoe))
+            else:
+                existFailure=True
+        except:
+            unprocessable = true
+            print('Error Message: ', sys.exc_info())
+        finally:
+            if unprocessable:
+                abort(422)
+            elif existFailure:
+                responseData={ 
+                                'success': False,
+                                'exist': existFailure,
+                                'bay':bayID,
+                                }
+                return jsonify(responseData)
+            else:
+                responseData={ 
+                                'success': True,
+                                'exist': existFailure,
+                                'bay':bayID,
+                                'created_bay': createdBay
+                                }
+                return jsonify(responseData)
+
     
     #  ----------------------------------------------------------------
     #  Error Handlers

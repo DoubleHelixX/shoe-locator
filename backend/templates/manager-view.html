@@ -22,7 +22,7 @@
         <span class="close">&times;</span>
         <!-- POP UP CONTENT -->
         <div class="table-header my-auto">
-          <p class="table-title">NEW BAY: </p>
+          <p contentEditable="true" id ="create_bay_name" class="table-title"> Type Bay # Here </p>
           <div class = "buttons"> 
             <button type="button" rel="tooltip" id = 'createBtn' onclick="return createBay()" class="btn btn-success " value='create'>
 
@@ -34,7 +34,6 @@
         <div class=" my-auto">
           <table id ="create_bay_table" class="table table-edit">
             <thead class=" text-primary">
-              <th>Bay</th>
               <th>Section</th>
               <th>Name</th>
               <th>Style# </th>
@@ -45,8 +44,8 @@
               <th>View</th>
             </thead>
             <tbody>
-                <tr data-id="" id="create_bay_tr">
-                  <td    class = "edit bay_new" contenteditable="true"> </td>
+              {% for i in range(8) %}
+                <tr data-id="" class="create_bay_tr">
                   <td    class = "edit bay_new" contenteditable="true"> </td>
                   <td    class = "edit bay_new" contenteditable="true">  </td>
                   <td    class = "text-primary edit bay_new" contenteditable="true">  </td>
@@ -56,6 +55,8 @@
                   <td    class = "edit bay_new" contenteditable="true">  </td>
                   <td    class = "edit bay_new hover_img" data-img="None" contenteditable="true"></td>
                 </tr>
+              {% endfor %}
+
             </tbody>
           </table>
         </div>
@@ -71,7 +72,7 @@
         <!-- onclick="return getBays({{responseData.bay_info[0].bay}});" -->
         <li class = "selected"><a href="all"  >All Bays</a></li>
         <li class="divider"></li>
-  {% if responseData.bay_info=="None" %}
+  {% if responseData.bay_info!="None" %}
     {% for bay in responseData.bay_categories %}
         <li class = "nonselected"><a href="{{bay}}" >Bay: {{bay}} </a> </li>
     {% endfor %}
@@ -347,8 +348,8 @@
         
         //**** Send new table data to backend ****//
         
-        //console.log(tableData);
-        fetch("/manager/bay/edit", {
+        console.log(tableData);
+        fetch("/manager/bay", {
             method: "PATCH",
             body: JSON.stringify({
               bay:tableData[0]['bay'],
@@ -519,56 +520,47 @@
   let createBtn = document.getElementById('createBtn');
   let x = 'bay_new';
   let td = document.getElementsByClassName(x);
-  
+  let bayID = document.getElementById('create_bay_name');
   let editTxt = document.getElementById('confirmTxt');
-  let tableRow = document.getElementById('create_bay_tr');
+  let tableRow = document.getElementsByClassName('create_bay_tr');
   // console.log('t', table , 'c', createBtn, 'x', x, 'td', td, 'edittxt', editTxt, 't', tableRow);
  
   // **** Set Table UI back to default Look ****//
   let rowData=[];
 
-  for (let col =0; col<9; col++){
-    rowData.push(td[col].textContent);
-}
+
 
 //**** Format Table Data ****//
 
-  let tableData= [{'data' : []}];
-  tableData[0].data.push(
-    {
-      'bay': "" ,
-      'section': ""  ,
-      'name':  "" ,
-      'style': ""  ,
-      'row': ""  ,
-      'col': ""  ,
-      'notes':  "" ,
-      'gender':  "" ,
-      'img':  "" 
-    }
-  );
-  tableData[0].data[0].bay= rowData[0];
-  tableData[0].data[0].section= rowData[1];
-  tableData[0].data[0].name= rowData[2];
-  tableData[0].data[0].style= rowData[3];
-  tableData[0].data[0].row= rowData[4];
-  tableData[0].data[0].col= rowData[5];
-  tableData[0].data[0].notes= rowData[6];
-  tableData[0].data[0].gender= rowData[7];
-  tableData[0].data[0].img= rowData[8];
-  //console.log('tableData: ', tableData);
-
-  //**** VALIDATE URL POSSBILE FUNCTIONALITY*****////
-  // from django.core.validators import URLValidator
-  // from django.core.exceptions import ValidationError
-
-  // val = URLValidator(verify_exists=False)
-  // try:
-  //     val('http://www.google.com')
-  // except ValidationError, e:
-  //     print e
-
+  let tableData= [{'bay': "", 'data' : []}];
+  incrementRow =0;
+  tableData[0].bay = bayID.textContent;
   
+  for (let i = 0; i < tableRow.length; i++){
+    for (let col =0; col<8; col++){
+      if (td[col+(8*i)].textContent.length>0){
+        rowData.push(td[col+(8*i)].textContent);
+      }
+      rowData.push(" ");
+
+      
+    }
+
+    tableData[0].data.push(
+      {
+        'section': rowData[i+incrementRow],
+        'name':  rowData[i+2+incrementRow],
+        'style': rowData[i+3+incrementRow]  ,
+        'row': rowData[i+4+incrementRow]  ,
+        'col': rowData[i+5+incrementRow]  ,
+        'notes': rowData[i+6+incrementRow],
+        'gender':rowData[i+7+incrementRow] ,
+        'img': rowData[i+8+incrementRow]
+      }
+    );
+    incrementRow +=7;
+  }
+  //console.log('tableData', tableData);
 
 //**** END****//
 
@@ -577,6 +569,7 @@
 fetch("/manager/bay", {
     method: "POST",
     body: JSON.stringify({
+      bay: tableData[0]['bay'],
       data: tableData[0]['data']
     }),
     headers: {
@@ -604,10 +597,30 @@ fetch("/manager/bay", {
             });
             myToast.showToast();
           }
+      else if (obj.success == false && obj.exist == true){
+            var myToast = Toastify({
+            text: 'Unsuccessful: Bay Already Exist - Change Bay Name',
+            duration: 4000,
+            backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+            gravity: "bottom",
+            position: "center"
+            });
+            myToast.showToast();
+          }
       else{
           //window.location.reload(false); 
-          console.log(obj.created_shoes);
-    }
+    //       console.log(obj.created_bay);
+    //       var myToast = Toastify({
+    //         text: 'successful !',
+    //         duration: 4000,
+    //         backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
+    //         gravity: "bottom",
+    //         position: "center"
+    //         });
+    //         myToast.showToast();
+    window.location = obj.bay;
+
+     }
       }).catch (function (error) {
           console.error(error);
       });
