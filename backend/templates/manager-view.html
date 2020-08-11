@@ -2,41 +2,42 @@
 {% block title %}Manage Shoe Bays{% endblock %}
 {% block content %}
 
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
-        <div class="container"><div><h1>Reebok Shoe Locate</div>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="nav navbar-nav ml-auto"> 
-                  <button type="button" rel="tooltip" class="btn btn-success">
-                    <i class="material-icons">Create Bay</i>
-                  </button></ul>
-            </div>
-        </div>
-    </nav>
-
-    
-    <div class="container-dropdown-btn d-flex masthead">
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="dd-button" data-toggle="dropdown">Bay Selection
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <!-- onclick="return getBays({{responseData.bay_info[0].bay}});" -->
-          <li class = "selected"><a href="all"  >All Bays</a></li>
-          <li class="divider"></li>
-          {% for bay in responseData.bay_categories %}
-          <li class = "nonselected"><a href="{{bay}}" >Bay: {{bay}} </a> </li>
-		    	{% endfor %}
-        </ul>
+  <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+      <div class="container"><div><h1>Reebok Shoe Locate</div>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="nav navbar-nav ml-auto"> 
+                <button type="button" rel="tooltip" class="btn btn-success">
+                  <i class="material-icons">Create Bay</i>
+                </button></ul>
+          </div>
       </div>
+  </nav>
+
+  
+  <div class="container-dropdown-btn d-flex masthead">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="dd-button" data-toggle="dropdown">Bay Selection
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <!-- onclick="return getBays({{responseData.bay_info[0].bay}});" -->
+        <li class = "selected"><a href="all"  >All Bays</a></li>
+        <li class="divider"></li>
+  {% if responseData.bay_info=="None" %}
+    {% for bay in responseData.bay_categories %}
+        <li class = "nonselected"><a href="{{bay}}" >Bay: {{bay}} </a> </li>
+    {% endfor %}
+      </ul>
     </div>
-    {% if responseData.baySelected == 'all' %}
-      {% for bay in responseData.bay_categories %}
-        {%if (loop.index%2 != 0) and (loop.index < 3) %}
-        <header class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
-        {%elif (loop.index%2 != 0) and (loop.index > 2) %}
-        <section class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
-        {%endif%}
-        
-   
+  </div>
+      {% if responseData.baySelected == 'all' %}
+        {% for bay in responseData.bay_categories %}
+          {%if (loop.index%2 != 0) and (loop.index < 3) %}
+          <header class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+          {%elif (loop.index%2 != 0) and (loop.index > 2) %}
+          <section class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+          {%endif%}
+          
+  
           <div class= "bayA container_sm my-auto">
             <div class="table-header my-auto">
               <p class="table-title">BAY: {{bay}}</p>
@@ -63,75 +64,72 @@
                     <th>View</th>
                   </thead>
                   <tbody>
-                    {% for shoe in responseData.bay_info  %}
-                      {% if shoe.bay == bay|int %}
-                        <tr data-id="{{shoe.id}}" class = "row{{bay}}">
-                          
-                          <td    class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
-                          <td    class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
-                          <td    class="text-primary norm bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td>
-                          <td    class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
-                          <td    class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
-                          <td    class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
-                          <td    class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
-                          <td    class = "norm bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
-                            👀 	
-                          {%if shoe.img%}
-                            <span class="hover_img">
-                              <img src= "{{shoe.img}}" alt="image"/>
-                            </span>
-                          {%endif%}
-                          </td>
+          {% for shoe in responseData.bay_info  %}
+            {% if shoe.bay == bay|int %}
+                    <tr data-id="{{shoe.id}}" class = "row{{bay}}">
+                      
+                      <td    class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
+                      <td    class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
+                      <td    class="text-primary norm bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td>
+                      <td    class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
+                      <td    class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
+                      <td    class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
+                      <td    class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
+                      <td    class = "norm bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                        👀 	
+                      {%if shoe.img%}
+                        <span class="hover_img">
+                          <img src= "{{shoe.img}}" alt="image"/>
+                        </span>
+                      {%endif%}
+                      </td>
 
-                        </tr>
-                      {% endif %}
-                    {% endfor %}
+                    </tr>
+            {% endif %}
+          {% endfor %}
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-      {%if (loop.index%2 ==0) and (loop.index < 3) %}
-          </header> 
-      {%elif (loop.index%2 ==0) and (loop.index > 2)%}
-      </section> 
-      {%endif%}
+          {%if (loop.index%2 ==0) and (loop.index < 3) %}
+            </header> 
+          {%elif (loop.index%2 ==0) and (loop.index > 2)%}
+            </section> 
+          {%endif%}
+        {% endfor %}
+      {%else%}
+        <header class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+            <div class= "bayA container_sm my-auto">
+              <div class="table-header my-auto">
+                <p class="table-title">BAY: {{responseData.baySelected}}</p>
+                <div class = "buttons"> 
+                  <button type="button" rel="tooltip" id = 'editBtn{{responseData.baySelected}}' onclick="return editBay('{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
 
-      {% endfor %}
-
-    {%else%}
-
-   <header class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
-      <div class= "bayA container_sm my-auto">
-        <div class="table-header my-auto">
-          <p class="table-title">BAY: {{responseData.baySelected}}</p>
-          <div class = "buttons"> 
-            <button type="button" rel="tooltip" id = 'editBtn{{responseData.baySelected}}' onclick="return editBay('{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
-
-            <i  id = "editTxt{{responseData.baySelected}}" class="material-icons">Edit</i>
-            </button>
-            <button type="button" rel="tooltip" id = 'deleteBtn{{responseData.baySelected}}' onclick="return deleteBay('{{responseData.baySelected}}')" class="btn btn-danger" value='delete'>
-              <i id = "deleteTxt{{responseData.baySelected}}" class="material-icons">Delete</i>
-            </button>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class=" my-auto">
-            <table class="table table-norm {{responseData.baySelected}}">
-              <thead class=" text-primary">
-                <th>Section</th>
-                <th>Name</th>
-                <th>Style# </th>
-                <th> Row</th>
-                <th>Coloumn</th>
-                <th>Notes</th>
-                <th>Gender</th>
-                <th>View</th>
-              </thead>
-              <tbody>
-                {% for shoe in responseData.bay_info  %}
-                    <tr data-id="{{shoe.id}}" class = "row{{responseData.baySelected}}">
-                      
+                  <i  id = "editTxt{{responseData.baySelected}}" class="material-icons">Edit</i>
+                  </button>
+                  <button type="button" rel="tooltip" id = 'deleteBtn{{responseData.baySelected}}' onclick="return deleteBay('{{responseData.baySelected}}')" class="btn btn-danger" value='delete'>
+                    <i id = "deleteTxt{{responseData.baySelected}}" class="material-icons">Delete</i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class=" my-auto">
+                  <table class="table table-norm {{responseData.baySelected}}">
+                    <thead class=" text-primary">
+                      <th>Section</th>
+                      <th>Name</th>
+                      <th>Style# </th>
+                      <th> Row</th>
+                      <th>Coloumn</th>
+                      <th>Notes</th>
+                      <th>Gender</th>
+                      <th>View</th>
+                    </thead>
+                    <tbody>
+                      {% for shoe in responseData.bay_info  %}
+                        <tr data-id="{{shoe.id}}" class = "row{{responseData.baySelected}}">
+                          
                           <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.section}} </td>
                           <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.name}} </td>
                           <td    class = "text-primary norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.style}} </td>
@@ -140,291 +138,310 @@
                           <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.notes}} </td>
                           <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.gender}} </td>
                           <td    class = "norm bay_{{responseData.baySelected}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
-                        👀 	
-                      {%if (shoe.img) and (shoe.img !="None") %}
-                        <span class="hover_img">
-                          <img src= "{{shoe.img}}" alt="image"/>
-                        </span>
-                      {%endif%}
-                      </td>
-
-                    </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+                          👀 	
+                        {%if (shoe.img) and (shoe.img !="None") %}
+                          <span class="hover_img">
+                            <img src= "{{shoe.img}}" alt="image"/>
+                          </span>
+                        {%endif%}
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            </header> 
+      {%endif%}
+  {% else %}
+    <li class = "nonselected"><a href="" > </a> </li> 
+        </ul>
+      </div>
+    </div>
+    <header class="masthead text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+      <div class= "bayA container_sm my-auto">
+        <div class="table-header my-auto">
+        </div>
+        <div class="card-body">
+          <div class=" my-auto">
           </div>
         </div>
       </div>
       </header> 
+  {% endif %}
 
-    {%endif%}
 
-    <script>
-      activeBay="";
-      activeCounter=0;
-      function editBay(bay){
-        console.log("activeBtnCount: " + activeBay)
-        if(((document.getElementById('editBtn'+bay).value == 'edit' && activeBay=="")) ||((document.getElementById('editBtn'+bay).value == 'save' && activeBay==bay)))
-        {
-          activeBay=bay;
-          let table = document.getElementsByClassName(bay);
-         
-          let editBtn = document.getElementById('editBtn'+bay);
-          let x = 'bay_' + bay;
-          let y = 'style_bay_'+bay;
-          let z = 'img_bay_'+bay
-          let td = document.getElementsByClassName(x);
-         
-          let editTxt = document.getElementById('editTxt'+bay);
-          let tableRow = document.getElementsByClassName('row'+bay);
-        
-          if (editBtn.value == 'edit' && activeCounter==0){
 
-            //alert('in here');
-            editTxt.textContent = 'save';
-            editBtn.value = 'save'
-            console.log(tableRow.length);
+<script>
+  activeBay="";
+  activeCounter=0;
+  function editBay(bay){
+    console.log("activeBtnCount: " + activeBay)
+    if(((document.getElementById('editBtn'+bay).value == 'edit' && activeBay=="")) ||((document.getElementById('editBtn'+bay).value == 'save' && activeBay==bay)))
+    {
+      activeBay=bay;
+      let table = document.getElementsByClassName(bay);
+      
+      let editBtn = document.getElementById('editBtn'+bay);
+      let x = 'bay_' + bay;
+      let y = 'style_bay_'+bay;
+      let z = 'img_bay_'+bay
+      let td = document.getElementsByClassName(x);
+      
+      let editTxt = document.getElementById('editTxt'+bay);
+      let tableRow = document.getElementsByClassName('row'+bay);
+    
+      if (editBtn.value == 'edit' && activeCounter==0){
 
-            for (let j=0; j < table.length; j++) {
-              table[j].className = 'table table-edit ' + bay;
+        //alert('in here');
+        editTxt.textContent = 'save';
+        editBtn.value = 'save'
+        console.log(tableRow.length);
+
+        for (let j=0; j < table.length; j++) {
+          table[j].className = 'table table-edit ' + bay;
+        }
+
+        for (let j=0; j < tableRow.length; j++) {
+          for (let col =0; col<8; col++){
+            
+            td[col+ (8*j)].contentEditable= true;
+            if (col == 2)
+            td[col+ (8*j)].className= 'text-primary edit ' + x;
+            else if (col==7){
+              td[col+ (8*j)].className= 'hover_img edit ' + x;
+              td[col+ (8*j)].textContent=td[col+ (8*j)].getAttribute('data-img');
+              //td[col+ (8*j)].textContent=""
+
             }
-
-            for (let j=0; j < tableRow.length; j++) {
-              for (let col =0; col<8; col++){
-                
-                td[col+ (8*j)].contentEditable= true;
-                if (col == 2)
-                td[col+ (8*j)].className= 'text-primary edit ' + x;
-                else if (col==7){
-                  td[col+ (8*j)].className= 'hover_img edit ' + x;
-                  td[col+ (8*j)].textContent=td[col+ (8*j)].getAttribute('data-img');
-                  //td[col+ (8*j)].textContent=""
-
-                }
-                else 
-                td[col+ (8*j)].className= 'edit ' + x;
-              }
-            }
-
-            activeCounter++;
+            else 
+            td[col+ (8*j)].className= 'edit ' + x;
           }
-          else if (editBtn.value == 'save'  && activeCounter==1){
-            // **** Set Table UI back to default Look ****//
-              let rowData=[];
+        }
 
-              //alert(editBtn.value);
-              editBtn.value = 'edit'
-              editTxt.textContent = 'edit';
-              for (let j=0; j < table.length; j++) {
-              //console.log('BEFORE: ' , table[j].className)
-              table[j].className = 'table table-norm ' + bay;
-              //console.log('AFTER: ' , table[j].className)
+        activeCounter++;
+      }
+      else if (editBtn.value == 'save'  && activeCounter==1){
+        // **** Set Table UI back to default Look ****//
+          let rowData=[];
+
+          //alert(editBtn.value);
+          editBtn.value = 'edit'
+          editTxt.textContent = 'edit';
+          for (let j=0; j < table.length; j++) {
+          //console.log('BEFORE: ' , table[j].className)
+          table[j].className = 'table table-norm ' + bay;
+          //console.log('AFTER: ' , table[j].className)
+          }
+          console.log(tableRow.length, td.length);
+          
+          for (let j=0; j < table.length; j++) {
+            table[j].className = 'table table-norm ' + bay;
+          }
+
+          for (let j=0; j < tableRow.length; j++) {
+
+            for (let col =0; col<8; col++){
+              //console.log(td[col+ (8*j)].textContent);
+              rowData.push(td[col+ (8*j)].textContent);
+            
+              td[col+ (8*j)].contentEditable= false;
+              if (col == 2)
+              td[col+ (8*j)].className= 'text-primary norm ' + x;
+              else if (col==7){
+                td[col+ (8*j)].className= 'hover_img norm ' + x;
+                td[col+ (8*j)].textContent= '👀' ;
               }
-              console.log(tableRow.length, td.length);
-              
-              for (let j=0; j < table.length; j++) {
-                table[j].className = 'table table-norm ' + bay;
-             }
+              else 
+              td[col+ (8*j)].className= 'norm ' + x;  
 
-              for (let j=0; j < tableRow.length; j++) {
-
-               for (let col =0; col<8; col++){
-                 //console.log(td[col+ (8*j)].textContent);
-                  rowData.push(td[col+ (8*j)].textContent);
-                
-                  td[col+ (8*j)].contentEditable= false;
-                  if (col == 2)
-                  td[col+ (8*j)].className= 'text-primary norm ' + x;
-                  else if (col==7){
-                    td[col+ (8*j)].className= 'hover_img norm ' + x;
-                    td[col+ (8*j)].textContent= '👀' ;
-                  }
-                  else 
-                  td[col+ (8*j)].className= 'norm ' + x;  
-
-                }
             }
+        }
 
-           //**** Format Table Data ****//
+        //**** Format Table Data ****//
 
-              let tableData= [{'bay': bay ,'data' : []}];
-              let incrementRow =0;
-              for (let i = 0; i < tableRow.length; i++){
-                tableData[0].data.push(
-                  {
-                    'shoe_id': tableRow[i].getAttribute('data-id'),
-                    'section': ""  ,
-                    'name':  "" ,
-                    'style': ""  ,
-                    'row': ""  ,
-                    'col': ""  ,
-                    'notes':  "" ,
-                    'gender':  "" ,
-                    'img':  "" 
-                  }
-                );
-
-                tableData[0].data[i].section= rowData[i+incrementRow];
-                tableData[0].data[i].name= rowData[i+1+incrementRow];
-                tableData[0].data[i].style= rowData[i+2+incrementRow];
-                tableData[0].data[i].row= rowData[i+3+incrementRow];
-                tableData[0].data[i].col= rowData[i+4+incrementRow];
-                tableData[0].data[i].notes= rowData[i+5+incrementRow];
-                tableData[0].data[i].gender= rowData[i+6+incrementRow];
-                tableData[0].data[i].img= rowData[i+7+incrementRow];
-                incrementRow +=7;
-
-                //**** VALIDATE URL POSSBILE FUNCTIONALITY*****////
-                // from django.core.validators import URLValidator
-                // from django.core.exceptions import ValidationError
-
-                // val = URLValidator(verify_exists=False)
-                // try:
-                //     val('http://www.google.com')
-                // except ValidationError, e:
-                //     print e
-
+          let tableData= [{'bay': bay ,'data' : []}];
+          let incrementRow =0;
+          for (let i = 0; i < tableRow.length; i++){
+            tableData[0].data.push(
+              {
+                'shoe_id': tableRow[i].getAttribute('data-id'),
+                'section': ""  ,
+                'name':  "" ,
+                'style': ""  ,
+                'row': ""  ,
+                'col': ""  ,
+                'notes':  "" ,
+                'gender':  "" ,
+                'img':  "" 
               }
+            );
 
-            //**** END****//
-            
-            //**** Send new table data to backend ****//
-            
-            //console.log(tableData);
-            fetch("/manager/bay/edit", {
-                method: "PATCH",
-                body: JSON.stringify({
-                  bay:tableData[0]['bay'],
-                  data: tableData[0]['data']
-                }),
-                headers: {
-                  "Content-Type": "application/json",
-                },}).then(function(response){
-                  return response.json();
-                }).then(function(obj){
-                  if (obj.success == false && obj.error == "404"){
+            tableData[0].data[i].section= rowData[i+incrementRow];
+            tableData[0].data[i].name= rowData[i+1+incrementRow];
+            tableData[0].data[i].style= rowData[i+2+incrementRow];
+            tableData[0].data[i].row= rowData[i+3+incrementRow];
+            tableData[0].data[i].col= rowData[i+4+incrementRow];
+            tableData[0].data[i].notes= rowData[i+5+incrementRow];
+            tableData[0].data[i].gender= rowData[i+6+incrementRow];
+            tableData[0].data[i].img= rowData[i+7+incrementRow];
+            incrementRow +=7;
+
+            //**** VALIDATE URL POSSBILE FUNCTIONALITY*****////
+            // from django.core.validators import URLValidator
+            // from django.core.exceptions import ValidationError
+
+            // val = URLValidator(verify_exists=False)
+            // try:
+            //     val('http://www.google.com')
+            // except ValidationError, e:
+            //     print e
+
+          }
+
+        //**** END****//
+        
+        //**** Send new table data to backend ****//
+        
+        //console.log(tableData);
+        fetch("/manager/bay/edit", {
+            method: "PATCH",
+            body: JSON.stringify({
+              bay:tableData[0]['bay'],
+              data: tableData[0]['data']
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },}).then(function(response){
+              return response.json();
+            }).then(function(obj){
+              if (obj.success == false && obj.error == "404"){
+                var myToast = Toastify({
+                text: 'Shoe Not in our Database',
+                duration: 4000,
+                backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+                gravity: "bottom",
+                position: "center"
+                });
+                myToast.showToast();
+              }
+              else if (obj.success == false && obj.error == "422"){
                     var myToast = Toastify({
-                    text: 'Shoe Not in our Database',
+                    text: 'Unprocessable: Try again if it repeats contact webmaster',
                     duration: 4000,
-                    backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+                    backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
                     gravity: "bottom",
                     position: "center"
                     });
                     myToast.showToast();
                   }
-                  else if (obj.success == false && obj.error == "422"){
-                        var myToast = Toastify({
-                        text: 'Unprocessable: Try again if it repeats contact webmaster',
-                        duration: 4000,
-                        backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
-                        gravity: "bottom",
-                        position: "center"
-                        });
-                        myToast.showToast();
-                      }
-                  else{
-                     window.location.reload(false); 
-                     //console.log(obj.updated_shoes);
-                }
-                  }).catch (function (error) {
-                      console.error(error);
-                  });
-            
-                  activeBay="";
-                  activeCounter--;
-          }
-      }
-        else
-          alert('FINISH WITH ACTIVE BAY FIRST!');
-    }
-  
-    // DELETE FUNCTIONALITY
-
-      function deleteBay(bay){
-        console.log("activeBtnCount: " + activeBay)
-        if(((document.getElementById('deleteBtn'+bay).value == 'delete' && activeBay=="")) ||((document.getElementById('deleteBtn'+bay).value == 'confirm' && activeBay==bay)))
-        {
-          activeBay=bay;
-          let table = document.getElementsByClassName(bay);
-         
-          let deleteBtn = document.getElementById('deleteBtn'+bay);
-          let deleteTxt = document.getElementById('deleteTxt'+bay);
-
-          
-        
-          if (deleteBtn.value == 'delete' && activeCounter==0){
-
-            //alert('in here');
-            deleteTxt.textContent = 'Confirm?';
-            deleteBtn.value = 'confirm'
-
-            for (let j=0; j < table.length; j++) {
-              table[j].className = 'table table-delete ' + bay;
+              else{
+                  window.location.reload(false); 
+                  //console.log(obj.updated_shoes);
             }
+              }).catch (function (error) {
+                  console.error(error);
+              });
+        
+              activeBay="";
+              activeCounter--;
+      }
+  }
+    else
+      alert('FINISH WITH ACTIVE BAY FIRST!');
+}
 
-            activeCounter++;
+// DELETE FUNCTIONALITY
+
+  function deleteBay(bay){
+    console.log("activeBtnCount: " + activeBay)
+    if(((document.getElementById('deleteBtn'+bay).value == 'delete' && activeBay=="")) ||((document.getElementById('deleteBtn'+bay).value == 'confirm' && activeBay==bay)))
+    {
+      activeBay=bay;
+      let table = document.getElementsByClassName(bay);
+      
+      let deleteBtn = document.getElementById('deleteBtn'+bay);
+      let deleteTxt = document.getElementById('deleteTxt'+bay);
+
+      
+    
+      if (deleteBtn.value == 'delete' && activeCounter==0){
+
+        //alert('in here');
+        deleteTxt.textContent = 'Confirm?';
+        deleteBtn.value = 'confirm'
+
+        for (let j=0; j < table.length; j++) {
+          table[j].className = 'table table-delete ' + bay;
+        }
+
+        activeCounter++;
+      }
+      else if (deleteBtn.value == 'confirm' && activeCounter==1){
+
+        // **** Set Table UI back to default Look ****//
+          deleteBtn.value = 'delete'
+          deleteTxt.textContent = 'delete';
+          for (let j=0; j < table.length; j++) {
+          //console.log('BEFORE: ' , table[j].className)
+          table[j].className = 'table table-norm ' + bay;
+          //console.log('AFTER: ' , table[j].className)
           }
-          else if (deleteBtn.value == 'confirm' && activeCounter==1){
-
-            // **** Set Table UI back to default Look ****//
-              deleteBtn.value = 'delete'
-              deleteTxt.textContent = 'delete';
-              for (let j=0; j < table.length; j++) {
-              //console.log('BEFORE: ' , table[j].className)
-              table[j].className = 'table table-norm ' + bay;
-              //console.log('AFTER: ' , table[j].className)
-              }
-                        
-            //**** Send bay data to backend ****//
-              fetch("/manager/bay", {
-                  method: "DELETE",
-                  body: JSON.stringify({
-                    bay:bay
-                  }),
-                  headers: {
-                    "Content-Type": "application/json",
-                  },}).then(function(response){
-                    return response.json();
-                  }).then(function(obj){
-                    if (obj.success == false && obj.error == "404"){
+                    
+        //**** Send bay data to backend ****//
+          fetch("/manager/bay", {
+              method: "DELETE",
+              body: JSON.stringify({
+                bay:bay
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },}).then(function(response){
+                return response.json();
+              }).then(function(obj){
+                if (obj.success == false && obj.error == "404"){
+                  var myToast = Toastify({
+                  text: 'Shoe Not in our Database',
+                  duration: 4000,
+                  backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+                  gravity: "bottom",
+                  position: "center"
+                  });
+                  myToast.showToast();
+                }
+                else if (obj.success == false && obj.error == "422"){
                       var myToast = Toastify({
-                      text: 'Shoe Not in our Database',
+                      text: 'Unprocessable: Try again if it repeats contact webmaster',
                       duration: 4000,
-                      backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+                      backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
                       gravity: "bottom",
                       position: "center"
                       });
                       myToast.showToast();
                     }
-                    else if (obj.success == false && obj.error == "422"){
-                          var myToast = Toastify({
-                          text: 'Unprocessable: Try again if it repeats contact webmaster',
-                          duration: 4000,
-                          backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
-                          gravity: "bottom",
-                          position: "center"
-                          });
-                          myToast.showToast();
-                        }
-                    else{
-                      window.location = "all";
-                      //console.log(obj.updated_shoes);
-                  }
-                    }).catch (function (error) {
-                        console.error(error);
-                    });
-              
-                    activeBay="";
-                    activeCounter--;
-          }
-        }
-
-          else
-            alert('FINISH WITH ACTIVE BAY FIRST!');
+                else{
+                  window.location = "all";
+                  //console.log(obj.updated_shoes);
+              }
+                }).catch (function (error) {
+                    console.error(error);
+                });
+          
+                activeBay="";
+                activeCounter--;
       }
-    </script>
+    }
 
-    <script>
-      
-    </script>
+      else
+        alert('FINISH WITH ACTIVE BAY FIRST!');
+  }
+</script>
+
+
+
+
     {% endblock  %}
+
+  
+

@@ -108,6 +108,7 @@ def create_app(test_config=None):
         searchFailure = False
         bayCategories=None
         listOfBays=None
+        blankPage=False
         
         try:
             if bay == 'all':
@@ -123,10 +124,11 @@ def create_app(test_config=None):
                     distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
                     bayCategories = [str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
                     #print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)                    
+            elif not listOfBays and bay=='all':
+                blankPage= True
             else:  
                 print('>>> no such Bay. Length is: ' , listOfBays)
                 searchFailure=True
-                
         except:
             unprocessable = true
             print('Error Message: ', sys.exc_info())
@@ -135,6 +137,13 @@ def create_app(test_config=None):
                 abort(404)
             elif unprocessable:
                 abort(422)
+            elif blankPage:
+                responseData={ 
+                                'success': True,
+                                'baySelected': bay,
+                                'bay_info': 'None'
+                                }
+                return render_template('manager-view.html', responseData=responseData)
             else:
                 responseData={ 
                                 'success': True,
