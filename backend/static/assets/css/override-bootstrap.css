@@ -339,7 +339,7 @@ header {
 
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus {
-  border: dotted pink;
+  border: solid rgb(9, 132, 214);
   /* outline:groove white;
   outline-offset: 2em; */
 }

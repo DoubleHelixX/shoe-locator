@@ -142,7 +142,7 @@
                           <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.gender}} </td>
                           <td    class = "norm bay_{{responseData.baySelected}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
                         👀 	
-                      {%if shoe.img and shoe.img !='None'%}
+                      {%if (shoe.img) and (shoe.img !="None") %}
                         <span class="hover_img">
                           <img src= "{{shoe.img}}" alt="image"/>
                         </span>
@@ -199,6 +199,8 @@
                 else if (col==7){
                   td[col+ (8*j)].className= 'hover_img edit ' + x;
                   td[col+ (8*j)].textContent=td[col+ (8*j)].getAttribute('data-img');
+                  //td[col+ (8*j)].textContent=""
+
                 }
                 else 
                 td[col+ (8*j)].className= 'edit ' + x;

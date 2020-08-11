@@ -115,18 +115,16 @@ def create_app(test_config=None):
             else:
                 listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.section).all()  
             
-            if len(listOfBays):   
+            if listOfBays:   
                 for shoe in listOfBays:
                     #print('>>>1', listOfBays)
                     bayData.append(Bay.format(shoe))
                     #print('>>>2', shoe)
                     distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
                     bayCategories = [str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
-                    #print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
-                    
-                    
+                    #print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)                    
             else:  
-                print('>>> no such Bay. Length is: ' , len(listOfBays))
+                print('>>> no such Bay. Length is: ' , listOfBays)
                 searchFailure=True
                 
         except:
@@ -246,9 +244,11 @@ def create_app(test_config=None):
                     
                     outdatedShoe.notes=updatedShoe['notes'].strip()
                     print('@notes: ',  outdatedShoe.notes )
-                    
-                    outdatedShoe.img=updatedShoe['img'].strip()
-                    print('@img: ',  outdatedShoe.img )
+                    if(updatedShoe['img'].strip() != 'None'):
+                        outdatedShoe.img=updatedShoe['img'].strip()
+                        print('@img: ',  outdatedShoe.img )
+                    else:
+                        outdatedShoe.img=""
                     
                     outdatedShoe.gender=updatedShoe['gender'].strip()
                     print('@gender: ',  outdatedShoe.gender )
