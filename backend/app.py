@@ -281,6 +281,42 @@ def create_app(test_config=None):
                                 'total_bay_results': len(updated_bay)
                                 }
                 return jsonify(responseData)
+            
+    @app.route('/manager/bay', methods =['DELETE'])
+    def DeleteBay(): 
+        # *See if data is being passed and accepted through the url.*
+        #print('>>>Bay #: ',bay)
+        unprocessable = False
+        searchFailure = False
+        bayCategories=None
+        listOfBays=None
+        bayID= request.get_json()['bay']
+        try:
+            deleted_bay=[]
+            deleted = Bay.query.filter(Bay.bay==bayID).all()
+            if deleted:
+               for gone in deleted:
+                   deleted_bay.append(Bay.format(gone))
+                   gone.delete()        
+            else:  
+                print('@>>> no such Bay.')
+                searchFailure=True
+                    
+        except:
+            unprocessable = true
+            print('Error Message: ', sys.exc_info())
+        finally:
+            if searchFailure:
+                abort(404)
+            elif unprocessable:
+                abort(422)
+            else:
+                responseData={ 
+                                'success': True,
+                                'bay':bayID,
+                                'deleted_shoes': deleted_bay
+                                }
+                return jsonify(responseData)
 
     
     

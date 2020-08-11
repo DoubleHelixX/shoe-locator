@@ -44,8 +44,8 @@
                 <button type="button" rel="tooltip" id = 'editBtn{{bay}}' onclick="return editBay('{{bay}}')" class="btn btn-success " value='edit'>
                 <i  id = "editTxt{{bay}}" class="material-icons">Edit</i>
                 </button>
-                <button type="button" rel="tooltip" id = 'deleteBtn' class="btn btn-danger" value='delete'>
-                  <i class="material-icons">Delete</i>
+              <button type="button" rel="tooltip" id = 'deleteBtn{{bay}}' onclick="return deleteBay('{{bay}}')" class="btn btn-danger" value='delete'>
+                  <i id = "deleteTxt{{bay}}" class="material-icons">Delete</i>
                 </button>
               </div>
             </div>
@@ -110,9 +110,8 @@
 
             <i  id = "editTxt{{responseData.baySelected}}" class="material-icons">Edit</i>
             </button>
-            <button type="button" rel="tooltip" id = 'deleteBtn' class="btn btn-danger" value='delete'>
-
-              <i class="material-icons">Delete</i>
+            <button type="button" rel="tooltip" id = 'deleteBtn{{responseData.baySelected}}' onclick="return deleteBay('{{responseData.baySelected}}')" class="btn btn-danger" value='delete'>
+              <i id = "deleteTxt{{responseData.baySelected}}" class="material-icons">Delete</i>
             </button>
           </div>
         </div>
@@ -209,7 +208,7 @@
 
             activeCounter++;
           }
-          else if (editBtn.value == 'save' && activeCounter==1){
+          else if (editBtn.value == 'save'  && activeCounter==1){
             // **** Set Table UI back to default Look ****//
               let rowData=[];
 
@@ -333,18 +332,99 @@
             
                   activeBay="";
                   activeCounter--;
-              
           }
-       
-
-        
-
       }
-
         else
-          alert('SAVE ACTIVE BAY FIRST!');
+          alert('FINISH WITH ACTIVE BAY FIRST!');
     }
-
   
+    // DELETE FUNCTIONALITY
+
+      function deleteBay(bay){
+        console.log("activeBtnCount: " + activeBay)
+        if(((document.getElementById('deleteBtn'+bay).value == 'delete' && activeBay=="")) ||((document.getElementById('deleteBtn'+bay).value == 'confirm' && activeBay==bay)))
+        {
+          activeBay=bay;
+          let table = document.getElementsByClassName(bay);
+         
+          let deleteBtn = document.getElementById('deleteBtn'+bay);
+          let deleteTxt = document.getElementById('deleteTxt'+bay);
+
+          
+        
+          if (deleteBtn.value == 'delete' && activeCounter==0){
+
+            //alert('in here');
+            deleteTxt.textContent = 'Confirm?';
+            deleteBtn.value = 'confirm'
+
+            for (let j=0; j < table.length; j++) {
+              table[j].className = 'table table-delete ' + bay;
+            }
+
+            activeCounter++;
+          }
+          else if (deleteBtn.value == 'confirm' && activeCounter==1){
+
+            // **** Set Table UI back to default Look ****//
+              deleteBtn.value = 'delete'
+              deleteTxt.textContent = 'delete';
+              for (let j=0; j < table.length; j++) {
+              //console.log('BEFORE: ' , table[j].className)
+              table[j].className = 'table table-norm ' + bay;
+              //console.log('AFTER: ' , table[j].className)
+              }
+                        
+            //**** Send bay data to backend ****//
+              fetch("/manager/bay", {
+                  method: "DELETE",
+                  body: JSON.stringify({
+                    bay:bay
+                  }),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },}).then(function(response){
+                    return response.json();
+                  }).then(function(obj){
+                    if (obj.success == false && obj.error == "404"){
+                      var myToast = Toastify({
+                      text: 'Shoe Not in our Database',
+                      duration: 4000,
+                      backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+                      gravity: "bottom",
+                      position: "center"
+                      });
+                      myToast.showToast();
+                    }
+                    else if (obj.success == false && obj.error == "422"){
+                          var myToast = Toastify({
+                          text: 'Unprocessable: Try again if it repeats contact webmaster',
+                          duration: 4000,
+                          backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+                          gravity: "bottom",
+                          position: "center"
+                          });
+                          myToast.showToast();
+                        }
+                    else{
+                      window.location = "all";
+                      //console.log(obj.updated_shoes);
+                  }
+                    }).catch (function (error) {
+                        console.error(error);
+                    });
+              
+                    activeBay="";
+                    activeCounter--;
+          }
+        }
+
+          else
+            alert('FINISH WITH ACTIVE BAY FIRST!');
+      }
+    </script>
+
+    <script>
+      
     </script>
     {% endblock  %}
