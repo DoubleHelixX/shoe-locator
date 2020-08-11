@@ -504,6 +504,7 @@ td.norm { resize: ""; overflow: visible;}
 
 a {
   -webkit-text-fill-color: rgb(0, 90, 173);
+  cursor: pointer;
 }
 
 li {
