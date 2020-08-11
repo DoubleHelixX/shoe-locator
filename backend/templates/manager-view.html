@@ -6,7 +6,7 @@
       <div class="container"><div><h1>Reebok Shoe Locate</div>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="nav navbar-nav ml-auto"> 
-                <button type="button" rel="tooltip" class="btn btn-success">
+                <button type="button" rel="tooltip" onclick="return popUpBay()"  class="btn btn-success">
                   <i class="material-icons">Create Bay</i>
                 </button></ul>
           </div>
@@ -15,6 +15,55 @@
 
   
   <div class="container-dropdown-btn d-flex masthead">
+    
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <!-- POP UP CONTENT -->
+        <div class="table-header my-auto">
+          <p class="table-title">NEW BAY: </p>
+          <div class = "buttons"> 
+            <button type="button" rel="tooltip" id = 'createBtn' onclick="return createBay()" class="btn btn-success " value='create'>
+
+            <i  id = "confirmTxt" class="material-icons">Confirm?</i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+        <div class=" my-auto">
+          <table id ="create_bay_table" class="table table-edit">
+            <thead class=" text-primary">
+              <th>Bay</th>
+              <th>Section</th>
+              <th>Name</th>
+              <th>Style# </th>
+              <th>Row</th>
+              <th>Coloumn</th>
+              <th>Notes</th>
+              <th>Gender</th>
+              <th>View</th>
+            </thead>
+            <tbody>
+                <tr data-id="" id="create_bay_tr">
+                  <td    class = "edit bay_new" contenteditable="true"> </td>
+                  <td    class = "edit bay_new" contenteditable="true"> </td>
+                  <td    class = "edit bay_new" contenteditable="true">  </td>
+                  <td    class = "text-primary edit bay_new" contenteditable="true">  </td>
+                  <td    class = "edit bay_new " contenteditable="true">  </td>
+                  <td    class = "edit bay_new" contenteditable="true"></td>
+                  <td    class = "edit bay_new" contenteditable="true">  </td>
+                  <td    class = "edit bay_new" contenteditable="true">  </td>
+                  <td    class = "edit bay_new hover_img" data-img="None" contenteditable="true"></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="dropdown">
       <button class="btn btn-default dropdown-toggle" type="dd-button" data-toggle="dropdown">Bay Selection
       <span class="caret"></span></button>
@@ -229,13 +278,7 @@
           //alert(editBtn.value);
           editBtn.value = 'edit'
           editTxt.textContent = 'edit';
-          for (let j=0; j < table.length; j++) {
-          //console.log('BEFORE: ' , table[j].className)
-          table[j].className = 'table table-norm ' + bay;
-          //console.log('AFTER: ' , table[j].className)
-          }
-          console.log(tableRow.length, td.length);
-          
+
           for (let j=0; j < table.length; j++) {
             table[j].className = 'table table-norm ' + bay;
           }
@@ -432,10 +475,146 @@
                 activeCounter--;
       }
     }
-
       else
         alert('FINISH WITH ACTIVE BAY FIRST!');
   }
+
+  // POPUP BAY FUNCTIONALITY //
+
+  function popUpBay(){
+  // Get the modal
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on the button, open the modal
+  modal.style.display = "block";
+  
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+
+  }
+  // CREATE BAY FUNCTIONALITY //
+
+  function createBay(){
+
+ 
+  let table = document.getElementById('create_bay_table');
+  
+  let createBtn = document.getElementById('createBtn');
+  let x = 'bay_new';
+  let td = document.getElementsByClassName(x);
+  
+  let editTxt = document.getElementById('confirmTxt');
+  let tableRow = document.getElementById('create_bay_tr');
+  // console.log('t', table , 'c', createBtn, 'x', x, 'td', td, 'edittxt', editTxt, 't', tableRow);
+ 
+  // **** Set Table UI back to default Look ****//
+  let rowData=[];
+
+  for (let col =0; col<9; col++){
+    rowData.push(td[col].textContent);
+}
+
+//**** Format Table Data ****//
+
+  let tableData= [{'data' : []}];
+  tableData[0].data.push(
+    {
+      'bay': "" ,
+      'section': ""  ,
+      'name':  "" ,
+      'style': ""  ,
+      'row': ""  ,
+      'col': ""  ,
+      'notes':  "" ,
+      'gender':  "" ,
+      'img':  "" 
+    }
+  );
+  tableData[0].data[0].bay= rowData[0];
+  tableData[0].data[0].section= rowData[1];
+  tableData[0].data[0].name= rowData[2];
+  tableData[0].data[0].style= rowData[3];
+  tableData[0].data[0].row= rowData[4];
+  tableData[0].data[0].col= rowData[5];
+  tableData[0].data[0].notes= rowData[6];
+  tableData[0].data[0].gender= rowData[7];
+  tableData[0].data[0].img= rowData[8];
+  //console.log('tableData: ', tableData);
+
+  //**** VALIDATE URL POSSBILE FUNCTIONALITY*****////
+  // from django.core.validators import URLValidator
+  // from django.core.exceptions import ValidationError
+
+  // val = URLValidator(verify_exists=False)
+  // try:
+  //     val('http://www.google.com')
+  // except ValidationError, e:
+  //     print e
+
+  
+
+//**** END****//
+
+//**** Send new table data to backend ****//
+
+fetch("/manager/bay", {
+    method: "POST",
+    body: JSON.stringify({
+      data: tableData[0]['data']
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },}).then(function(response){
+      return response.json();
+    }).then(function(obj){
+      if (obj.success == false && obj.error == "404"){
+        var myToast = Toastify({
+        text: 'Shoe Not in our Database',
+        duration: 4000,
+        backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+        gravity: "bottom",
+        position: "center"
+        });
+        myToast.showToast();
+      }
+      else if (obj.success == false && obj.error == "422"){
+            var myToast = Toastify({
+            text: 'Unprocessable: Try again if it repeats contact webmaster',
+            duration: 4000,
+            backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+            gravity: "bottom",
+            position: "center"
+            });
+            myToast.showToast();
+          }
+      else{
+          //window.location.reload(false); 
+          console.log(obj.created_shoes);
+    }
+      }).catch (function (error) {
+          console.error(error);
+      });
+  }
+
+
+
 </script>
 
 
