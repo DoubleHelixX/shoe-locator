@@ -142,7 +142,7 @@
                           <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.gender}} </td>
                           <td    class = "norm bay_{{responseData.baySelected}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
                         👀 	
-                      {%if shoe.img%}
+                      {%if shoe.img and shoe.img !='None'%}
                         <span class="hover_img">
                           <img src= "{{shoe.img}}" alt="image"/>
                         </span>
@@ -162,6 +162,7 @@
 
     <script>
       activeBay="";
+      activeCounter=0;
       function editBay(bay){
         console.log("activeBtnCount: " + activeBay)
         if(((document.getElementById('editBtn'+bay).value == 'edit' && activeBay=="")) ||((document.getElementById('editBtn'+bay).value == 'save' && activeBay==bay)))
@@ -178,7 +179,7 @@
           let editTxt = document.getElementById('editTxt'+bay);
           let tableRow = document.getElementsByClassName('row'+bay);
         
-          if (editBtn.value == 'edit' ){
+          if (editBtn.value == 'edit' && activeCounter==0){
 
             //alert('in here');
             editTxt.textContent = 'save';
@@ -203,28 +204,10 @@
                 td[col+ (8*j)].className= 'edit ' + x;
               }
             }
-            // let specialRowIncrement = 8;
-          
-            // for (let tr=0; tr < td.length; tr++) {
-            //   td[tr].contentEditable= true;
-            //   console.log(tr);
 
-            //   if( tr !=0 && (tr ==2 || tr ==2+specialRowIncrement))
-            //     td[tr].className= 'text-primary edit ' + x;
-              
-            //   else if (tr==7 || tr==7+specialRowIncrement)
-            //     td[tr].className= 'hover_img edit ' + x;
-
-            //   else
-            //     td[tr].className= 'edit ' + x;
-
-              
-            // //console.log(td, '||' , trStyle , '||', trImg);
-            // }
-
-
+            activeCounter++;
           }
-          else if (editBtn.value == 'save' ){
+          else if (editBtn.value == 'save' && activeCounter==1){
             // **** Set Table UI back to default Look ****//
               let rowData=[];
 
@@ -262,6 +245,7 @@
             }
 
            //**** Format Table Data ****//
+
               let tableData= [{'bay': bay ,'data' : []}];
               let incrementRow =0;
               for (let i = 0; i < tableRow.length; i++){
@@ -289,58 +273,75 @@
                 tableData[0].data[i].img= rowData[i+7+incrementRow];
                 incrementRow +=7;
 
+                //**** VALIDATE URL POSSBILE FUNCTIONALITY*****////
+                // from django.core.validators import URLValidator
+                // from django.core.exceptions import ValidationError
+
+                // val = URLValidator(verify_exists=False)
+                // try:
+                //     val('http://www.google.com')
+                // except ValidationError, e:
+                //     print e
+
               }
-               console.log(tableData);
-              // fetch("/manager/bay/" + data, {
-              //   post request to that route
-              //   method: "PATCH",
-              //   body: JSON.stringify({}),
-              //   headers: {
-              //     "Content-Type": "application/json",
-              //   },).then(function(response){
-              //     return response.json();
-              //   }).then(function(obj){
-              //     if (obj.success == false && obj.error == "404"){
-              //       var myToast = Toastify({
-              //       text: 'Shoe Not in our Database',
-              //       duration: 4000,
-              //       backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
-              //       gravity: "bottom",
-              //       position: "center"
-              //       });
-              //       myToast.showToast();
-              //     }
-              //     else if (obj.success == false && obj.error == "422"){
-              //           var myToast = Toastify({
-              //           text: 'Unprocessable: Try again if it repeats contact webmaster',
-              //           duration: 4000,
-              //           backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
-              //           gravity: "bottom",
-              //           position: "center"
-              //           });
-              //           myToast.showToast();
-              //         }
-              //     else
-              //       window.location.reload(false); 
-              //     }).catch (function (error) {
-              //         console.error(error);
-              //         window.location.reload(false); 
-                    
-              //     });
 
-            activeBay="";
-
+            //**** END****//
+            
+            //**** Send new table data to backend ****//
+            
+            //console.log(tableData);
+            fetch("/manager/bay/edit", {
+                method: "PATCH",
+                body: JSON.stringify({
+                  bay:tableData[0]['bay'],
+                  data: tableData[0]['data']
+                }),
+                headers: {
+                  "Content-Type": "application/json",
+                },}).then(function(response){
+                  return response.json();
+                }).then(function(obj){
+                  if (obj.success == false && obj.error == "404"){
+                    var myToast = Toastify({
+                    text: 'Shoe Not in our Database',
+                    duration: 4000,
+                    backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+                    gravity: "bottom",
+                    position: "center"
+                    });
+                    myToast.showToast();
+                  }
+                  else if (obj.success == false && obj.error == "422"){
+                        var myToast = Toastify({
+                        text: 'Unprocessable: Try again if it repeats contact webmaster',
+                        duration: 4000,
+                        backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+                        gravity: "bottom",
+                        position: "center"
+                        });
+                        myToast.showToast();
+                      }
+                  else{
+                     window.location.reload(false); 
+                     //console.log(obj.updated_shoes);
+                }
+                  }).catch (function (error) {
+                      console.error(error);
+                  });
+            
+                  activeBay="";
+                  activeCounter--;
               
           }
+       
 
         
 
-          
-        }
+      }
 
         else
           alert('SAVE ACTIVE BAY FIRST!');
-      }
+    }
 
   
     </script>

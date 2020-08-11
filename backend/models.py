@@ -62,13 +62,15 @@ class Bay(db.Model):
     self.img = img
     self.gender = gender
     
+  def db_drop_and_create_all():
+    db.drop_all()
+    db.create_all()
 
   def insert(self):
     db.session.add(self)
     db.session.commit()
     
   def update(self):
-    db.session.update(self)
     db.session.commit()
 
   def delete(self):

@@ -6,7 +6,7 @@ from flask_cors import CORS
 # from flask_moment import Moment
 from jinja2 import Environment, PackageLoader
 from flask import Flask, render_template, request, Response, flash, redirect, url_for, jsonify
-from sqlalchemy import Column, String, Integer, create_engine
+from sqlalchemy import Column, String, Integer, create_engine,and_
 
 def create_app(test_config=None):
     # env = Environment(loader=PackageLoader('flaskr', '..\\..\\frontend\\templates'))
@@ -196,38 +196,74 @@ def create_app(test_config=None):
     #                 })
     
     # body: JSON.stringify({
-    #           //stringify json object
+    #           stringify json object
     #           description: descriptionValue, //get value of the description text field
     #         }), 
     # description = request.get_json()['description'] #get the dictionary/object of key description #sycnously way -> .form.get('description', '')  #'' <-- default in case value is empty) # data submitted via the form (string text)
 
     @app.route('/manager/bay/edit', methods =['PATCH'])
-    def EditBay(bay): 
+    def EditBay(): 
         # *See if data is being passed and accepted through the url.*
         #print('>>>Bay #: ',bay)
         unprocessable = False
         searchFailure = False
         bayCategories=None
         listOfBays=None
-        bayID = request.get_json()['ID'] #get the dictionary/object of key description #sycnously way -> .form.get('description', '')  #'' <-- default in case value is empty) # data submitted via the form (string text)
-        data = request.get_json()['data']
-        
+        bayID= request.get_json()['bay']
+        data =  request.get_json()['data']
         try:
-            outdatedShoes = []
-            updatedShoes = []
-            if len(outdatedBay):                
-                for shoe in data:
-                    xID = shoe.id
-                    xCol = shoe.col
-                    xValue = shoe.value
-                    updatedShoe = Bay.query.filter(Bay.id == xID).all()
-                    outdatedShoes.append(updatedShoe)
-                    updatedShoe[xCol]= xValue
-                    updatedShoe.update()
-                    updatedShoes.append(Bay.query.filter(Bay.id == xID).all())
-            else:  
-                print('>>> no such Bay. Length is: ' , len(outdatedBay))
-                searchFailure=True 
+            outdated_bay=[]
+            updated_bay=[]
+           
+            #print(">>> outdated_bay: ", outdated_bay )
+                
+            for updatedShoe in data:
+                print('@shoe: ', updatedShoe )
+                
+                outdatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id']) , Bay.bay==bayID)).one_or_none()
+                outdated_bay.append(Bay.format(outdatedShoe))
+                print('@shoe: ', outdatedShoe )
+                print('@OutdatedBay: ', outdated_bay )
+                
+                
+                if outdatedShoe:
+                    print('@shoe true: ', outdatedShoe )
+                    
+                    outdatedShoe.section=updatedShoe['section'].strip()
+                    print('@section: ', outdatedShoe.section, updatedShoe['section'] )
+                    
+                    outdatedShoe.name=updatedShoe['name'].strip()
+                    print('@name: ',  outdatedShoe.name )
+                    
+                    outdatedShoe.style=updatedShoe['style'].strip()
+                    print('@style: ',  outdatedShoe.style )
+                    
+                    outdatedShoe.row=updatedShoe['row'].strip()
+                    print('@row: ',  outdatedShoe.row )
+                    
+                    outdatedShoe.col=updatedShoe['col'].strip()
+                    print('@col: ',  outdatedShoe.col )
+                    
+                    outdatedShoe.notes=updatedShoe['notes'].strip()
+                    print('@notes: ',  outdatedShoe.notes )
+                    
+                    outdatedShoe.img=updatedShoe['img'].strip()
+                    print('@img: ',  outdatedShoe.img )
+                    
+                    outdatedShoe.gender=updatedShoe['gender'].strip()
+                    print('@gender: ',  outdatedShoe.gender )
+                    
+                    outdatedShoe.update()
+                    updatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id'].strip()) , Bay.bay==bayID)).one_or_none()
+                    print('@updatedShoe: ',  updatedShoe )
+                    
+                    updated_bay.append(Bay.format(updatedShoe))
+                    print('@ updated_bay: ',   updated_bay )
+                    
+                else:  
+                    print('@>>> no such Bay. Length is: ' , len(outdatedShoe))
+                    searchFailure=True
+                     
         except:
             unprocessable = true
             print('Error Message: ', sys.exc_info())
@@ -240,9 +276,9 @@ def create_app(test_config=None):
                 responseData={ 
                                 'success': True,
                                 'bay':bayID,
-                                'outdated_shoes': outdatedShoes,
-                                'updated_shoes': updatedShoes,
-                                'total_bay_results': len(updatedShoes)
+                                'outdated_shoes': outdated_bay,
+                                'updated_shoes': updated_bay,
+                                'total_bay_results': len(updated_bay)
                                 }
                 return jsonify(responseData)
 
