@@ -199,12 +199,12 @@ header.masthead {
 
 }
 
-.container{
+/* .container{
 max-height: 100%;
 width: 1200px;
 max-width: 100%;
 
-}
+} */
 
 .container_sm{
   max-height: 100%;
@@ -366,13 +366,13 @@ header {
 }
 
 .buttons {
-  width: 7em;
+  width: 0em;
   position: relative;
-  left: 15.5rem;
-  top: 0.75rem;
+  left: 0;
+  top: 0;
   display: flex;
-  margin: auto;
-  justify-content: center;
+  margin-left: 70%;
+  /* justify-content: left; */
 }
 
 .table-responsive {
@@ -423,23 +423,23 @@ position: block;
 right: 10rem;
 }
 header.masthead{
-    padding-top: 0rem;
-    padding-left: 20rem;
-    padding-right: 20rem;
-    padding-bottom: 0rem;
-    margin-top: 20px;
-    max-width: 2075px;
-    width: 2050px;
+    padding-top: 0rem!important;
+    padding-left: 20rem!important;
+    padding-right: 20rem!important;
+    padding-bottom: 0rem!important;
+    /* margin-top: 20px!important;
+    max-width: 2075px!important;
+    width: 2050px!important; */
 }
 
 section.masthead{
-  padding-top: 0rem;
-  padding-left: 20rem;
-  padding-right: 20rem;
-  padding-bottom: 0rem;
-margin-top: 15px;
-max-width: 2075px;
-width: 2050px;
+  padding-top: 0rem!important;
+  padding-left: 20rem!important;
+  padding-right: 20rem!important;
+  padding-bottom: 0rem!important;
+/* margin-top: 15px!important;
+max-width: 2075px!important;
+width: 2050px!important; */
 }
 
 .header-title {
@@ -774,3 +774,4 @@ td:hover .hover_img {
   text-decoration: none;
   cursor: pointer;
 }
+
