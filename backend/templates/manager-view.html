@@ -15,11 +15,11 @@
           
           <form style="display: inline; margin: 0;" class="" method="GET" action="/">
             <button type="submit" class="btn">
-              <div style="font-size: 3em; color: rgb(47, 189, 194);" ><i class="fa fa-home"></i> </div>
+              <div style="font-size: 2.5em; color: rgb(47, 189, 194);" ><i class="fa fa-home"></i> </div>
             </button>
           </form>
           <form style="display: inline; margin: 0;"  class="" method="GET" action="/associate">
-            <button type="submit" class="btn">  <div style="font-size: 2em; color: rgb(47, 189, 194);" >👟</div> </button>
+            <button type="submit" class="btn">  <div style="font-size: 2em; color: rgb(47, 189, 194); margin-bottom: 6px;" >👟</div> </button>
             <!-- <a class="navbar-brand" onclick = " return window.location.replace('http://localhost:5000/') " >👟</a> -->
           </form>
           
@@ -532,117 +532,131 @@
 
   function createBay(){
 
- 
-  let table = document.getElementById('create_bay_table');
+  if (!isNaN(document.getElementById('create_bay_name').textContent)){
+
+    let table = document.getElementById('create_bay_table');
+    
+    let createBtn = document.getElementById('createBtn');
+    let x = 'bay_new';
+    let td = document.getElementsByClassName(x);
+    let bayID = document.getElementById('create_bay_name');
+    let editTxt = document.getElementById('confirmTxt');
+    let tableRow = document.getElementsByClassName('create_bay_tr');
+    console.log('bay# ', bayID, 'num? ', isNaN(bayID.textContent));
+
   
-  let createBtn = document.getElementById('createBtn');
-  let x = 'bay_new';
-  let td = document.getElementsByClassName(x);
-  let bayID = document.getElementById('create_bay_name');
-  let editTxt = document.getElementById('confirmTxt');
-  let tableRow = document.getElementsByClassName('create_bay_tr');
-  // console.log('t', table , 'c', createBtn, 'x', x, 'td', td, 'edittxt', editTxt, 't', tableRow);
- 
-  // **** Set Table UI back to default Look ****//
-  let rowData=[];
+    // **** Set Table UI back to default Look ****//
+    let rowData=[];
 
 
-
-//**** Format Table Data ****//
-
-  let tableData= [{'bay': "", 'data' : []}];
-  incrementRow =0;
-  tableData[0].bay = bayID.textContent;
+  //**** Format Table Data ****//
   
-  for (let i = 0; i < tableRow.length; i++){
-    for (let col =0; col<8; col++){
-      if (td[col+(8*i)].textContent.length>0){
-        rowData.push(td[col+(8*i)].textContent);
+
+    let tableData= [{'bay': "", 'data' : []}];
+    incrementRow =0;
+    tableData[0].bay = bayID.textContent;
+    
+    for (let i = 0; i < tableRow.length; i++){
+      for (let col =0; col<8; col++){
+        if (td[col+(8*i)].textContent.length>0){
+          rowData.push(td[col+(8*i)].textContent);
+        }
+        rowData.push(" ");
+
+        
       }
-      rowData.push(" ");
 
-      
+      tableData[0].data.push(
+        {
+          'section': rowData[i+incrementRow],
+          'name':  rowData[i+2+incrementRow],
+          'style': rowData[i+3+incrementRow]  ,
+          'row': rowData[i+4+incrementRow]  ,
+          'col': rowData[i+5+incrementRow]  ,
+          'notes': rowData[i+6+incrementRow],
+          'gender':rowData[i+7+incrementRow] ,
+          'img': rowData[i+8+incrementRow]
+        }
+      );
+      incrementRow +=7;
     }
+    //console.log('tableData', tableData);
 
-    tableData[0].data.push(
-      {
-        'section': rowData[i+incrementRow],
-        'name':  rowData[i+2+incrementRow],
-        'style': rowData[i+3+incrementRow]  ,
-        'row': rowData[i+4+incrementRow]  ,
-        'col': rowData[i+5+incrementRow]  ,
-        'notes': rowData[i+6+incrementRow],
-        'gender':rowData[i+7+incrementRow] ,
-        'img': rowData[i+8+incrementRow]
+  //**** END****//
+
+  //**** Send new table data to backend ****//
+
+  fetch("/manager/bay", {
+      method: "POST",
+      body: JSON.stringify({
+        bay: tableData[0]['bay'],
+        data: tableData[0]['data']
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },}).then(function(response){
+        return response.json();
+      }).then(function(obj){
+        if (obj.success == false && obj.error == "404"){
+          var myToast = Toastify({
+          text: 'Shoe Not in our Database',
+          duration: 4000,
+          backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+          gravity: "bottom",
+          position: "center"
+          });
+          myToast.showToast();
+        }
+        else if (obj.success == false && obj.error == "422"){
+              var myToast = Toastify({
+              text: 'Unprocessable: Try again if it repeats contact webmaster',
+              duration: 4000,
+              backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+              gravity: "bottom",
+              position: "center"
+              });
+              myToast.showToast();
+            }
+        else if (obj.success == false && obj.exist == true){
+              var myToast = Toastify({
+              text: 'Unsuccessful: Bay Already Exist - Change Bay Name',
+              duration: 4000,
+              backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+              gravity: "bottom",
+              position: "center"
+              });
+              myToast.showToast();
+            }
+        else{
+            //window.location.reload(false); 
+      //       console.log(obj.created_bay);
+      //       var myToast = Toastify({
+      //         text: 'successful !',
+      //         duration: 4000,
+      //         backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
+      //         gravity: "bottom",
+      //         position: "center"
+      //         });
+      //         myToast.showToast();
+      window.location = obj.bay;
+
       }
-    );
-    incrementRow +=7;
-  }
-  //console.log('tableData', tableData);
-
-//**** END****//
-
-//**** Send new table data to backend ****//
-
-fetch("/manager/bay", {
-    method: "POST",
-    body: JSON.stringify({
-      bay: tableData[0]['bay'],
-      data: tableData[0]['data']
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },}).then(function(response){
-      return response.json();
-    }).then(function(obj){
-      if (obj.success == false && obj.error == "404"){
-        var myToast = Toastify({
-        text: 'Shoe Not in our Database',
-        duration: 4000,
-        backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
-        gravity: "bottom",
-        position: "center"
+        }).catch (function (error) {
+            console.error(error);
         });
-        myToast.showToast();
-      }
-      else if (obj.success == false && obj.error == "422"){
-            var myToast = Toastify({
-            text: 'Unprocessable: Try again if it repeats contact webmaster',
+    }
+  else{
+    var myToast = Toastify({
+            text: 'Bay ID must be a number only!',
             duration: 4000,
             backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
             gravity: "bottom",
             position: "center"
             });
             myToast.showToast();
-          }
-      else if (obj.success == false && obj.exist == true){
-            var myToast = Toastify({
-            text: 'Unsuccessful: Bay Already Exist - Change Bay Name',
-            duration: 4000,
-            backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
-            gravity: "bottom",
-            position: "center"
-            });
-            myToast.showToast();
-          }
-      else{
-          //window.location.reload(false); 
-    //       console.log(obj.created_bay);
-    //       var myToast = Toastify({
-    //         text: 'successful !',
-    //         duration: 4000,
-    //         backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
-    //         gravity: "bottom",
-    //         position: "center"
-    //         });
-    //         myToast.showToast();
-    window.location = obj.bay;
-
-     }
-      }).catch (function (error) {
-          console.error(error);
-      });
+            
   }
+}
 
 
 
