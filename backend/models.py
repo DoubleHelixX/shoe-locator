@@ -27,6 +27,9 @@ def setup_db(app, database_path=database_path):
   except:
     return False
 
+def db_drop_and_create_all():
+  db.drop_all()
+  db.create_all()
 
 
 #----------------------------------------------------------------------------#
@@ -62,9 +65,6 @@ class Bay(db.Model):
     self.img = img
     self.gender = gender
     
-  def db_drop_and_create_all():
-    db.drop_all()
-    db.create_all()
 
   def insert(self):
     db.session.add(self)

@@ -1,5 +1,5 @@
 import os
-from models import setup_db, Bay
+from models import setup_db, Bay, db_drop_and_create_all
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -7,6 +7,7 @@ from flask_cors import CORS
 from jinja2 import Environment, PackageLoader
 from flask import Flask, render_template, request, Response, flash, redirect, url_for, jsonify
 from sqlalchemy import Column, String, Integer, create_engine,and_
+from auth import AuthError, requires_auth
 
 def create_app(test_config=None):
     # env = Environment(loader=PackageLoader('flaskr', '..\\..\\frontend\\templates'))
@@ -99,6 +100,7 @@ def create_app(test_config=None):
 
 
     @app.route('/manager/bay/<string:bay>', methods =['GET'])
+    #@requires_auth('get:bays')
     def ShowBay(bay='all'):
         bayData =[]
         
@@ -145,6 +147,13 @@ def create_app(test_config=None):
                                 }
                 return render_template('manager-view.html', responseData=responseData)
             else:
+                # return jsonify(responseData={ 
+                #                 'success': True,
+                #                 'baySelected': bay,
+                #                 'bay_info': bayData,
+                #                 'bay_categories': bayCategories,
+                #                 'total_bay_results': len(listOfBays)
+                #                 })
                 responseData={ 
                                 'success': True,
                                 'baySelected': bay,
@@ -209,6 +218,7 @@ def create_app(test_config=None):
     # description = request.get_json()['description'] #get the dictionary/object of key description #sycnously way -> .form.get('description', '')  #'' <-- default in case value is empty) # data submitted via the form (string text)
 
     @app.route('/manager/bay', methods =['PATCH'])
+    #@requires_auth('patch:bays')
     def EditBay(): 
         # *See if data is being passed and accepted through the url.*
         #print('>>>Bay #: ',bay)
@@ -292,6 +302,7 @@ def create_app(test_config=None):
                 return jsonify(responseData)
             
     @app.route('/manager/bay', methods =['DELETE'])
+    #@requires_auth('delete:bays')
     def DeleteBay(): 
         # *See if data is being passed and accepted through the url.*
         #print('>>>Bay #: ',bay)
@@ -328,6 +339,7 @@ def create_app(test_config=None):
                 return jsonify(responseData)
 
     @app.route('/manager/bay', methods =['POST'])
+    #@requires_auth('post:bays')
     def CreateBay(): 
         # *See if data is being passed and accepted through the url.*
         #print('>>>Bay #: ',bay)
