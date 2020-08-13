@@ -1,24 +1,65 @@
-import os
 from models import setup_db, Bay, db_drop_and_create_all
-from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 # from flask_moment import Moment
 from jinja2 import Environment, PackageLoader
-from flask import Flask, render_template, request, Response, flash, redirect, url_for, jsonify
+from flask import Flask, render_template, request, Response, flash, redirect, url_for, jsonify, abort,session
 from sqlalchemy import Column, String, Integer, create_engine,and_
 from auth import AuthError, requires_auth
+from functools import wraps
+from os import environ as env
+from werkzeug.exceptions import HTTPException
+from dotenv import load_dotenv, find_dotenv
+from authlib.integrations.flask_client import OAuth
+from six.moves.urllib.parse import urlencode
+import json
+import constants
+
+
+
+
+ENV_FILE = find_dotenv()
+if ENV_FILE:
+    load_dotenv(ENV_FILE)
+
+AUTH0_CALLBACK_URL = env.get(constants.AUTH0_CALLBACK_URL)
+AUTH0_CLIENT_ID = env.get(constants.AUTH0_CLIENT_ID)
+AUTH0_CLIENT_SECRET = env.get(constants.AUTH0_CLIENT_SECRET)
+AUTH0_DOMAIN = env.get(constants.AUTH0_DOMAIN)
+AUTH0_BASE_URL = 'https://' + AUTH0_DOMAIN
+AUTH0_AUDIENCE = env.get(constants.AUTH0_AUDIENCE)
+
 
 def create_app(test_config=None):
     # env = Environment(loader=PackageLoader('flaskr', '..\\..\\frontend\\templates'))
     # template = env.get_template('testing.html')
     # create and configure the app
     app = Flask(__name__)
+    app.secret_key = constants.SECRET_KEY
+    app.debug = True
     configedDB = setup_db(app)
     if not configedDB:
       abort(500)
   
-    # moment=Moment(app)
+    @app.errorhandler(Exception)
+    def handle_auth_error(ex):
+        response = jsonify(message=str(ex))
+        response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
+        return response
+        oauth = OAuth(app)
+
+        auth0 = oauth.register(
+            'auth0',
+            client_id=AUTH0_CLIENT_ID,
+            client_secret=AUTH0_CLIENT_SECRET,
+            api_base_url=AUTH0_BASE_URL,
+            access_token_url=AUTH0_BASE_URL + '/oauth/token',
+            authorize_url=AUTH0_BASE_URL + '/authorize',
+            client_kwargs={
+                'scope': 'openid profile email',
+            },
+        )
+
     '''
     @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
     '''
@@ -43,6 +84,32 @@ def create_app(test_config=None):
     def index():
         return render_template('index.html')
     
+    @app.route('/callback')
+    def callback_handling():
+        auth0.authorize_access_token()
+        resp = auth0.get('userinfo')
+        userinfo = resp.json()
+
+        session[constants.JWT_PAYLOAD] = userinfo
+        session[constants.PROFILE_KEY] = {
+            'user_id': userinfo['sub'],
+            'name': userinfo['name'],
+            'picture': userinfo['picture']
+        }
+        return redirect('/manager/bay/all')
+
+    @app.route('/login')
+    def login():
+        return auth0.authorize_redirect(redirect_uri=AUTH0_CALLBACK_URL, audience=AUTH0_AUDIENCE)
+
+
+    @app.route('/logout')
+    def logout():
+        session.clear()
+        params = {'returnTo': url_for('home', _external=True), 'client_id': AUTH0_CLIENT_ID}
+        return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
+
+    
     @app.route('/associate')
     def AssociateView():
         return render_template('associate-view.html')
@@ -53,14 +120,14 @@ def create_app(test_config=None):
 
 
     @app.route('/associate/shoe/<style_code>', methods =['GET'])
-    def GetShoe(style_code):
+    def GetShoe(*args, **kwargs):
         # *See if data is being passed and accepted through the url.*
         #print('>>>Shoe code: ', style_code)
         unprocessable = False
         searchFailure = False
         try:
             listOfShoes=[]
-            
+            style_code = kwargs.get('style_code', 'all')
             # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
             #flashOutput=[]
             
@@ -100,7 +167,7 @@ def create_app(test_config=None):
 
 
     @app.route('/manager/bay/<string:bay>', methods =['GET'])
-    #@requires_auth('get:bays')
+    @requires_auth('get:bays')
     def ShowBay(bay='all'):
         bayData =[]
         

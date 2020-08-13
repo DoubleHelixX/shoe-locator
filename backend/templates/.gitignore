@@ -141,3 +141,7 @@ venv
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+a0-variables.js
+auth_config.json
+node_modules/
