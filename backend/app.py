@@ -37,6 +37,18 @@ def create_app(test_config=None):
     app = Flask(__name__)
     app.secret_key = constants.SECRET_KEY
     app.debug = True
+    oauth = OAuth(app)
+    auth0 = oauth.register(
+        'auth0',
+        client_id=AUTH0_CLIENT_ID,
+        client_secret=AUTH0_CLIENT_SECRET,
+        api_base_url=AUTH0_BASE_URL,
+        access_token_url=AUTH0_BASE_URL + '/oauth/token',
+        authorize_url=AUTH0_BASE_URL + '/authorize',
+        client_kwargs={
+            'scope': 'openid profile email',
+        },
+    )
     configedDB = setup_db(app)
     if not configedDB:
       abort(500)
@@ -46,19 +58,8 @@ def create_app(test_config=None):
         response = jsonify(message=str(ex))
         response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
         return response
-        oauth = OAuth(app)
-
-        auth0 = oauth.register(
-            'auth0',
-            client_id=AUTH0_CLIENT_ID,
-            client_secret=AUTH0_CLIENT_SECRET,
-            api_base_url=AUTH0_BASE_URL,
-            access_token_url=AUTH0_BASE_URL + '/oauth/token',
-            authorize_url=AUTH0_BASE_URL + '/authorize',
-            client_kwargs={
-                'scope': 'openid profile email',
-            },
-        )
+    
+    
 
     '''
     @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
@@ -120,14 +121,13 @@ def create_app(test_config=None):
 
 
     @app.route('/associate/shoe/<style_code>', methods =['GET'])
-    def GetShoe(*args, **kwargs):
+    def GetShoe(style_code):
         # *See if data is being passed and accepted through the url.*
         #print('>>>Shoe code: ', style_code)
         unprocessable = False
         searchFailure = False
         try:
             listOfShoes=[]
-            style_code = kwargs.get('style_code', 'all')
             # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
             #flashOutput=[]
             
@@ -167,10 +167,10 @@ def create_app(test_config=None):
 
 
     @app.route('/manager/bay/<string:bay>', methods =['GET'])
-    @requires_auth('get:bays')
-    def ShowBay(bay='all'):
+    #@requires_auth('get:bays')
+    def ShowBay(bay): #*args, **kwargs
         bayData =[]
-        
+        #bay = kwargs.get('bay', 'all')
         # *See if data is being passed and accepted through the url.*
         #print('>>>Bay #: ',bay)
         unprocessable = False
