@@ -1,7 +1,7 @@
+# from flask_moment import Moment
 from models import setup_db, Bay, db_drop_and_create_all
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-# from flask_moment import Moment
 from jinja2 import Environment, PackageLoader
 from flask import Flask, render_template, request, Response, flash, redirect, url_for, jsonify, abort,session
 from sqlalchemy import Column, String, Integer, create_engine,and_
@@ -31,12 +31,9 @@ AUTH0_AUDIENCE = env.get(constants.AUTH0_AUDIENCE)
 
 
 def create_app(test_config=None):
-    # env = Environment(loader=PackageLoader('flaskr', '..\\..\\frontend\\templates'))
-    # template = env.get_template('testing.html')
     # create and configure the app
     app = Flask(__name__)
-    app.secret_key = constants.SECRET_KEY
-    app.debug = True
+  
     oauth = OAuth(app)
     auth0 = oauth.register(
         'auth0',
@@ -48,7 +45,10 @@ def create_app(test_config=None):
         client_kwargs={
             'scope': 'openid profile email',
         },
-    )
+    )  
+    
+    app.secret_key = constants.SECRET_KEY
+    app.debug = True
     configedDB = setup_db(app)
     if not configedDB:
       abort(500)
@@ -90,7 +90,7 @@ def create_app(test_config=None):
         auth0.authorize_access_token()
         resp = auth0.get('userinfo')
         userinfo = resp.json()
-
+        print('>>>USER_INFO',userinfo)
         session[constants.JWT_PAYLOAD] = userinfo
         session[constants.PROFILE_KEY] = {
             'user_id': userinfo['sub'],
