@@ -1,5 +1,5 @@
 # from flask_moment import Moment
-from models import setup_db, Bay, db_drop_and_create_all, db_drop_all
+from models import setup_db, Bay, db_drop_and_create_all
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from jinja2 import Environment, PackageLoader
@@ -10,9 +10,9 @@ from functools import wraps
 from os import environ as env
 from werkzeug.exceptions import HTTPException
 from dotenv import load_dotenv, find_dotenv
-from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 import json
+from authlib.integrations.flask_client import OAuth
 import constants
 
 
@@ -80,7 +80,7 @@ def create_app(test_config=None):
     # Controllers.
     #----------------------------------------------------------------------------#
     #db_drop_and_create_all()
-    #db_drop_all()
+   
     @app.route('/')
     def index():
         return render_template('home.html')
@@ -161,7 +161,7 @@ def create_app(test_config=None):
             
         except expression as identifier:
             #flash('Shoe not in Records')
-            unprocessable = true
+            unprocessable = True
             print('except Expression: ', identifier)
         finally:
             if searchFailure:
@@ -183,7 +183,6 @@ def create_app(test_config=None):
         bayData =[]
         bay = kwargs.get('bay', 'all')
         # *See if data is being passed and accepted through the url.*
-        print('>>>Bay #: ',bay)
         unprocessable = False
         searchFailure = False
         bayCategories=None
@@ -193,9 +192,10 @@ def create_app(test_config=None):
         try:
             if bay == 'all':
                 listOfBays = Bay.query.order_by(Bay.bay , Bay.section).all()  
-                print('>>>', listOfBays)
+                #print('>>>', listOfBays)
             else:
                 listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.section).all()  
+            
             
             if listOfBays:   
                 for shoe in listOfBays:
@@ -207,17 +207,16 @@ def create_app(test_config=None):
                     #print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)                    
             elif not listOfBays and bay=='all':
                 blankPage= True
+                #print('>>> type', type(listOfBays) , 'bay', bay)
             else:  
                 print('>>> no such Bay. Length is: ' , listOfBays)
                 searchFailure=True
         except:
-            unprocessable = true
+            unprocessable = True
             print('Error Message: ', sys.exc_info())
         finally:
             if searchFailure:
                 abort(404)
-            elif unprocessable:
-                abort(422)
             elif blankPage:
                 responseData={ 
                                 'success': True,
@@ -225,23 +224,20 @@ def create_app(test_config=None):
                                 'bay_info': 'None'
                                 }
                 return jsonify(responseData)
-                # return render_template('manager-view.html', responseData=responseData)
+                #return render_template('manager-view.html', responseData=responseData)
+            
+            elif unprocessable:
+                abort(422)
             else:
-                return jsonify(responseData={ 
+                responseData={ 
                                 'success': True,
                                 'baySelected': bay,
                                 'bay_info': bayData,
                                 'bay_categories': bayCategories,
                                 'total_bay_results': len(listOfBays)
-                                })
-                # responseData={ 
-                #                 'success': True,
-                #                 'baySelected': bay,
-                #                 'bay_info': bayData,
-                #                 'bay_categories': bayCategories,
-                #                 'total_bay_results': len(listOfBays)
-                #                 }
-                # return render_template('manager-view.html', responseData=responseData)
+                                }
+                return jsonify(responseData)
+                #return render_template('manager-view.html', responseData=responseData)
     
     
     @app.route('/manager/bay', methods =['PATCH'])
@@ -334,17 +330,18 @@ def create_app(test_config=None):
         bayID= request.get_json()['bay']
         try:
             deleted_bay=[]
+            
             deleted = Bay.query.filter(Bay.bay==bayID).all()
-            if deleted:
-               for gone in deleted:
-                   deleted_bay.append(Bay.format(gone))
-                   gone.delete()        
+            if len(deleted):
+                for gone in deleted:
+                    deleted_bay.append(Bay.format(gone))
+                    gone.delete()        
             else:  
                 print('@>>> no such Bay.')
                 searchFailure=True
                     
         except:
-            unprocessable = true
+            unprocessable = True
             print('Error Message: ', sys.exc_info())
         finally:
             if searchFailure:
@@ -355,6 +352,7 @@ def create_app(test_config=None):
                 responseData={ 
                                 'success': True,
                                 'bay':bayID,
+                                'deleted_total': len(deleted_bay),
                                 'deleted_shoes': deleted_bay
                                 }
                 return jsonify(responseData)
@@ -392,7 +390,7 @@ def create_app(test_config=None):
             else:
                 existFailure=True
         except:
-            unprocessable = true
+            unprocessable = True
             print('Error Message: ', sys.exc_info())
         finally:
             if unprocessable:
@@ -460,7 +458,14 @@ def create_app(test_config=None):
     #  ----------------------------------------------------------------
     #  Error Handlers
     #  ----------------------------------------------------------------
-
+    @app.errorhandler(AuthError)
+    def authentification_failed(AuthError): 
+      return jsonify({
+                      "success": False, 
+                      "error": AuthError.status_code,
+                      "message": AuthError.error['description']
+                      }), AuthError.status_code
+      
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({

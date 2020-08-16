@@ -705,18 +705,15 @@ td:hover .hover_img {
   left: 50%;
   top: 50%;
   background-color: transparent;
-  height: 400px;
-  margin-top: -200px;
-
-
+  margin-top: -300px;
   margin-left: -700px;
 
 }
 
 
 .hover_img img {
-  max-width:100%;
-  max-height:100%;
+  max-width:50%;
+  max-height:50%;
   padding: 5px;
   
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);

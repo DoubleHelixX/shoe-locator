@@ -4,9 +4,10 @@ from sqlalchemy.orm import column_property
 from flask_sqlalchemy import SQLAlchemy
 import json
 import manage as m
+from constants import database_setup 
 
-database_name = "shoe_locate"
-database_path = "postgresql+psycopg2://{}:{}@{}/{}".format('postgres', '1','localhost:5432', database_name)
+
+database_path = "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
 
 db = SQLAlchemy()
 migration=None
@@ -31,8 +32,6 @@ def db_drop_and_create_all():
   db.drop_all()
   db.create_all()
 
-def db_drop_all():
-  db.drop_all()
 #----------------------------------------------------------------------------#
 # Models.
 #----------------------------------------------------------------------------#
