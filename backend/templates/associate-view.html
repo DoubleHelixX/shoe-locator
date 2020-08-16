@@ -20,19 +20,28 @@
                 
             
             </img>
+            <form id ="form" style="display: inline; margin: 0;" class="">
                 <div class="col-3">
-                    <input class="effect-8 " id="stylecode " onkeyup="return (tfSubmit(event,this))" type="text" placeholder="Enter Style Code #">
+                    <input class="effect-8 " id="style_code"  type="text" placeholder="Enter Style Code #">
                     <span class="focus-border">
                         <i></i>
                     </span>
                 </div>   
                 <div id="error" class="hidden" style="text-align: center; color: red;" ></div>
 
-                <!-- <div class ="btnDiv">
-                     <a class="btn btn-light btn-bordered-success sr-button"  onclick="btnSubmit()" role="button" data-aos="zoom-in" data-aos-duration="400" data-aos-once="true"  id="searchButton">Search</a>
-                </div> -->
-            </div>
+                
+                     <button class="btnDiv btn btn-light btn-bordered-success sr-button" type="submit" value="submit" role="button" data-aos="zoom-in" data-aos-duration="400" data-aos-once="true"  id="searchButton">Search</button>
+               
+                </form>
+                  
+          <div style="padding-top: 45px;"> 
+          <button class=" btnDiv btn btn-light btn-bordered-success sr-button hidden" onclick="showCount()" id='countBtn' role="button" data-aos="zoom-in" data-aos-duration="400" data-aos-once="true" value ="">Count</button>
+        </div> 
         </div>
+     
+
+         
+          
     </div>
 
         
@@ -40,39 +49,42 @@
  
    <script>
 
-    function tfSubmit(e,str){
+    // function tfSubmit(e,str){
     
-        var keyCode = (window.Event) ? e.which : e.keyCode;
-        var keyCode2 = (window.event) ? e.which : e.keyCode;
-        if (keyCode == 13 || keyCode2==13){
-            //alert('sds', str.value);
+    //     var keyCode = (window.Event) ? e.which : e.keyCode;
+    //     var keyCode2 = (window.event) ? e.which : e.keyCode;
+    //     if (keyCode == 13 || keyCode2==13){
+    //         //alert('sds', str.value);
       
-            searchShoeAsync(str.value);
-            str.value='';
-        }
-    }
+    //         searchShoeAsync(str.value);
+    //         str.value='';
+    //     }
+    // }
        
-//     function triggerEvent(el, type){
-//     if ('createEvent' in document) {
-//             // modern browsers, IE9+
-//             var e = document.createEvent('HTMLEvents');
-//             e.initEvent(type, false, true);
-//             el.dispatchEvent(e);
-//             alert('sds');
-//         } else {
-//             // IE 8
-//             var e = document.createEventObject();
-//             e.eventType = type;
-//             el.fireEvent('on'+e.eventType, e);
-//         }
-        
-// }
+let countBtn =document.getElementById('countBtn');
+function showCount(){
+  countBtn.classList.add("hidden");
+  if(!countBtn.value)
+    countBtn.value=0;
 
-//     function btnSubmit(){
-//         var el = document.querySelector('input[type="text"]');
-//         triggerEvent(el, 'onkeyup');       
-//     }
+  var myToast = Toastify({
+                text: 'There are:  '+ countBtn.value + '  Shoes available.',
+                duration: 4000,
+                backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
+                gravity: "bottom",
+                position: "center",
+                });
+  myToast.showToast();
 
+}
+
+document.getElementById("form").onsubmit = function (e) {
+        // creates event handler for submit btn of form.
+        e.preventDefault();
+       countBtn.classList.remove("hidden");
+        searchShoeAsync(document.getElementById("style_code").value,'search')
+
+}
 function searchShoeAsync(inputValue=null){
         //alert(inputValue);
 
@@ -123,6 +135,7 @@ function searchShoeAsync(inputValue=null){
                 }
             else{
               //console.log(obj.total_shoe_results, obj.shoe_info[0]);
+              countBtn.value=obj.total_shoe_results;
             
               for(let i=0; i < obj.total_shoe_results; i++){
                 console.log(i, obj.total_shoe_results, obj.shoe_info[i]);
@@ -151,42 +164,8 @@ function searchShoeAsync(inputValue=null){
       }
       
 
-    function searchShoeAsync2(inputValue=null){
-        //alert(inputValue);
-
-        let errorDiv = document.getElementById("error"); //Error block / debugger
-        if (
-            inputValue === undefined ||
-            inputValue === null ||
-            inputValue === "" ||
-            inputValue.length === 0 ||
-          !inputValue
-        ) {
-          //alert('desription field return type is ' , typeof descriptionValue,  ' value is: ' , descriptionValue)
-          errorDiv.innerHTML =
-            " Enter a Value";
-          errorDiv.className = "";
-        } else if (inputValue.includes("#")){
-          errorDiv.innerHTML =
-            " Remove any # Symbols";
-          errorDiv.className = "";
-        }
-        else {
-            //alert(typeof inputValue);
-
-          errorDiv.className = "hidden";
-          errorDiv.innerHTML = "";
-          fetch("/shoe/" + inputValue, {
-            method: "GET",
-          }).then(function (jsonResponse) {
-            //alert(jsonResponse);
-          }).catch(function (e) {
-              errorDiv.innerHTML = "something went wrong with the  Fetch  error- POST method- "; //fill error div content with correct message
-              errorDiv.className = ""; //show the div element - unhidden
-              console.error(e);
-          });
-        }
-      }
+          
+       
     
    </script>
 

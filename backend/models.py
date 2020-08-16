@@ -1,5 +1,6 @@
 import os
-from sqlalchemy import Column, String, Integer, create_engine
+from sqlalchemy import Column, String, Integer, create_engine, select, func, DateTime
+from sqlalchemy.orm import column_property
 from flask_sqlalchemy import SQLAlchemy
 import json
 import manage as m
@@ -19,8 +20,7 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    # db.drop_all()
-    # db.create_all()
+    
     # BOOTSTRAP DB migration command with migration file
     migration = m.migration(app, db)
     return True
@@ -31,7 +31,8 @@ def db_drop_and_create_all():
   db.drop_all()
   db.create_all()
 
-
+def db_drop_all():
+  db.drop_all()
 #----------------------------------------------------------------------------#
 # Models.
 #----------------------------------------------------------------------------#
@@ -43,13 +44,16 @@ class Bay(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   bay = db.Column(db.Integer, nullable=False)
   section = db.Column(db.String(120), nullable=False)
-  name = db.Column(db.String)
+  name = db.Column(db.String(120))
   style = db.Column(db.String(120), nullable=False)
   row = db.Column(db.String(120), nullable=False)
   col = db.Column(db.String(120), nullable=False)
   notes = db.Column(db.String(120))
   img = db.Column(db.String(500), nullable = True)
   gender = db.Column(db.CHAR(1))
+  data = db.relationship('Data', backref='bays', lazy=True)
+  # shoe_count =  column_property(select([func.count(shoes.bay_style)]).\
+  #       where(shoes.bay_style==style))
   
   def __repr__(self):
     return f'<Bay {self.id} {self.name}>'
@@ -91,6 +95,21 @@ class Bay(db.Model):
       'img': self.img,
       'gender': self.gender.upper()
     }
+
+
+class Data(db.Model):
+  __tablename__ = 'data'
+
+  id = db.Column(db.Integer, primary_key=True)
+  bayId = db.Column(db.Integer, db.ForeignKey('bays.id'), nullable=False)
+  shoeCount= db.Column(db.Integer, nullable = True)
+  date_added = Column(DateTime())
+  
+ 
+ 
+  def insert(self):
+    db.session.add(self)
+    db.session.commit()
 
 #----------------------------------------------------------------------------#
 # Filters.

@@ -1,5 +1,5 @@
 # from flask_moment import Moment
-from models import setup_db, Bay, db_drop_and_create_all
+from models import setup_db, Bay, db_drop_and_create_all, db_drop_all
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from jinja2 import Environment, PackageLoader
@@ -34,18 +34,18 @@ def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
   
-    oauth = OAuth(app)
-    auth0 = oauth.register(
-        'auth0',
-        client_id=AUTH0_CLIENT_ID,
-        client_secret=AUTH0_CLIENT_SECRET,
-        api_base_url=AUTH0_BASE_URL,
-        access_token_url=AUTH0_BASE_URL + '/oauth/token',
-        authorize_url=AUTH0_BASE_URL + '/authorize',
-        client_kwargs={
-            'scope': 'openid profile email',
-        },
-    )  
+    # oauth = OAuth(app)
+    # auth0 = oauth.register(
+    #     'auth0',
+    #     client_id=AUTH0_CLIENT_ID,
+    #     client_secret=AUTH0_CLIENT_SECRET,
+    #     api_base_url=AUTH0_BASE_URL,
+    #     access_token_url=AUTH0_BASE_URL + '/oauth/token',
+    #     authorize_url=AUTH0_BASE_URL + '/authorize',
+    #     client_kwargs={
+    #         'scope': 'openid profile email',
+    #     },
+    # )  
     
     app.secret_key = constants.SECRET_KEY
     app.debug = True
@@ -53,41 +53,42 @@ def create_app(test_config=None):
     if not configedDB:
       abort(500)
   
-    @app.errorhandler(Exception)
-    def handle_auth_error(ex):
-        response = jsonify(message=str(ex))
-        response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
-        return response
+    # @app.errorhandler(Exception)
+    # def handle_auth_error(ex):
+    #     response = jsonify(message=str(ex))
+    #     response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
+    #     return response
     
     
 
     '''
-    @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
+    CORS set up. Allowed '*' for origins. 
     '''
     CORS(app, resources={r"/api/*": {"origins": "*"}})
     
 
     '''
-    @TODO: Use the after_request decorator to set Access-Control-Allow
+    Use the after_request decorator to set Access-Control-Allow
     '''
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,PATCH')
         return response
 
     #----------------------------------------------------------------------------#
     # Controllers.
     #----------------------------------------------------------------------------#
-
-
+    #db_drop_and_create_all()
+    #db_drop_all()
     @app.route('/')
     def index():
-        return render_template('index.html')
+        return render_template('home.html')
     
     @app.route('/callback')
     def callback_handling():
-        auth0.authorize_access_token()
+        #auth0 = app.config['auth0']
+        token = auth0.authorize_access_token()
         resp = auth0.get('userinfo')
         userinfo = resp.json()
         print('>>>USER_INFO',userinfo)
@@ -101,7 +102,11 @@ def create_app(test_config=None):
 
     @app.route('/login')
     def login():
-        return auth0.authorize_redirect(redirect_uri=AUTH0_CALLBACK_URL, audience=AUTH0_AUDIENCE)
+        #auth0 = app.config['auth0']
+        #state = uuid.uuid4().hex
+        #redirect_url = url_for("auth.callback", _external=True)
+        #auth0.save_authorize_state(redirect_uri=redirect_url, state=state)
+        return auth0.authorize_redirect(redirect_uri=AUTH0_CALLBACK_URL, audience=AUTH0_AUDIENCE) #, state=state
 
 
     @app.route('/logout')
@@ -126,17 +131,23 @@ def create_app(test_config=None):
         #print('>>>Shoe code: ', style_code)
         unprocessable = False
         searchFailure = False
+        count=0
         try:
             listOfShoes=[]
             # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
             #flashOutput=[]
             
             receivedShoe = Bay.query.filter(Bay.style == style_code).order_by(Bay.bay).all()  
+           
             
             if len(receivedShoe):   
                 for shoe in receivedShoe:
                     listOfShoes.append(Bay.format(shoe))
-                   
+                    
+                    # countOfShoe = Shoes.query.filter(shoe.id == Shoes.id).one_or_none()
+                    # if countOfShoe:
+                    #     count+=1
+                        
                     # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
                     #flashOutput.append('Bay:' + Bay.bay + ' Row: '+ Bay.row + ' Col: '+ Bay.col)
             else:  
@@ -170,9 +181,9 @@ def create_app(test_config=None):
     #@requires_auth('get:bays')
     def ShowBay(bay): #*args, **kwargs
         bayData =[]
-        #bay = kwargs.get('bay', 'all')
+       # bay = kwargs.get('bay', 'all')
         # *See if data is being passed and accepted through the url.*
-        #print('>>>Bay #: ',bay)
+        print('>>>Bay #: ',bay)
         unprocessable = False
         searchFailure = False
         bayCategories=None
@@ -182,6 +193,7 @@ def create_app(test_config=None):
         try:
             if bay == 'all':
                 listOfBays = Bay.query.order_by(Bay.bay , Bay.section).all()  
+                print('>>>', listOfBays)
             else:
                 listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.section).all()  
             
@@ -286,7 +298,7 @@ def create_app(test_config=None):
 
     @app.route('/manager/bay', methods =['PATCH'])
     #@requires_auth('patch:bays')
-    def EditBay(): 
+    def EditBay(*args, **kwargs): 
         # *See if data is being passed and accepted through the url.*
         #print('>>>Bay #: ',bay)
         unprocessable = False
@@ -311,25 +323,19 @@ def create_app(test_config=None):
                 
                 
                 if outdatedShoe:
-                    print('@shoe true: ', outdatedShoe )
                     
                     outdatedShoe.section=updatedShoe['section'].strip()
-                    print('@section: ', outdatedShoe.section, updatedShoe['section'] )
                     
                     outdatedShoe.name=updatedShoe['name'].strip()
-                    print('@name: ',  outdatedShoe.name )
-                    
+                           
                     outdatedShoe.style=updatedShoe['style'].strip()
-                    print('@style: ',  outdatedShoe.style )
                     
                     outdatedShoe.row=updatedShoe['row'].strip()
-                    print('@row: ',  outdatedShoe.row )
                     
                     outdatedShoe.col=updatedShoe['col'].strip()
-                    print('@col: ',  outdatedShoe.col )
                     
                     outdatedShoe.notes=updatedShoe['notes'].strip()
-                    print('@notes: ',  outdatedShoe.notes )
+
                     if(updatedShoe['img'].strip() != 'None'):
                         outdatedShoe.img=updatedShoe['img'].strip()
                         print('@img: ',  outdatedShoe.img )
@@ -370,7 +376,7 @@ def create_app(test_config=None):
             
     @app.route('/manager/bay', methods =['DELETE'])
     #@requires_auth('delete:bays')
-    def DeleteBay(): 
+    def DeleteBay(*args, **kwargs): 
         # *See if data is being passed and accepted through the url.*
         #print('>>>Bay #: ',bay)
         unprocessable = False
@@ -406,8 +412,8 @@ def create_app(test_config=None):
                 return jsonify(responseData)
 
     @app.route('/manager/bay', methods =['POST'])
-    #@requires_auth('post:bays')
-    def CreateBay(): 
+    #@requires_auth('create:bays')
+    def CreateBay(*args, **kwargs): 
         # *See if data is being passed and accepted through the url.*
         #print('>>>Bay #: ',bay)
         unprocessable = False
