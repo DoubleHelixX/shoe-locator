@@ -243,59 +243,7 @@ def create_app(test_config=None):
                 return render_template('manager-view.html', responseData=responseData)
     
     
-    # @app.route('/manager/bays/<string:bay>', methods =['GET'])
-    # def EditBayAsync(bay):
-    #     bayData =[]
-        
-    #     # *See if data is being passed and accepted through the url.*
-    #     #print('>>>Bay #: ',bay)
-    #     unprocessable = False
-    #     searchFailure = False
-    #     bayCategories=None
-    #     listOfBays=None
-    #     try:
-    #         if bay == 'all':
-    #             listOfBays = Bay.query.order_by(Bay.bay).all()  
-    #         else:
-    #             listOfBays = Bay.query.filter(Bay.bay == bay).order_by(Bay.id).all()  
-            
-            
-    #         if len(listOfBays):   
-    #             for shoe in listOfBays:
-    #                #print('>>>1', listOfBays)
-    #                 bayData.append(Bay.format(shoe))
-    #                 #print('>>>2', shoe)
-    #                 distinctBays = Bay.query.with_entities(Bay.bay).distinct().order_by(Bay.bay).all()
-    #                 bayCategories = [ 'Bay: ' + str(char) for bay in distinctBays for char in bay if isinstance(char, int)]
-    #                 #print('>>> distinct' , distinctBays,  'Bay Categories: ', bayCategories)
-            
-                   
-    #         else:  
-    #             print('>>> no such Bay. Length is: ' , len(listOfBays))
-    #             searchFailure=True
-                
-    #     except:
-    #         unprocessable = true
-    #         print('Error Message: ', sys.exc_info())
-    #     finally:
-    #         if searchFailure:
-    #             abort(404)
-    #         elif unprocessable:
-    #             abort(422)
-    #         else:
-    #             return jsonify({
-    #                 'success': True,
-    #                 'bay_info': bayData,
-    #                 'bay_categories': bayCategories,
-    #                 'total_bay_results': len(listOfBays)
-    #                 })
-    
-    # body: JSON.stringify({
-    #           stringify json object
-    #           description: descriptionValue, //get value of the description text field
-    #         }), 
-    # description = request.get_json()['description'] #get the dictionary/object of key description #sycnously way -> .form.get('description', '')  #'' <-- default in case value is empty) # data submitted via the form (string text)
-
+   
     @app.route('/manager/bay', methods =['PATCH'])
     #@requires_auth('patch:bays')
     def EditBay(*args, **kwargs): 
@@ -465,6 +413,48 @@ def create_app(test_config=None):
                                 }
                 return jsonify(responseData)
 
+    @app.route('/manager/data/<string:bay_id>', methods =['GET'])
+    @requires_auth('get:data')
+    def ShowBay(*args, **kwargs): #*args, **kwargs
+        bayData =[]
+        bay_id = kwargs.get('bay_id', 'all')
+        # *See if data is being passed and accepted through the url.*
+        print('>>>Bay #: ',bay)
+        unprocessable = False
+        searchFailure = False
+        bayCategories=None
+        listOfBays=None
+        blankPage=False
+        
+        try:
+            if bay_id == 'all':
+                listOfBayData = Data.query.order_by(Data.bay_id).all()  
+                print('>>>', listOfBayData)
+            else:
+                listOfBayData = Data.query.filter(Data.bay_id == bay_id).one_or_none()  
+            
+            if listOfBayData:   
+                for bay in listOfBayData:
+                    #print('>>>1', listOfBays)
+                    bayData.append(Data.format(bay))                     
+            else:  
+                print('>>> no such Data for this Bay.)
+                searchFailure=True
+        except:
+            unprocessable = true
+            print('Error Message: ', sys.exc_info())
+        finally:
+            if searchFailure:
+                abort(404)
+            elif unprocessable:
+                abort(422)
+            else:
+                return jsonify(responseData={ 
+                                'success': True,
+                                'bay_data': bayData,
+                                'total_data_results': len(listOfBayData)
+                                })
+                
     
     #  ----------------------------------------------------------------
     #  Error Handlers

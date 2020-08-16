@@ -106,10 +106,32 @@ class Data(db.Model):
   date_added = Column(DateTime())
   
  
- 
+ def __repr__(self):
+    return f'<Bay {self.id} {self.date_added}>'
+  
+  def __init__(self, bayId, shoeCount, date_added):
+    self.bayId = bayId
+    self.shoeCount = shoeCount
+    self.date_added =date_added
+    
   def insert(self):
     db.session.add(self)
     db.session.commit()
+    
+  def update(self):
+    db.session.commit()
+
+  def delete(self):
+    db.session.delete(self)
+    db.session.commit()
+
+  def format(self):
+    return {
+      'id': self.id,
+      'bayId': self.bayId,
+      'shoeCount': self.shoeCount,
+      'date_added': self.date_added
+    }
 
 #----------------------------------------------------------------------------#
 # Filters.
