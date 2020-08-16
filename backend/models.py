@@ -52,8 +52,7 @@ class Bay(db.Model):
   img = db.Column(db.String(500), nullable = True)
   gender = db.Column(db.CHAR(1))
   data = db.relationship('Data', backref='bays', lazy=True)
-  # shoe_count =  column_property(select([func.count(shoes.bay_style)]).\
-  #       where(shoes.bay_style==style))
+  
   
   def __repr__(self):
     return f'<Bay {self.id} {self.name}>'
@@ -101,12 +100,12 @@ class Data(db.Model):
   __tablename__ = 'data'
 
   id = db.Column(db.Integer, primary_key=True)
-  bayId = db.Column(db.Integer, db.ForeignKey('bays.id'), nullable=False)
+  bayId = db.Column(db.Integer, db.ForeignKey('bays.id'), nullable=True)
   shoeCount= db.Column(db.Integer, nullable = True)
   date_added = Column(DateTime())
   
  
- def __repr__(self):
+  def __repr__(self):
     return f'<Bay {self.id} {self.date_added}>'
   
   def __init__(self, bayId, shoeCount, date_added):
