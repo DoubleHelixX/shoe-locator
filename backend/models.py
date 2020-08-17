@@ -3,11 +3,13 @@ from sqlalchemy import Column, String, Integer, create_engine, select, func, Dat
 from sqlalchemy.orm import column_property
 from flask_sqlalchemy import SQLAlchemy
 import json
+from flask import Flask
 import manage as m
-from constants import database_setup 
-
+from constants import database_setup, jsonData
+import pandas as pd
 
 database_path = "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
+# engine = create_engine(database_path)
 
 db = SQLAlchemy()
 migration=None
@@ -21,7 +23,7 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    
+    db.create_all()
     # BOOTSTRAP DB migration command with migration file
     migration = m.migration(app, db)
     return True
@@ -31,6 +33,49 @@ def setup_db(app, database_path=database_path):
 def db_drop_and_create_all():
   db.drop_all()
   db.create_all()
+ 
+  
+def db_initialize_tables_csv_pandas():
+ engine = db.get_engine()  
+ 
+ csv_file_path = 'C:/Users/Public/bays_.csv'
+ # Read CSV with Pandas
+ df = pd.read_csv(csv_file_path)
+ print(df)
+ # Insert to DB
+ df.to_sql('bays',
+          con=engine,
+          index=True,
+          index_label='id',
+          if_exists='replace')
+ 
+    
+def db_initialize_tables_json():
+  for i in jsonData: 
+    #print(i)
+    for j in i['data']:
+      new_bay = (Bay(
+          bay = i['bay'],
+          section =j['section'],
+          name =j['name'], 
+          style =  j['style'],
+          row =j['row'],
+          col =j['col'],
+          notes =j['notes'], 
+          gender = j['gender'], 
+          img =j['img'], 
+      ))
+      new_bay.insert()
+      
+
+   
+
+
+  
+    
+    
+
+
 
 #----------------------------------------------------------------------------#
 # Models.

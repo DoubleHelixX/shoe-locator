@@ -1,5 +1,5 @@
 # from flask_moment import Moment
-from models import setup_db, Bay, db_drop_and_create_all
+from models import setup_db, Bay, db_drop_and_create_all, db_initialize_tables_json
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from jinja2 import Environment, PackageLoader
@@ -50,16 +50,13 @@ def create_app(test_config=None):
     app.secret_key = constants.SECRET_KEY
     app.debug = True
     configedDB = setup_db(app)
+    
+    # db_drop_and_create_all()
+    # db_initialize_tables_json()
+    
     if not configedDB:
       abort(500)
   
-    # @app.errorhandler(Exception)
-    # def handle_auth_error(ex):
-    #     response = jsonify(message=str(ex))
-    #     response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
-    #     return response
-    
-    
 
     '''
     CORS set up. Allowed '*' for origins. 
@@ -79,7 +76,6 @@ def create_app(test_config=None):
     #----------------------------------------------------------------------------#
     # Controllers.
     #----------------------------------------------------------------------------#
-    #db_drop_and_create_all()
    
     @app.route('/')
     def index():
@@ -472,6 +468,15 @@ def create_app(test_config=None):
     #  ----------------------------------------------------------------
     #  Error Handlers
     #  ----------------------------------------------------------------
+    
+    
+    # @app.errorhandler(Exception)
+    # def handle_auth_error(ex):
+    #     response = jsonify(message=str(ex))
+    #     response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
+    #     return response
+    
+    
     @app.errorhandler(AuthError)
     def authentification_failed(AuthError): 
       return jsonify({
