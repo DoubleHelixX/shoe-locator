@@ -8,7 +8,7 @@ import manage as m
 from constants import database_setup, jsonData
 import pandas as pd
 
-database_path = "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
+database_path =  "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
 # engine = create_engine(database_path)
 
 db = SQLAlchemy()
@@ -65,7 +65,11 @@ def db_initialize_tables_json():
           gender = j['gender'], 
           img =j['img'], 
       ))
+     
       new_bay.insert()
+      
+      
+      
       
 
    

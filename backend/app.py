@@ -51,8 +51,8 @@ def create_app(test_config=None):
     app.debug = True
     configedDB = setup_db(app)
     
-    # db_drop_and_create_all()
-    # db_initialize_tables_json()
+    #db_drop_and_create_all()
+    #db_initialize_tables_json()
     
     if not configedDB:
       abort(500)

@@ -4,9 +4,9 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from constants import database_setup, bearer_tokens
 from app import create_app
-from models import setup_db, Bay, db_drop_and_create_all,  db_initialize_tables_json
+from models import setup_db, Bay, db_drop_and_create_all,  db_initialize_tables_json,db
 
-
+     
 assistant_manager_auth_header = {
             'Authorization': bearer_tokens['assistant_manager']
             }
@@ -21,12 +21,29 @@ class ShoeLocateTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_path = "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
+        self.database_path= "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
         setup_db(self.app, self.database_path)
-        
+        db.session.close()
+        db.session.remove()
+        db_drop_and_create_all()    
+        db_initialize_tables_json()
         
         self.new_bay = {
             "bay": "12",
+            "data": [{
+                "section": "A",
+                "name":  "new bay",
+                "style": "S5454",
+                "row": "4",
+                "col": "2",
+                "notes":  "Box color is Yellow.",
+                "gender":  "M",
+                "img":  "https://bit.ly/31sgwi5"
+            }]
+        }
+        
+        self.existing_bay = {
+            "bay": "1",
             "data": [{
                 "section": "A",
                 "name":  "new bay",
@@ -87,22 +104,14 @@ class ShoeLocateTestCase(unittest.TestCase):
             "img":  "https://images.unsplash.com/photo-1536787175219-c199c3100742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" 
             }]
         }      
-          
+       
         # binds the app to the current context
         with self.app.app_context():
             self.db = SQLAlchemy()
             self.db.init_app(self.app)
             # create all tables
             self.db.create_all()
-            # self.db.session.close()
-            # self.db.session.remove()
-            # db_drop_and_create_all()
-            # db_initialize_tables_json()
-           
-            
-              
-            
-        
+      
 
     def tearDown(self):
         """Executed after each test"""
@@ -299,13 +308,13 @@ class ShoeLocateTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'Permission not found.')
         
     def test_exist_Failure(self):
-        res = self.client().post('/manager/bay', json=self.new_bay, headers =store_manager_auth_header)
+        res = self.client().post('/manager/bay', json=self.existing_bay, headers =store_manager_auth_header)
         data = json.loads(res.data)
         
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['exist'], True)
-        self.assertEqual(data['bay'], 12)
+        self.assertEqual(data['bay'], 1)
   
     
     # * ----- END OF TESTING CREATE BAY ROUTE ----- *
