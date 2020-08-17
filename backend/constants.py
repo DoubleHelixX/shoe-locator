@@ -15,8 +15,8 @@ JWT_PAYLOAD = 'jwt_payload'
 
 
 bearer_tokens = {
-    "store_manager" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NjE1OTk1LCJleHAiOjE1OTc3MDIzOTUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.qmiqpwbCMeT2qyF5B-f5V26yWKLT96gCaDyH4Bb8Bp3y14Jq2mlso_aGYhSsFF49BZf8QszEHdqJZtLbgKocTBBVadxpcYaEfvcKAK4qUKthURBid6lYblIm5wRcuOy4NFldEAPNNDKIswbfzVIpKpxmIt4Q4vzWSbUe84_i_QM50-6dXEAIRmOTnl_JeuIMNt_f2FMGJsxlq7o7kfawarr_dKMICU5XO43Lxs41a13MNwR6EWcmmyiTRiJtosQSLIiu0WGHlc0706U6uJPDabBagDVA3FcQ_9cXYkb2K_ym-KM-1U7VBC_qe128KmTBgZKJ4gueRBrlFubs7zrS-g",
-    "assistant_manager" : " Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NjE2MDU2LCJleHAiOjE1OTc3MDI0NTYsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.cuxcKUelwasWXsy7q7TST7czRQV1CHXqtm2fQlfpHerw68ohOt236jEnSy1oBKtbviQJJMAAMdDirWaEP-9VX8pLAu03NGJC2fy0PFWGrKfPkIMXMD7nRfQfPi59vgJKsbbZASCBHy3m660lt-GpyGx1MyceokiCmlrfTKnoVlRISo0LQE4Q6wT_xVu9mpUMZGUXZNHOyO5QQRlHtCOzrz4FTfvi8F9MbkQxqQtTDsP4LsI7dabxxU2L3FwYrT-xJYOvFxwa4jHyVnk2nAY3EZAPMZ7xSGd0SxSwk5NbgbIvM5EfKS6D_mzimkVq3Q9bDR0c4y78Czl6P6NbQOeDrA"
+    "store_manager" :  " Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMjA5LCJleHAiOjE1OTc3ODk2MDksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d3Pw5yR_xq0qmAoVpOp6iT9wttv7tlhzDI0K5PlLS_PZ8vZiUcLK7sVDX1R7RosrkXErgZx2FZhUCdK96UkB_lYby5NIH-mp2A6Soh9HcMp5x8qJ-IzCxM1_fmi3XkPUJcNKiSJNq6NgWxwjFN-0OyAIfF9IbBcswOcATTpg6VH7mjqdIXV33hcUGpVT0jeJth7z4beoJhKq9ZdBxWiNJDg0O-TblyE9z3t7wONJUecmxMTfQueVYF92avFHEoXm-Wd5v9v_gxt8KhYM2VL-hmPwj9V503_H4HvpJjahfUyA1av0-xHtMEzphu-_ngFMhJzT5Lool2fbtmVOvzdD3w",
+    "assistant_manager": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMzI1LCJleHAiOjE1OTc3ODk3MjUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.epdkNKpd6P0DAzAws3R83bhhUe8DzWeUMsrBISXYSAQVsLUsI7Wf4aHehoYwRvBzgNspXo-D15qQgq9FzqmWYEIiACh9lH-e684H41mG9CEsRGflUYg-_EWvL9k9hxfuW0Jbq1ltsKo8Fl6tyoa3FQmQg7Jh6lZdBZvmIvfxqbmoD1tIOeVI17q_dvL2huYwdbxpiUPm4QoSQOxvaAlxEi0zpQ8yJiGWkhcmth7Kk2BmiIo2r_5KahnIZnxolNSOMe8XjflOHIgiqurg7hSZ5mXjPIS6CnVxkT4Er3eYibFaVHLRw5O-1B3ITOuPbyz-qD_8Jojnr1KqPx5rpNLyJg"
 }
 
 database_setup = {
@@ -206,3 +206,80 @@ jsonData= [{
     ]
  }
 ]
+
+new_bay_data ={
+  'new_bay':  {
+            "bay": "12",
+            "data": [{
+                "section": "A",
+                "name":  "new bay",
+                "style": "S5454",
+                "row": "4",
+                "col": "2",
+                "notes":  "Box color is Yellow.",
+                "gender":  "M",
+                "img":  "https://bit.ly/31sgwi5"
+            }]
+        },
+  'existing_bay': {
+            "bay": "1",
+            "data": [{
+                "section": "A",
+                "name":  "new bay",
+                "style": "S5454",
+                "row": "4",
+                "col": "2",
+                "notes":  "Box color is Yellow.",
+                "gender":  "M",
+                "img":  "https://bit.ly/31sgwi5"
+            }]
+        },
+    'edit_bay': {
+            "bay": "1" ,
+            "data" : [{
+            "shoe_id": "5",
+            "section": "A"  ,
+            "name":  "CHANGED BABY" ,
+            "style": "S5454"  ,
+            "row": "4"  ,
+            "col": "2"  ,
+            "notes":  "SOME NOTES" ,
+            "gender":  "F" ,
+            "img":  "https://images.unsplash.com/photo-1536787175219-c199c3100742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" 
+            }]
+        },
+    'edit_bay_403' :{
+            "bay": "1" ,
+            "data" : [{
+            "shoe_id": "10",
+            "section": "B"  ,
+            "name":  "CHANGED BABY" ,
+            "style": "4554"  ,
+            "row": "5"  ,
+            "col": "1"  ,
+            "notes":  "SOME NOTES" ,
+            "gender":  "M" ,
+            "img":  "" 
+            }]
+        },
+    'delete_bay':{
+	        "bay": "2"
+        },
+    'edit_bay_404': {
+            "bay": "9999" ,
+            "data" : [{
+            "shoe_id": "10",
+            "section": "A"  ,
+            "name":  "CHANGED BABY" ,
+            "style": "S5454"  ,
+            "row": "4"  ,
+            "col": "2"  ,
+            "notes":  "SOME NOTES" ,
+            "gender":  "F" ,
+            "img":  "https://images.unsplash.com/photo-1536787175219-c199c3100742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" 
+            }]
+        }      
+
+    
+    }
+

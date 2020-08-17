@@ -1,0 +1,1039 @@
+{
+	"info": {
+		"_postman_id": "59875c4d-83a5-4c11-a960-110562d53b9f",
+		"name": "shoe_locate",
+		"description": "This collection will test all the endpoints associated with the Shoe locate app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "GET_SHOE_PUBLIC_ENDPOINT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dcd99b68-bc2e-4330-b9d7-b2a57191cb12",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY containing the shoe_info of the shoe that was selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.shoe_info).to.be.an('array')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the amount of bays that shoe is located\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total_shoe_results).to.be.a('number')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/associate/shoe/2759",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"associate",
+								"shoe",
+								"2759"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_ALL_BAYS_NO_HEADER_BEARER_TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90c4c9e0-dfa4-439f-b35a-a371fe690fbf",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay/all",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay",
+								"all"
+							]
+						},
+						"description": "No BEARER"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH_BAYS_NO_HEADER_BEARER_TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "139294fc-43c0-42fc-9996-65f192959429",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST_BAYS_NO_HEADER_BEARER_TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f4613b89-68c1-4eba-b097-538921b5b6f7",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_BAYS_NO_HEADER_BEARER_TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1032f5e-deef-4d9c-b9b6-bf71c1dbe6ff",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_SPECIFIC_BAYS_NO_HEADER_BEARER_TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "54fe045a-c4e0-41cf-bf26-2074fddb6e8e",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Assistant Store Manager",
+			"item": [
+				{
+					"name": "GET_SHOE_ASSISTANT_STORE_MANAGER_ENDPOINT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34625097-b169-4b84-9376-908ad4c7212f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY containing the shoe_info of the shoe that was selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.shoe_info).to.be.an('array')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the amount of bays that shoe is located\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total_shoe_results).to.be.a('number')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/associate/shoe/2759",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"associate",
+								"shoe",
+								"2759"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_ALL_BAYS_AUTHORIZED_ASSISTANT_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d7b18fc7-d54b-4d90-b0f8-280e441c1ab4",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY of the bay you selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay_info).to.be.an('array')\r",
+									"  \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAYY of the bay_categories\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay_categories).to.be.an('array')\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the total_bay_results of shoes\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total_bay_results).to.be.a('number')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a STRING of the BAYID that was selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.baySelected).to.be.a('string')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMzI1LCJleHAiOjE1OTc3ODk3MjUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.epdkNKpd6P0DAzAws3R83bhhUe8DzWeUMsrBISXYSAQVsLUsI7Wf4aHehoYwRvBzgNspXo-D15qQgq9FzqmWYEIiACh9lH-e684H41mG9CEsRGflUYg-_EWvL9k9hxfuW0Jbq1ltsKo8Fl6tyoa3FQmQg7Jh6lZdBZvmIvfxqbmoD1tIOeVI17q_dvL2huYwdbxpiUPm4QoSQOxvaAlxEi0zpQ8yJiGWkhcmth7Kk2BmiIo2r_5KahnIZnxolNSOMe8XjflOHIgiqurg7hSZ5mXjPIS6CnVxkT4Er3eYibFaVHLRw5O-1B3ITOuPbyz-qD_8Jojnr1KqPx5rpNLyJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay/all",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_SPECIFIC_BAY_AUTHORIZED_ASSISTANT_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d6ad8c8a-a140-4d30-9095-1e753a6fc22f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY of the bay you selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay_info).to.be.an('array')\r",
+									"  \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAYY of the bay_categories\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay_categories).to.be.an('array')\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the total_bay_results of shoes\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total_bay_results).to.be.a('number')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a STRING of the BAYID that was selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.baySelected).to.be.a('string')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMzI1LCJleHAiOjE1OTc3ODk3MjUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.epdkNKpd6P0DAzAws3R83bhhUe8DzWeUMsrBISXYSAQVsLUsI7Wf4aHehoYwRvBzgNspXo-D15qQgq9FzqmWYEIiACh9lH-e684H41mG9CEsRGflUYg-_EWvL9k9hxfuW0Jbq1ltsKo8Fl6tyoa3FQmQg7Jh6lZdBZvmIvfxqbmoD1tIOeVI17q_dvL2huYwdbxpiUPm4QoSQOxvaAlxEi0zpQ8yJiGWkhcmth7Kk2BmiIo2r_5KahnIZnxolNSOMe8XjflOHIgiqurg7hSZ5mXjPIS6CnVxkT4Er3eYibFaVHLRw5O-1B3ITOuPbyz-qD_8Jojnr1KqPx5rpNLyJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay",
+								"1"
+							]
+						},
+						"description": "Test for rendered jinja template"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH_BAY_UNAUTHORIZED_ASSISTANT_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6b75ed1f-5478-4745-89cf-2b3244ba8b2c",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMzI1LCJleHAiOjE1OTc3ODk3MjUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.epdkNKpd6P0DAzAws3R83bhhUe8DzWeUMsrBISXYSAQVsLUsI7Wf4aHehoYwRvBzgNspXo-D15qQgq9FzqmWYEIiACh9lH-e684H41mG9CEsRGflUYg-_EWvL9k9hxfuW0Jbq1ltsKo8Fl6tyoa3FQmQg7Jh6lZdBZvmIvfxqbmoD1tIOeVI17q_dvL2huYwdbxpiUPm4QoSQOxvaAlxEi0zpQ8yJiGWkhcmth7Kk2BmiIo2r_5KahnIZnxolNSOMe8XjflOHIgiqurg7hSZ5mXjPIS6CnVxkT4Er3eYibFaVHLRw5O-1B3ITOuPbyz-qD_8Jojnr1KqPx5rpNLyJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST_BAY_UNAUTHORIZED_ASSISTANT_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a1502fe7-6a2c-43d0-b2b7-3fc227b01ea6",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMzI1LCJleHAiOjE1OTc3ODk3MjUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.epdkNKpd6P0DAzAws3R83bhhUe8DzWeUMsrBISXYSAQVsLUsI7Wf4aHehoYwRvBzgNspXo-D15qQgq9FzqmWYEIiACh9lH-e684H41mG9CEsRGflUYg-_EWvL9k9hxfuW0Jbq1ltsKo8Fl6tyoa3FQmQg7Jh6lZdBZvmIvfxqbmoD1tIOeVI17q_dvL2huYwdbxpiUPm4QoSQOxvaAlxEi0zpQ8yJiGWkhcmth7Kk2BmiIo2r_5KahnIZnxolNSOMe8XjflOHIgiqurg7hSZ5mXjPIS6CnVxkT4Er3eYibFaVHLRw5O-1B3ITOuPbyz-qD_8Jojnr1KqPx5rpNLyJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_BAY_UNAUTHORIZED_ASSISTANT_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6dd47dcb-0c3d-4f32-a6f4-3021fe3b8ff4",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMzI1LCJleHAiOjE1OTc3ODk3MjUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.epdkNKpd6P0DAzAws3R83bhhUe8DzWeUMsrBISXYSAQVsLUsI7Wf4aHehoYwRvBzgNspXo-D15qQgq9FzqmWYEIiACh9lH-e684H41mG9CEsRGflUYg-_EWvL9k9hxfuW0Jbq1ltsKo8Fl6tyoa3FQmQg7Jh6lZdBZvmIvfxqbmoD1tIOeVI17q_dvL2huYwdbxpiUPm4QoSQOxvaAlxEi0zpQ8yJiGWkhcmth7Kk2BmiIo2r_5KahnIZnxolNSOMe8XjflOHIgiqurg7hSZ5mXjPIS6CnVxkT4Er3eYibFaVHLRw5O-1B3ITOuPbyz-qD_8Jojnr1KqPx5rpNLyJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Store Manager",
+			"item": [
+				{
+					"name": "GET_SHOE_STORE_MANAGER_ENDPOINT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba3832d9-9cbe-4359-b35f-aa966ff02cf1",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY containing the shoe_info of the shoe that was selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.shoe_info).to.be.an('array')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the amount of bays that shoe is located\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total_shoe_results).to.be.a('number')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/associate/shoe/2759",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"associate",
+								"shoe",
+								"2759"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_ALL_BAYS_AUTHORIZED_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "92963367-2270-4385-88d5-7004130ab48f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY of the bay you selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay_info).to.be.an('array')\r",
+									"  \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAYY of the bay_categories\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay_categories).to.be.an('array')\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the total_bay_results of shoes\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total_bay_results).to.be.a('number')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a STRING of the BAYID that was selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.baySelected).to.be.a('string')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMjA5LCJleHAiOjE1OTc3ODk2MDksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d3Pw5yR_xq0qmAoVpOp6iT9wttv7tlhzDI0K5PlLS_PZ8vZiUcLK7sVDX1R7RosrkXErgZx2FZhUCdK96UkB_lYby5NIH-mp2A6Soh9HcMp5x8qJ-IzCxM1_fmi3XkPUJcNKiSJNq6NgWxwjFN-0OyAIfF9IbBcswOcATTpg6VH7mjqdIXV33hcUGpVT0jeJth7z4beoJhKq9ZdBxWiNJDg0O-TblyE9z3t7wONJUecmxMTfQueVYF92avFHEoXm-Wd5v9v_gxt8KhYM2VL-hmPwj9V503_H4HvpJjahfUyA1av0-xHtMEzphu-_ngFMhJzT5Lool2fbtmVOvzdD3w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay/all",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_SPECIFIC_BAYS_AUTHORIZED_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "44611a35-cd5f-481b-b742-18d1f450d2d5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY of the bay you selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay_info).to.be.an('array')\r",
+									"  \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAYY of the bay_categories\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay_categories).to.be.an('array')\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the total_bay_results of shoes\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total_bay_results).to.be.a('number')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a STRING of the BAYID that was selected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.baySelected).to.be.a('string')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMjA5LCJleHAiOjE1OTc3ODk2MDksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d3Pw5yR_xq0qmAoVpOp6iT9wttv7tlhzDI0K5PlLS_PZ8vZiUcLK7sVDX1R7RosrkXErgZx2FZhUCdK96UkB_lYby5NIH-mp2A6Soh9HcMp5x8qJ-IzCxM1_fmi3XkPUJcNKiSJNq6NgWxwjFN-0OyAIfF9IbBcswOcATTpg6VH7mjqdIXV33hcUGpVT0jeJth7z4beoJhKq9ZdBxWiNJDg0O-TblyE9z3t7wONJUecmxMTfQueVYF92avFHEoXm-Wd5v9v_gxt8KhYM2VL-hmPwj9V503_H4HvpJjahfUyA1av0-xHtMEzphu-_ngFMhJzT5Lool2fbtmVOvzdD3w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay/all",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH_BAY_AUTHORIZED_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4402bd52-0f7b-43bd-9b33-99a1dc7386a5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY of the updated shoes that were altered.\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.updated_shoes).to.be.an('array')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY of the outdated_shoes that were selected for edit.\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.outdated_shoes).to.be.an('array')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the total bays that were altered.\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total_bay_results).to.be.a('number')\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the Bay that was selected for editing.\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay).to.be.a('string')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMjA5LCJleHAiOjE1OTc3ODk2MDksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d3Pw5yR_xq0qmAoVpOp6iT9wttv7tlhzDI0K5PlLS_PZ8vZiUcLK7sVDX1R7RosrkXErgZx2FZhUCdK96UkB_lYby5NIH-mp2A6Soh9HcMp5x8qJ-IzCxM1_fmi3XkPUJcNKiSJNq6NgWxwjFN-0OyAIfF9IbBcswOcATTpg6VH7mjqdIXV33hcUGpVT0jeJth7z4beoJhKq9ZdBxWiNJDg0O-TblyE9z3t7wONJUecmxMTfQueVYF92avFHEoXm-Wd5v9v_gxt8KhYM2VL-hmPwj9V503_H4HvpJjahfUyA1av0-xHtMEzphu-_ngFMhJzT5Lool2fbtmVOvzdD3w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n\t\"bay\": \"1\" ,\r\n\t\"data\" : [\r\n \t{\r\n        \"shoe_id\": \"5\",\r\n        \"section\": \"A\"  ,\r\n        \"name\":  \"CHANGED BABY\" ,\r\n        \"style\": \"S5454\"  ,\r\n        \"row\": \"4\"  ,\r\n        \"col\": \"2\"  ,\r\n        \"notes\":  \"SOME NOTES\" ,\r\n        \"gender\":  \"F\" ,\r\n        \"img\":  \"https://images.unsplash.com/photo-1536787175219-c199c3100742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80\" \r\n\t}\r\n    ]\r\n }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST_BAY_AUTHORIZED_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "898a3412-338f-45cc-aed0-130250dbe78c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return an ARRAY of the bay created.\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.created_bay).to.be.an('array')\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Should return TRUE or FALSE depending if the bay exist already in the Database.\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.exist).to.be.a('boolean')\r",
+									" \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the bayID that was created.\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.bay).to.be.a('number')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMjA5LCJleHAiOjE1OTc3ODk2MDksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d3Pw5yR_xq0qmAoVpOp6iT9wttv7tlhzDI0K5PlLS_PZ8vZiUcLK7sVDX1R7RosrkXErgZx2FZhUCdK96UkB_lYby5NIH-mp2A6Soh9HcMp5x8qJ-IzCxM1_fmi3XkPUJcNKiSJNq6NgWxwjFN-0OyAIfF9IbBcswOcATTpg6VH7mjqdIXV33hcUGpVT0jeJth7z4beoJhKq9ZdBxWiNJDg0O-TblyE9z3t7wONJUecmxMTfQueVYF92avFHEoXm-Wd5v9v_gxt8KhYM2VL-hmPwj9V503_H4HvpJjahfUyA1av0-xHtMEzphu-_ngFMhJzT5Lool2fbtmVOvzdD3w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"bay\": \"12\",\r\n            \"data\": [{\r\n                \"section\": \"A\",\r\n                \"name\":  \"new bay\",\r\n                \"style\": \"S5454\",\r\n                \"row\": \"4\",\r\n                \"col\": \"2\",\r\n                \"notes\":  \"Box color is Yellow.\",\r\n                \"gender\":  \"M\",\r\n                \"img\":  \"https://bit.ly/31sgwi5\"\r\n            }]\r\n        }\r\n\r\n        ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_BAY_AUTHORIZED_STORE_MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dd90fd0b-ac68-420c-aeb2-72c7d5add1f3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"deleted_shoes should be an array of the shoes that were deleted\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.deleted_shoes).to.be.an('array')\r",
+									"  \r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data should return the bay that was deleted as a string\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"      pm.expect(jsonData.bay).to.be.a('string')\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Should return a NUMBER of the total shoes deleted with the bay\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.deleted_total).to.be.a('number')\r",
+									"\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3NzAzMjA5LCJleHAiOjE1OTc3ODk2MDksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d3Pw5yR_xq0qmAoVpOp6iT9wttv7tlhzDI0K5PlLS_PZ8vZiUcLK7sVDX1R7RosrkXErgZx2FZhUCdK96UkB_lYby5NIH-mp2A6Soh9HcMp5x8qJ-IzCxM1_fmi3XkPUJcNKiSJNq6NgWxwjFN-0OyAIfF9IbBcswOcATTpg6VH7mjqdIXV33hcUGpVT0jeJth7z4beoJhKq9ZdBxWiNJDg0O-TblyE9z3t7wONJUecmxMTfQueVYF92avFHEoXm-Wd5v9v_gxt8KhYM2VL-hmPwj9V503_H4HvpJjahfUyA1av0-xHtMEzphu-_ngFMhJzT5Lool2fbtmVOvzdD3w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"bay\": \"12\" \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/manager/bay",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"manager",
+								"bay"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

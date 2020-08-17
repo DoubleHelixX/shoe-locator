@@ -2,7 +2,7 @@ import os
 import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
-from constants import database_setup, bearer_tokens
+from constants import database_setup, bearer_tokens, new_bay_data
 from app import create_app
 from models import setup_db, Bay, db_drop_and_create_all,  db_initialize_tables_json,db
 
@@ -28,82 +28,16 @@ class ShoeLocateTestCase(unittest.TestCase):
         db_drop_and_create_all()    
         db_initialize_tables_json()
         
-        self.new_bay = {
-            "bay": "12",
-            "data": [{
-                "section": "A",
-                "name":  "new bay",
-                "style": "S5454",
-                "row": "4",
-                "col": "2",
-                "notes":  "Box color is Yellow.",
-                "gender":  "M",
-                "img":  "https://bit.ly/31sgwi5"
-            }]
-        }
+        self.new_bay =new_bay_data['new_bay'] 
         
-        self.existing_bay = {
-            "bay": "1",
-            "data": [{
-                "section": "A",
-                "name":  "new bay",
-                "style": "S5454",
-                "row": "4",
-                "col": "2",
-                "notes":  "Box color is Yellow.",
-                "gender":  "M",
-                "img":  "https://bit.ly/31sgwi5"
-            }]
-        }
+        self.existing_bay = new_bay_data['existing_bay'] 
 
-        self.edit_bay = {
-            "bay": "1" ,
-            "data" : [{
-            "shoe_id": "5",
-            "section": "A"  ,
-            "name":  "CHANGED BABY" ,
-            "style": "S5454"  ,
-            "row": "4"  ,
-            "col": "2"  ,
-            "notes":  "SOME NOTES" ,
-            "gender":  "F" ,
-            "img":  "https://images.unsplash.com/photo-1536787175219-c199c3100742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" 
-            }]
-        }
-
-        self.edit_bay_403 = {
-            "bay": "1" ,
-            "data" : [{
-            "shoe_id": "10",
-            "section": "B"  ,
-            "name":  "CHANGED BABY" ,
-            "style": "4554"  ,
-            "row": "5"  ,
-            "col": "1"  ,
-            "notes":  "SOME NOTES" ,
-            "gender":  "M" ,
-            "img":  "" 
-            }]
-        }
+        self.edit_bay = new_bay_data['edit_bay'] 
+        self.edit_bay_403 = new_bay_data['edit_bay_403'] 
         
-        self.delete_bay = {
-	        "bay": "2"
-        }
+        self.delete_bay =new_bay_data['delete_bay'] 
 
-        self.edit_bay_404= {
-            "bay": "9999" ,
-            "data" : [{
-            "shoe_id": "10",
-            "section": "A"  ,
-            "name":  "CHANGED BABY" ,
-            "style": "S5454"  ,
-            "row": "4"  ,
-            "col": "2"  ,
-            "notes":  "SOME NOTES" ,
-            "gender":  "F" ,
-            "img":  "https://images.unsplash.com/photo-1536787175219-c199c3100742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" 
-            }]
-        }      
+        self.edit_bay_404= new_bay_data['edit_bay_404'] 
        
         # binds the app to the current context
         with self.app.app_context():
