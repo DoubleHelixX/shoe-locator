@@ -249,56 +249,56 @@ def create_app(test_config=None):
         searchFailure = False
         bayCategories=None
         listOfBays=None
-        bayID= request.get_json()['bay']
-        data =  request.get_json()['data']
+        bayID=None
+        data=None
+        outdated_bay=None
+        updated_bay=None
         try:
-            outdated_bay=[]
-            updated_bay=[]
-           
-            #print(">>> outdated_bay: ", outdated_bay )
-                
-            for updatedShoe in data:
-                print('@shoe: ', updatedShoe )
-                
-                outdatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id'].strip()) , Bay.bay==bayID)).one_or_none()
-                outdated_bay.append(Bay.format(outdatedShoe))
-                print('@shoe: ', outdatedShoe )
-                print('@OutdatedBay: ', outdated_bay )
-                
-                
-                if outdatedShoe:
-                    
-                    outdatedShoe.section=updatedShoe['section'].strip()
-                    
-                    outdatedShoe.name=updatedShoe['name'].strip()
-                           
-                    outdatedShoe.style=updatedShoe['style'].strip()
-                    
-                    outdatedShoe.row=updatedShoe['row'].strip()
-                    
-                    outdatedShoe.col=updatedShoe['col'].strip()
-                    
-                    outdatedShoe.notes=updatedShoe['notes'].strip()
+            body=request.get_json()
+            if body:
+                bayID=body.get('bay', None)
+                data = body.get('data', None)  
+                if bayID and data:
+                    outdated_bay=[]
+                    updated_bay=[]
+                    #print(">>> outdated_bay: ", outdated_bay )
+                    for updatedShoe in data:
+                        outdatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id'].strip()) , Bay.bay==bayID)).one_or_none()
+                        if outdatedShoe:
+                            outdated_bay.append(Bay.format(outdatedShoe))
+                            
+                            outdatedShoe.section=updatedShoe['section'].strip()
+                            
+                            outdatedShoe.name=updatedShoe['name'].strip()
+                                
+                            outdatedShoe.style=updatedShoe['style'].strip()
+                            
+                            outdatedShoe.row=updatedShoe['row'].strip()
+                            
+                            outdatedShoe.col=updatedShoe['col'].strip()
+                            
+                            outdatedShoe.notes=updatedShoe['notes'].strip()
 
-                    if(updatedShoe['img'].strip() != 'None'):
-                        outdatedShoe.img=updatedShoe['img'].strip()
-                        print('@img: ',  outdatedShoe.img )
-                    else:
-                        outdatedShoe.img=""
-                    
-                    outdatedShoe.gender=updatedShoe['gender'].strip()
-                    print('@gender: ',  outdatedShoe.gender )
-                    
-                    outdatedShoe.update()
-                    updatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id'].strip()) , Bay.bay==bayID)).one_or_none()
-                    print('@updatedShoe: ',  updatedShoe )
-                    
-                    updated_bay.append(Bay.format(updatedShoe))
-                    print('@ updated_bay: ',   updated_bay )
-                    
-                else:  
-                    print('@>>> no such Bay. Length is: ' , len(outdatedShoe))
-                    searchFailure=True
+                            if(updatedShoe['img'].strip() != 'None'):
+                                outdatedShoe.img=updatedShoe['img'].strip()
+                                print('@img: ',  outdatedShoe.img )
+                            else:
+                                outdatedShoe.img=""
+                            
+                            outdatedShoe.gender=updatedShoe['gender'].strip()
+                            print('@gender: ',  outdatedShoe.gender )
+                            
+                            outdatedShoe.update()
+                            updatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id'].strip()) , Bay.bay==bayID)).one_or_none()
+                            print('@updatedShoe: ',  updatedShoe )
+                            
+                            updated_bay.append(Bay.format(updatedShoe))
+                            print('@ updated_bay: ',   updated_bay )
+                        else:  
+                            print('@>>> no such Bay.')
+                            searchFailure=True
+            else:
+                unprocessable=True
                      
         except:
             unprocessable = true
@@ -318,6 +318,7 @@ def create_app(test_config=None):
                                 }
                 return jsonify(responseData)
             
+            
     @app.route('/manager/bay', methods =['DELETE'])
     @requires_auth('delete:bays')
     def DeleteBay(*args, **kwargs): 
@@ -327,18 +328,22 @@ def create_app(test_config=None):
         searchFailure = False
         bayCategories=None
         listOfBays=None
-        bayID= request.get_json()['bay']
+        bayID=None
+        deleted_bay=[]
+        
         try:
-            deleted_bay=[]
-            
-            deleted = Bay.query.filter(Bay.bay==bayID).all()
-            if len(deleted):
-                for gone in deleted:
-                    deleted_bay.append(Bay.format(gone))
-                    gone.delete()        
-            else:  
-                print('@>>> no such Bay.')
-                searchFailure=True
+            body=request.get_json()
+            if body:
+                bayID=body.get('bay', None)
+                if bayID:
+                    deleted = Bay.query.filter(Bay.bay==bayID).all()
+                    if len(deleted):
+                        for gone in deleted:
+                            deleted_bay.append(Bay.format(gone))
+                            gone.delete()        
+                    else:  
+                        print('@>>> no such Bay.')
+                        searchFailure=True
                     
         except:
             unprocessable = True
@@ -367,28 +372,37 @@ def create_app(test_config=None):
         bayCategories=None
         listOfBays=None
         created=None
-        bayID=int(request.get_json()['bay'].strip())
-        data = request.get_json()['data']
+        data=None
+        bayID=None
+        createdBay=[]
+        
         try:
-            print('@bay' , bayID)
-            createdBay=[]
-            exist = Bay.query.filter(Bay.bay==bayID).all()
-            print('@ exist' ,exist)
-            if not exist:
-                for shoe in data:
-                    #print('@ shoe', shoe)
-                    toBeCreated = Bay(bay=bayID, section=shoe['section'].strip() , name=shoe['name'].strip() , style=shoe['style'].strip() , row=shoe['row'].strip() , col=shoe['col'].strip() , notes=shoe['notes'].strip() , img=shoe['img'].strip() , gender=shoe['gender'].strip() )
-                    # print('@ created', toBeCreated)
-                    
-                    toBeCreated.insert()
-            
-                created = Bay.query.filter(Bay.bay==bayID).all()
+            body=request.get_json()
+            if body:
+                bayID=body.get('bay', None)
+                data = body.get('data', None)  
+            if bayID and data:
+                bayID = int(bayID.strip())
+                print('@bay' , bayID)
+                exist = Bay.query.filter(Bay.bay==bayID).all()
+                print('@ exist' ,exist)
+                if not exist:
+                    for shoe in data:
+                        #print('@ shoe', shoe)
+                        toBeCreated = Bay(bay=bayID, section=shoe['section'].strip() , name=shoe['name'].strip() , style=shoe['style'].strip() , row=shoe['row'].strip() , col=shoe['col'].strip() , notes=shoe['notes'].strip() , img=shoe['img'].strip() , gender=shoe['gender'].strip() )
+                        # print('@ created', toBeCreated)
+                        
+                        toBeCreated.insert()
                 
-                if created:
-                    for shoe in created:
-                        createdBay.append(Bay.format(shoe))
+                    created = Bay.query.filter(Bay.bay==bayID).all()
+                    
+                    if created:
+                        for shoe in created:
+                            createdBay.append(Bay.format(shoe))
+                else:
+                    existFailure=True
             else:
-                existFailure=True
+                unprocessable=True
         except:
             unprocessable = True
             print('Error Message: ', sys.exc_info())
