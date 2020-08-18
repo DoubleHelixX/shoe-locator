@@ -9,6 +9,9 @@ As well all should know time is key when showcasing professional salesmanship. T
 ### The old solution
 Normally one way to become faster at this was to remember where certain shoes were ahead of time. However, every retail season means a change in product for the store. In our case this means the bays will get populated with new shoes. This rearragnement of shoes means that remembering where a shoe is becomes remembering where a shoe was. Remembering becomes inefficent after a couple months. This leads the sales team to constanly repeat the cycle of remembering where a shoe is all over again. Whats worse is that your old memeories of where a shoe was can someitmes confuse you.
 
+### The new solution
+Let an app remember for you!
+
 ## The Pitch
 As we should all know, the more time spent being confused when helping a customer can hinder salesmanship and affect not just yourself but the store as well. By using Shoe Locate you can be FASTER. Return to the customer with their product faster and allow less of a chance of doubt and or a change in mind to occur. Focus more of you time on the sale and build upon that unique interaction with the customer so that the customer leaves the store with a feeling that he or she had a unique memorable experience. Time correlates to every sales metrics. Spend less time remembering and more time planning on everything else to secure that sale. Increase your store KPI's and let the stores sales margins be a reflection of salesmanship and not a reflection of shoe bay memorization.
 
