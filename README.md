@@ -101,7 +101,8 @@ In order to run the application:
 
 ### Testing
 In order to run tests:
-1)  **First make sure your environment is active: [How to set up a python virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).** 
+1)  **First make sure your environment is active: 
+    - [How to set up a python virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).** 
 2) **Next navigate to the backend folder and run the following commands:**
 ```
 python test_api.py
