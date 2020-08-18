@@ -115,7 +115,7 @@ python test_api.py
 **`All tests are kept in that file and should be maintained as updates are made to app functionality.`**
 - **Alternatively you can use Postman to test the endpoints as well.**
 - **The Postman collection `"shoe_locate.postman_collection.json"` is located within the `./shoe_locate directory`**    
-    - [LOCATED HERE](./shoe_locate/shoe_locate.postman_collection.json)
+    - [LOCATED HERE](shoe_locate.postman_collection.json)
 
 ## API Reference
 
