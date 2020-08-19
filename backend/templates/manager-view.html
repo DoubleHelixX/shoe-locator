@@ -568,7 +568,8 @@
         if (td[col+(8*i)].textContent.length>0){
           rowData.push(td[col+(8*i)].textContent);
         }
-        rowData.push(" ");
+        else
+          rowData.push(" ");
 
         
       }
@@ -576,13 +577,13 @@
       tableData[0].data.push(
         {
           'section': rowData[i+incrementRow],
-          'name':  rowData[i+2+incrementRow],
-          'style': rowData[i+3+incrementRow]  ,
-          'row': rowData[i+4+incrementRow]  ,
-          'col': rowData[i+5+incrementRow]  ,
-          'notes': rowData[i+6+incrementRow],
-          'gender':rowData[i+7+incrementRow] ,
-          'img': rowData[i+8+incrementRow]
+          'name':  rowData[i+1+incrementRow],
+          'style': rowData[i+2+incrementRow]  ,
+          'row': rowData[i+3+incrementRow]  ,
+          'col': rowData[i+4+incrementRow]  ,
+          'notes': rowData[i+5+incrementRow],
+          'gender':rowData[i+6+incrementRow] ,
+          'img': rowData[i+7+incrementRow]
         }
       );
       incrementRow +=7;
