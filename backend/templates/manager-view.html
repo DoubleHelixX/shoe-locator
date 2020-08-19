@@ -46,7 +46,7 @@
         </div>
         <div class="card-body">
         <div class=" my-auto">
-          <table id ="create_bay_table" class="table table-edit">
+          <table id ="create_bay_table" class="table table-norm">
             <thead class=" text-primary">
               <th>Section</th>
               <th>Name</th>
@@ -134,14 +134,14 @@
             {% if shoe.bay == bay|int %}
                     <tr data-id="{{shoe.id}}" class = "row{{bay}}">
                       
-                      <td    class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
-                      <td    class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
-                      <td    class="text-primary norm bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td>
-                      <td    class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
-                      <td    class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
-                      <td    class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
-                      <td    class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
-                      <td    class = "norm bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                      <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
+                      <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
+                      <td  rowspan="1"  class="text-primary norm bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td> 
+                      <td  rowspan="1"  class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
+                      <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
+                      <td   rowspan="1" class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
+                      <td   rowspan="1" class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
+                      <td   rowspan="1" class = "norm bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
                         👀 	
                       {%if shoe.img%}
                         <span class="hover_img">
@@ -279,7 +279,7 @@
             td[col+ (8*j)].className= 'text-primary edit ' + x;
             else if (col==7){
               td[col+ (8*j)].className= 'hover_img edit ' + x;
-              td[col+ (8*j)].textContent=td[col+ (8*j)].getAttribute('data-img');
+              td[col+ (8*j)].textContent="";
               //td[col+ (8*j)].textContent=""
 
             }
@@ -306,17 +306,24 @@
 
             for (let col =0; col<8; col++){
               //console.log(td[col+ (8*j)].textContent);
+              if (col == 2){
               rowData.push(td[col+ (8*j)].textContent);
-            
-              td[col+ (8*j)].contentEditable= false;
-              if (col == 2)
               td[col+ (8*j)].className= 'text-primary norm ' + x;
+              }
               else if (col==7){
+                if(td[col+ (8*j)].getAttribute('data-img') == td[col+ (8*j)].textContent || td[col+ (8*j)].textContent=="")
+                  rowData.push(td[col+ (8*j)].getAttribute('data-img'))
+                else
+                  rowData.push(td[col+ (8*j)].textContent);
                 td[col+ (8*j)].className= 'hover_img norm ' + x;
                 td[col+ (8*j)].textContent= '👀' ;
               }
-              else 
+              else {
+              rowData.push(td[col+ (8*j)].textContent);
               td[col+ (8*j)].className= 'norm ' + x;  
+              }
+              
+              td[col+ (8*j)].contentEditable= false;
 
             }
         }

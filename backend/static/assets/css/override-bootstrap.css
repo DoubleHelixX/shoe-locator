@@ -353,6 +353,7 @@ header {
 .table-edit {
   background-color: white;
   border: double green 5px;
+  height: 100%;
 }
 
 .table-delete {
@@ -374,6 +375,16 @@ header {
   margin-left: 70%;
   /* justify-content: left; */
 }
+table, .table-norm, .table-edit, .table-delete, .table {
+  line-height: 100%!important;
+}
+/* table {
+  display: inline-table;
+  table-layout:overflow;
+  border: none; 
+  word-wrap:break-word;
+  overflow:scroll;
+} */
 
 .table-responsive {
   position: relative;
@@ -423,14 +434,15 @@ position: block;
 right: 10rem;
 }
 header.masthead{
-  padding-left: 20rem!important;
-   
-    
+  padding-left: 20rem; 
+  padding-right:20rem;
+
 }
 
 section.masthead{
   padding-left: 20rem!important;
   padding-top: 0rem!important;
+  padding-right: 20rem;
  
 }
 
@@ -456,12 +468,21 @@ height: 1rem;
 
 
 
-td.edit { resize: horizontal; overflow: hidden;  }
-td.norm { resize: ""; overflow: visible;}
- 
+td.edit { resize: horizontal; overflow: hidden; overflow-wrap: break-word;  }
+td.norm { resize: ""; overflow: visible; overflow-wrap: break-word;}
+th {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
 
-
- 
+/* hr {
+  height: 2px;
+  width: 1.5px;
+  border-radius: 1px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+}
+  */
 /* container, .container, section, .section, header, .header,.text-primary,.my-auto .card-body,.masthead ,.text-center, .text-white ,.d-flex ,.re-size{
 
   size: 1px;
@@ -469,6 +490,7 @@ td.norm { resize: ""; overflow: visible;}
   width: 1px;
 
 } */
+
 
 
 @media screen and (max-width: 991px) {
