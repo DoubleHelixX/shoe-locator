@@ -100,8 +100,9 @@ In order to run the application:
     - **Run Application:**
         ```
         flask run
-3) Omit the  `db_drop_and_create_all()` & ` db_initialize_tables_json() ` methods to pump starter data in the database.
-     ```   
+     ```  
+3) This project uses the `Better Comments` Extension for showcasing comments. Install [Here](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
+4) Omit the  `db_drop_and_create_all()` & ` db_initialize_tables_json() ` methods to pump starter data in the database. 
 
 ### Testing
 In order to run tests:
