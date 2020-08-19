@@ -12,22 +12,22 @@ from werkzeug.exceptions import HTTPException
 from dotenv import load_dotenv, find_dotenv
 from six.moves.urllib.parse import urlencode
 import json
-from authlib.integrations.flask_client import OAuth
+#from authlib.integrations.flask_client import OAuth
 import constants
 
 
 
 
-ENV_FILE = find_dotenv()
-if ENV_FILE:
-    load_dotenv(ENV_FILE)
+# ENV_FILE = find_dotenv()
+# if ENV_FILE:
+#     load_dotenv(ENV_FILE)
 
-AUTH0_CALLBACK_URL = env.get(constants.AUTH0_CALLBACK_URL)
-AUTH0_CLIENT_ID = env.get(constants.AUTH0_CLIENT_ID)
-AUTH0_CLIENT_SECRET = env.get(constants.AUTH0_CLIENT_SECRET)
-AUTH0_DOMAIN = env.get(constants.AUTH0_DOMAIN)
-AUTH0_BASE_URL = 'https://' + AUTH0_DOMAIN
-AUTH0_AUDIENCE = env.get(constants.AUTH0_AUDIENCE)
+# AUTH0_CALLBACK_URL = env.get(constants.AUTH0_CALLBACK_URL)
+# AUTH0_CLIENT_ID = env.get(constants.AUTH0_CLIENT_ID)
+# AUTH0_CLIENT_SECRET = env.get(constants.AUTH0_CLIENT_SECRET)
+# AUTH0_DOMAIN = env.get(constants.AUTH0_DOMAIN)
+# AUTH0_BASE_URL = 'https://' + AUTH0_DOMAIN
+# AUTH0_AUDIENCE = env.get(constants.AUTH0_AUDIENCE)
 
 
 def create_app(test_config=None):
@@ -51,8 +51,8 @@ def create_app(test_config=None):
     app.debug = True
     configedDB = setup_db(app)
     
-    #db_drop_and_create_all()
-    #db_initialize_tables_json()
+    # db_drop_and_create_all()
+    # db_initialize_tables_json()
     
     if not configedDB:
       abort(500)
@@ -81,35 +81,35 @@ def create_app(test_config=None):
     def index():
         return render_template('home.html')
     
-    @app.route('/callback')
-    def callback_handling():
-        #auth0 = app.config['auth0']
-        token = auth0.authorize_access_token()
-        resp = auth0.get('userinfo')
-        userinfo = resp.json()
-        print('>>>USER_INFO',userinfo)
-        session[constants.JWT_PAYLOAD] = userinfo
-        session[constants.PROFILE_KEY] = {
-            'user_id': userinfo['sub'],
-            'name': userinfo['name'],
-            'picture': userinfo['picture']
-        }
-        return redirect('/manager/bay/all')
+    # @app.route('/callback')
+    # def callback_handling():
+    #     #auth0 = app.config['auth0']
+    #     token = auth0.authorize_access_token()
+    #     resp = auth0.get('userinfo')
+    #     userinfo = resp.json()
+    #     print('>>>USER_INFO',userinfo)
+    #     session[constants.JWT_PAYLOAD] = userinfo
+    #     session[constants.PROFILE_KEY] = {
+    #         'user_id': userinfo['sub'],
+    #         'name': userinfo['name'],
+    #         'picture': userinfo['picture']
+    #     }
+    #     return redirect('/manager/bay/all')
 
-    @app.route('/login')
-    def login():
-        #auth0 = app.config['auth0']
-        #state = uuid.uuid4().hex
-        #redirect_url = url_for("auth.callback", _external=True)
-        #auth0.save_authorize_state(redirect_uri=redirect_url, state=state)
-        return auth0.authorize_redirect(redirect_uri=AUTH0_CALLBACK_URL, audience=AUTH0_AUDIENCE) #, state=state
+    # @app.route('/login')
+    # def login():
+    #     #auth0 = app.config['auth0']
+    #     #state = uuid.uuid4().hex
+    #     #redirect_url = url_for("auth.callback", _external=True)
+    #     #auth0.save_authorize_state(redirect_uri=redirect_url, state=state)
+    #     return auth0.authorize_redirect(redirect_uri=AUTH0_CALLBACK_URL, audience=AUTH0_AUDIENCE) #, state=state
 
 
-    @app.route('/logout')
-    def logout():
-        session.clear()
-        params = {'returnTo': url_for('home', _external=True), 'client_id': AUTH0_CLIENT_ID}
-        return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
+    # @app.route('/logout')
+    # def logout():
+    #     session.clear()
+    #     params = {'returnTo': url_for('home', _external=True), 'client_id': AUTH0_CLIENT_ID}
+    #     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
     
     @app.route('/associate')
