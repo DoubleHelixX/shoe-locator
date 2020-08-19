@@ -48,19 +48,21 @@
 
  
    <script>
-
-    // function tfSubmit(e,str){
+  //----------------------------------------------------------------------------------------------------------
+  //      * Depreciated function for retrieving the input field text value without using a form tag
+  //----------------------------------------------------------------------------------------------------------
+   /*  function tfSubmit(e,str){
     
-    //     var keyCode = (window.Event) ? e.which : e.keyCode;
-    //     var keyCode2 = (window.event) ? e.which : e.keyCode;
-    //     if (keyCode == 13 || keyCode2==13){
-    //         //alert('sds', str.value);
+        var keyCode = (window.Event) ? e.which : e.keyCode;
+        var keyCode2 = (window.event) ? e.which : e.keyCode;
+        if (keyCode == 13 || keyCode2==13){
+            //alert('sds', str.value);
       
-    //         searchShoeAsync(str.value);
-    //         str.value='';
-    //     }
-    // }
-       
+            searchShoeAsync(str.value);
+            str.value='';
+        }
+    } */
+      
 let countBtn =document.getElementById('countBtn');
 function showCount(){
   countBtn.classList.add("hidden");
@@ -77,18 +79,16 @@ function showCount(){
   myToast.showToast();
 
 }
-
+// creates event handler for submit btn of form.
 document.getElementById("form").onsubmit = function (e) {
-        // creates event handler for submit btn of form.
+        
         e.preventDefault();
-       //countBtn.classList.remove("hidden");
         searchShoeAsync(document.getElementById("style_code").value,'search')
-
 }
-function searchShoeAsync(inputValue=null){
-        //alert(inputValue);
 
+function searchShoeAsync(inputValue=null){
         let errorDiv = document.getElementById("error"); //Error block / debugger
+        //Validation check for input errors
         if (
             inputValue === undefined ||
             inputValue === null ||
@@ -96,18 +96,17 @@ function searchShoeAsync(inputValue=null){
             inputValue.length === 0 ||
           !inputValue
         ) {
-          //alert('desription field return type is ' , typeof descriptionValue,  ' value is: ' , descriptionValue)
           errorDiv.innerHTML =
             " Enter a Value";
           errorDiv.className = "";
-        } else if (inputValue.includes("#")){
+        } 
+        // Validation for # symbols
+        else if (inputValue.includes("#")){
           errorDiv.innerHTML =
             " Remove any # Symbols";
           errorDiv.className = "";
         }
         else {
-            //alert(typeof inputValue);
-
           errorDiv.className = "hidden";
           errorDiv.innerHTML = "";
           fetch("associate/shoe/" + inputValue, {method: "GET"},).then(function(response){
@@ -158,15 +157,8 @@ function searchShoeAsync(inputValue=null){
             console.error(error);
             
           });
-
-          
         }
-      }
-      
-
-          
-       
-    
+      } 
    </script>
 
 {% endblock  %}

@@ -14,11 +14,18 @@
 # SECRET_KEY = 'ThisIsTheSecretKey'
 # JWT_PAYLOAD = 'jwt_payload'
 
-# auth0_config = {
-#     "AUTH0_DOMAIN" : "",
-#     "ALGORITHMS" : ["RS256"],
-#     "API_AUDIENCE" : "image"
-# }
+
+
+#----------------------------------------------------------------------------#
+#*              Constants for Storing auth configuration
+#----------------------------------------------------------------------------#
+auth0_config = {
+    "AUTH0_DOMAIN" : 'double-helixx.us.auth0.com',
+    "ALGORITHMS" : ["RS256"],
+    "API_AUDIENCE" : "image"
+}
+
+
 
 #----------------------------------------------------------------------------#
 #*              Constants for Storing the bearer tokens
