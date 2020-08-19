@@ -35,6 +35,11 @@ bearer_tokens = {
     "assistant_manager": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwNjY3LCJleHAiOjE1OTc4ODcwNjcsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.mmh-UKWgoFs0ciZlgkgRFLQ2uo93hBTP1-LiOl2TV6p6ycBpFP4LtAwgQS1iB-hJsNIBytpR8V7NxB_HmoD3s14_MxT0I6uAtg8O4rRyuuTUeTcMVi5Bc-6emHcioNp6KSV5YxtV3lqPkcSe1OPkNlTvTtDb-RDaKLrpO2aaFzZVHb8Cl04EBoTWcCAeYRepiK8z8NLWAH3OnFv0BVzmAL4lXwvA8by8Bh6A825MLKC67qnQsNetQ_-2hSj-fXeSyR_pl-SGjJZktllm8POWvvtFBJCjIKcgqLVTHZf9g6p7-GvroskxKtsoJpiE0eetykKiqXOP2QMsXhV546yOEA"
 }
 
+
+#----------------------------------------------------------------------------#
+#*              Constants for Database Configuration
+#----------------------------------------------------------------------------#
+
 database_setup = {
     "database_name" : "shoe_locate",
     "user_name" : "postgres",
