@@ -100,9 +100,10 @@ In order to run the application:
         set FLASK_APP=app.py
         ```   
     - **Run Application:**
-        ```
-        flask run
+     ```
+     flask run
      ```  
+     
 3) This project uses the `Better Comments` Extension for showcasing comments. Install [Here](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
 4) Omit the  `db_drop_and_create_all()` & ` db_initialize_tables_json() ` methods to pump starter data in the database. 
 
@@ -120,9 +121,9 @@ python test_api.py
 - The **db_initialize_tables_json()**method  located in the [`models.py`](./backend/models.py) file uses that constant variable to insert all that data to the datatables respectivly.
 
 **`All tests are kept in that file and should be maintained as updates are made to app functionality.`**
-- **Alternatively you can use Postman to test the endpoints as well.**
-- **The Postman collection `"shoe_locate.postman_collection.json"` is located within the `./shoe_locate directory`**    
-    - [LOCATED HERE](shoe_locate.postman_collection.json)
+- **Alternatively you can use Postman to test the endpoints as well. `Make sure to initialize data in the database first as mentioned earlier before testing`**
+  - **The Postman collection `"shoe_locate.postman_collection.json"` is located within the `./shoe_locate directory`**    
+      - [LOCATED HERE](shoe_locate.postman_collection.json)
 
 ## API Reference
 
