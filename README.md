@@ -81,7 +81,7 @@ _Depreciated until further notice_:
 ~~The `./backend` directory contains a auth.py file which uses Flask.oauth with utilities library to handle the auth0 login request for authentication and then check for authorization for accessing endpoints pertaining for a manager to access.~~
 
 _In use_:
-The `./backend` directory contains a [`constants.py`](./backend/constants.py) file that supplies the Bearer tokens to the [`auth.py`](./backend/auth.py) file which checks for authorization for accessing endpoints pertaining for a manager to access. [View the README.md within ./backend for more details.](./backend/README.md)
+The `./backend` directory contains a [`constants.py`](./backend/constants.py) file that supplies the Bearer tokens to the [`auth.py`](./backend/auth.py) file which checks for authorization for accessing endpoints pertaining for a manager to access. [View the README.md within ./backend for more details.](./backend/README.md).
 
 ## Run & Test
 
@@ -122,9 +122,9 @@ python test_api.py
 
 **`All tests are kept in that file and should be maintained as updates are made to app functionality.`**
 - **Alternatively you can use Postman to test the endpoints as well.** 
-- **`Make sure to initialize data in the database first as mentioned earlier before testing`**
+- **`Make sure to initialize data in the database first as mentioned earlier before testing.`**
   - **The Postman collection `"shoe_locate.postman_collection.json"` is located within the `./shoe_locate directory`**    
-      - [LOCATED HERE](shoe_locate.postman_collection.json)
+      - [LOCATED HERE](shoe_locate.postman_collection.json).
 
 ## API Reference
 
