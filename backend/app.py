@@ -1,4 +1,9 @@
-# from flask_moment import Moment
+#----------------------------------------------------------------------------#
+#* Imports - future optional imports are flask moment and authlib.integrations
+#----------------------------------------------------------------------------#
+#! from authlib.integrations.flask_client import OAuth
+#! from flask_moment import Moment
+
 from models import setup_db, Bay, db_drop_and_create_all, db_initialize_tables_json
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -12,12 +17,12 @@ from werkzeug.exceptions import HTTPException
 from dotenv import load_dotenv, find_dotenv
 from six.moves.urllib.parse import urlencode
 import json
-#from authlib.integrations.flask_client import OAuth
 import constants
 
-
-
-
+#----------------------------------------------------------------------------#
+#               ! Future implementation - do not touch
+#*              Authlib.integrations - (API configuration)
+#----------------------------------------------------------------------------#
 # ENV_FILE = find_dotenv()
 # if ENV_FILE:
 #     load_dotenv(ENV_FILE)
@@ -29,11 +34,14 @@ import constants
 # AUTH0_BASE_URL = 'https://' + AUTH0_DOMAIN
 # AUTH0_AUDIENCE = env.get(constants.AUTH0_AUDIENCE)
 
-
 def create_app(test_config=None):
-    # create and configure the app
     app = Flask(__name__)
-  
+    
+   
+    #----------------------------------------------------------------------------#
+    #               ! Future implementation - do not touch
+    #*              Authlib.integrations - (API configuration)
+    #----------------------------------------------------------------------------#
     # oauth = OAuth(app)
     # auth0 = oauth.register(
     #     'auth0',
@@ -50,37 +58,41 @@ def create_app(test_config=None):
     app.secret_key = constants.SECRET_KEY
     app.debug = True
     configedDB = setup_db(app)
-    
+    #----------------------------------------------------------------------------#
+                                    #!OPTIONAL
+    #*               DROP, Create, and Initialize Database with Data 
+    #----------------------------------------------------------------------------#
     # db_drop_and_create_all()
     # db_initialize_tables_json()
     
+    #*Checks that database configuration was processed correctly.
     if not configedDB:
       abort(500)
   
 
-    '''
-    CORS set up. Allowed '*' for origins. 
-    '''
+    #* ----------------------- *CORS  (API configuration)  ----------------------#
     CORS(app, resources={r"/api/*": {"origins": "*"}})
+    # * ----------------------------- END --------------------------------------- *
     
 
-    '''
-    Use the after_request decorator to set Access-Control-Allow
-    '''
+    #* ----------------------- Access-Control-Allow configuration------------------------------#
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
         response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,PATCH')
         return response
+    # * -------------------------------------- END -------------------------------------------- *
 
     #----------------------------------------------------------------------------#
-    # Controllers.
+    #* END POINTS: GET, GET, GET, GET, GET, POST, PATCH, DELETE
     #----------------------------------------------------------------------------#
    
     @app.route('/')
     def index():
         return render_template('home.html')
-    
+                    
+                    # ! Future implementation - do not touch
+    #* -------------- Endpoints for Authlib.integrations - (API configuration)-----------------#
     # @app.route('/callback')
     # def callback_handling():
     #     #auth0 = app.config['auth0']
@@ -110,6 +122,7 @@ def create_app(test_config=None):
     #     session.clear()
     #     params = {'returnTo': url_for('home', _external=True), 'client_id': AUTH0_CLIENT_ID}
     #     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
+    # * -------------------------------------- END -------------------------------------------- *
 
     
     @app.route('/associate')
@@ -130,7 +143,10 @@ def create_app(test_config=None):
         count=0
         try:
             listOfShoes=[]
-            # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
+            #------------------------------------------------------------------------------------#
+            #                       ! Future implementation
+            #* - USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well - *
+            #------------------------------------------------------------------------------------#
             #flashOutput=[]
             
             receivedShoe = Bay.query.filter(Bay.style == style_code).order_by(Bay.bay).all()  
@@ -139,18 +155,27 @@ def create_app(test_config=None):
             if len(receivedShoe):   
                 for shoe in receivedShoe:
                     listOfShoes.append(Bay.format(shoe))
-                    
+                    #---------------------------------------------------------------------------#
+                    #                   ! Future implementation
+                    #*                       Data Analytics                             
+                    #---------------------------------------------------------------------------#
                     # countOfShoe = Shoes.query.filter(shoe.id == Shoes.id).one_or_none()
                     # if countOfShoe:
                     #     count+=1
-                        
+                    
+                    #--------------------------------------------------------------------------------#
+                    #                   ! Future implementation
                     # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
+                    #--------------------------------------------------------------------------------#
                     #flashOutput.append('Bay:' + Bay.bay + ' Row: '+ Bay.row + ' Col: '+ Bay.col)
             else:  
                 print('>>> no shoe results. Length is: ' , len(receivedShoe))
                 searchFailure=True
-           
+            
+            #--------------------------------------------------------------------------------#
+            #                   ! Future implementation
             # *USING FLASH TO RELAY GET RESPONSE INSTEAD. Currently disabled in HTML as well*
+            #--------------------------------------------------------------------------------#
             #flashListToStr = ' '.join([str(value) for value in flashOutput]) 
             #listToStr = ' '.join([str(value) for value in listOfShoes])                  
             #flash(flashListToStr)
@@ -220,7 +245,7 @@ def create_app(test_config=None):
                                 'bay_info': 'None'
                                 }
                 return jsonify(responseData)
-                #return render_template('manager-view.html', responseData=responseData)
+                #?return render_template('manager-view.html', responseData=responseData)
             
             elif unprocessable:
                 abort(422)
@@ -233,7 +258,7 @@ def create_app(test_config=None):
                                 'total_bay_results': len(listOfBays)
                                 }
                 return jsonify(responseData)
-                #return render_template('manager-view.html', responseData=responseData)
+                #?return render_template('manager-view.html', responseData=responseData)
     
     
     @app.route('/manager/bay', methods =['PATCH'])
@@ -250,6 +275,7 @@ def create_app(test_config=None):
         outdated_bay=None
         updated_bay=None
         try:
+            #* Checking if there is a JSON body 
             body=request.get_json()
             if body:
                 bayID=body.get('bay', None)
@@ -258,38 +284,39 @@ def create_app(test_config=None):
                     outdated_bay=[]
                     updated_bay=[]
                     #print(">>> outdated_bay: ", outdated_bay )
+                    
+                    #--------------------------------------------------------------------------------#
+                    #*          Update each specific shoe in each row within the bay                
+                    #--------------------------------------------------------------------------------#
                     for updatedShoe in data:
                         outdatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id'].strip()) , Bay.bay==bayID)).one_or_none()
                         if outdatedShoe:
+                            #* Capture the old list of shoes within the bay
                             outdated_bay.append(Bay.format(outdatedShoe))
                             
                             outdatedShoe.section=updatedShoe['section'].strip()
-                            
                             outdatedShoe.name=updatedShoe['name'].strip()
-                                
                             outdatedShoe.style=updatedShoe['style'].strip()
-                            
                             outdatedShoe.row=updatedShoe['row'].strip()
-                            
                             outdatedShoe.col=updatedShoe['col'].strip()
-                            
                             outdatedShoe.notes=updatedShoe['notes'].strip()
-
+                            #* Assign a falsy value to image if it returns back with a string that reads as 'None'
                             if(updatedShoe['img'].strip() != 'None'):
                                 outdatedShoe.img=updatedShoe['img'].strip()
-                                print('@img: ',  outdatedShoe.img )
+                                #print('@img: ',  outdatedShoe.img )
                             else:
                                 outdatedShoe.img=""
-                            
                             outdatedShoe.gender=updatedShoe['gender'].strip()
-                            print('@gender: ',  outdatedShoe.gender )
-                            
+                            #print('@gender: ',  outdatedShoe.gender )
                             outdatedShoe.update()
-                            updatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id'].strip()) , Bay.bay==bayID)).one_or_none()
-                            print('@updatedShoe: ',  updatedShoe )
                             
+                            #--------------------------------------------------------------------------------#
+                            #*          Capture the new updated list of shoes within the bay               
+                            #--------------------------------------------------------------------------------#
+                            updatedShoe = Bay.query.filter(and_(Bay.id== int(updatedShoe['shoe_id'].strip()) , Bay.bay==bayID)).one_or_none()
+                            #print('@updatedShoe: ',  updatedShoe )
                             updated_bay.append(Bay.format(updatedShoe))
-                            print('@ updated_bay: ',   updated_bay )
+                            #print('@ updated_bay: ',   updated_bay )
                         else:  
                             print('@>>> no such Bay.')
                             searchFailure=True
@@ -328,6 +355,7 @@ def create_app(test_config=None):
         deleted_bay=[]
         
         try:
+            #* Checking if there is a JSON body
             body=request.get_json()
             if body:
                 bayID=body.get('bay', None)
@@ -335,6 +363,7 @@ def create_app(test_config=None):
                     deleted = Bay.query.filter(Bay.bay==bayID).all()
                     if len(deleted):
                         for gone in deleted:
+                            #* Capture list of deleted shoes before deletion
                             deleted_bay.append(Bay.format(gone))
                             gone.delete()        
                     else:  
@@ -379,19 +408,15 @@ def create_app(test_config=None):
                 data = body.get('data', None)  
             if bayID and data:
                 bayID = int(bayID.strip())
-                print('@bay' , bayID)
+                #* Checking if bay already exist and if it does than throw an error otherwise create the bay with its data.
                 exist = Bay.query.filter(Bay.bay==bayID).all()
-                print('@ exist' ,exist)
                 if not exist:
                     for shoe in data:
-                        #print('@ shoe', shoe)
                         toBeCreated = Bay(bay=bayID, section=shoe['section'].strip() , name=shoe['name'].strip() , style=shoe['style'].strip() , row=shoe['row'].strip() , col=shoe['col'].strip() , notes=shoe['notes'].strip() , img=shoe['img'].strip() , gender=shoe['gender'].strip() )
-                        # print('@ created', toBeCreated)
-                        
                         toBeCreated.insert()
-                
+
+                    #* Capture a list of new shoes created
                     created = Bay.query.filter(Bay.bay==bayID).all()
-                    
                     if created:
                         for shoe in created:
                             createdBay.append(Bay.format(shoe))
@@ -421,7 +446,10 @@ def create_app(test_config=None):
                                 }
                 return jsonify(responseData)
 
-    
+#-------------------------------------------------------------------------------------#
+                    # ! Future implementation - do not touch
+#*               Optioanl endpoints for more data analytic attempts 
+#-------------------------------------------------------------------------------------#
     # @app.route('/manager/data/<string:bay_id>', methods =['GET'])
     # @requires_auth('get:data')
     # def ShowData(*args, **kwargs): #*args, **kwargs
@@ -464,19 +492,19 @@ def create_app(test_config=None):
     #                             'total_data_results': len(listOfBayData)
     #                             })
                 
-                
-    #  ----------------------------------------------------------------
-    #  Error Handlers
-    #  ----------------------------------------------------------------
-    
-    
-    # @app.errorhandler(Exception)
-    # def handle_auth_error(ex):
-    #     response = jsonify(message=str(ex))
-    #     response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
-    #     return response
-    
-    
+        #-------------------------------------------------------------------------------------#
+                        # ! Future implementation - do not touch
+        #*           Error Handlers - Authlib.integrations - (API configuration)     
+        #-------------------------------------------------------------------------------------#
+        #@app.errorhandler(Exception)
+        #def handle_auth_error(ex):
+        # response = jsonify(message=str(ex))
+        # response.status_code = (ex.code if isinstance(ex, HTTPException) else 500)
+        # return response
+        
+    #----------------------------------------------------------------------------#
+    #* Error Hanlders.
+    #----------------------------------------------------------------------------#
     @app.errorhandler(AuthError)
     def authentification_failed(AuthError): 
       return jsonify({

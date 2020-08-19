@@ -23,11 +23,16 @@ class ShoeLocateTestCase(unittest.TestCase):
         self.client = self.app.test_client
         self.database_path= "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
         setup_db(self.app, self.database_path)
+        #--------------------------------------------------------------------------------------------------------------------#
+        #* Dropping, Creating, and initializing data in the database before testing.
+        #--------------------------------------------------------------------------------------------------------------------#
         db.session.close()
         db.session.remove()
         db_drop_and_create_all()    
         db_initialize_tables_json()
-        
+        #--------------------------------------------------------------------------------------------------------------------#
+        #* Storing new Bay objects to be used in the test. Retrieves json values from variables located in constants.py
+        #--------------------------------------------------------------------------------------------------------------------#
         self.new_bay =new_bay_data['new_bay'] 
         
         self.existing_bay = new_bay_data['existing_bay'] 

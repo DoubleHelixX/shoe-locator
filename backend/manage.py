@@ -1,12 +1,12 @@
 #----------------------------------------------------------------------------#
-# Migration Imports
+#* Migration Imports
 #----------------------------------------------------------------------------#
 
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
 #----------------------------------------------------------------------------#
-# Manage Migration
+#* Manage Migration
 #----------------------------------------------------------------------------#
 def migration(app,db):
     migrate = Migrate(app, db)

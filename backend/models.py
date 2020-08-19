@@ -8,15 +8,15 @@ import manage as m
 from constants import database_setup, jsonData
 import pandas as pd
 
+#------------------------------------------------------------------------------------------------------#
+#*              Configures DB connection and binds flask application and a SQLAlchemy service
+#------------------------------------------------------------------------------------------------------#
 database_path =  "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
 # engine = create_engine(database_path)
-
 db = SQLAlchemy()
 migration=None
-'''
-setup_db(app)
-    binds a flask application and a SQLAlchemy service
-'''
+
+
 def setup_db(app, database_path=database_path):
   try:
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
@@ -24,20 +24,22 @@ def setup_db(app, database_path=database_path):
     db.app = app
     db.init_app(app)
     db.create_all()
-    # BOOTSTRAP DB migration command with migration file
+    #* BOOTSTRAP DB migration command with migration file
     migration = m.migration(app, db)
     return True
   except:
     return False
 
+#------------------------------------------------------------------------------------------------------#
+#*              Functions for dropping, creating, and initializing data within the database
+#------------------------------------------------------------------------------------------------------#
 def db_drop_and_create_all():
   db.drop_all()
   db.create_all()
  
-  
+ #* Using CSV with Pandas 
 def db_initialize_tables_csv_pandas():
  engine = db.get_engine()  
- 
  csv_file_path = 'C:/Users/Public/bays_.csv'
  # Read CSV with Pandas
  df = pd.read_csv(csv_file_path)
@@ -49,7 +51,7 @@ def db_initialize_tables_csv_pandas():
           index_label='id',
           if_exists='replace')
  
-    
+#* Using Stored constant dictionary variables as the JSON data 
 def db_initialize_tables_json():
   for i in jsonData: 
     #print(i)
@@ -65,7 +67,6 @@ def db_initialize_tables_json():
           gender = j['gender'], 
           img =j['img'], 
       ))
-     
       new_bay.insert()
       
       

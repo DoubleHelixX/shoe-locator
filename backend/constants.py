@@ -1,19 +1,28 @@
-""" Constants file for Auth0's seed project
-"""
-AUTH0_CLIENT_ID = 'AUTH0_CLIENT_ID'
-AUTH0_CLIENT_SECRET = 'AUTH0_CLIENT_SECRET'
-AUTH0_CALLBACK_URL = 'AUTH0_CALLBACK_URL'
-AUTH0_DOMAIN = 'AUTH0_DOMAIN'
-AUTH0_AUDIENCE = 'AUTH0_AUDIENCE'
-PROFILE_KEY = 'profile'
-SECRET_KEY = 'ThisIsTheSecretKey'
-JWT_PAYLOAD = 'jwt_payload'
 
+#!!!                                    THIS PAGE CONTAINS CONSTANT VARIABLES THAT ARE VERY IMPORTANT       
 
-""" Constants file for Auth0's seed project
-"""
+#----------------------------------------------------------------------------#
+#               ! Future implementation - do not touch
+#*              Constants for Authlib.integrations implementation
+#----------------------------------------------------------------------------#
+# AUTH0_CLIENT_ID = 'AUTH0_CLIENT_ID'
+# AUTH0_CLIENT_SECRET = 'AUTH0_CLIENT_SECRET'
+# AUTH0_CALLBACK_URL = 'AUTH0_CALLBACK_URL'
+# AUTH0_DOMAIN = 'AUTH0_DOMAIN'
+# AUTH0_AUDIENCE = 'AUTH0_AUDIENCE'
+# PROFILE_KEY = 'profile'
+# SECRET_KEY = 'ThisIsTheSecretKey'
+# JWT_PAYLOAD = 'jwt_payload'
 
+# auth0_config = {
+#     "AUTH0_DOMAIN" : "",
+#     "ALGORITHMS" : ["RS256"],
+#     "API_AUDIENCE" : "image"
+# }
 
+#----------------------------------------------------------------------------#
+#*              Constants for Storing the bearer tokens
+#----------------------------------------------------------------------------#
 bearer_tokens = {
     "store_manager" :  " Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwMjc5LCJleHAiOjE1OTc4ODY2NzksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.gtEmFKKpe1Dk_0SqXmr4tUoE_Xj5EBL9MpNn54EPUwEnpkmVut5fYD2mFn8hVUgkO_68NRdS1YPX6SPKJGE4J3TIdoeF6hjxu-_0OxGeUNczzAG_7lef0URb6dWS3HMN9DckzvBsXhwnF-QbCtMooIsNainOqMOHAPOIZ3-RmeAl-tmob-WrHcuLv1780o8vIwDDXdkJWEPCwzsD_EsSqb-o4cGT1AVD3D6lteX_PlKpqiI3MaBlTuuj6eCuVoOrRSk9_RQ60WsG-AN-fXHbEojoOEqEjxoFBq_BvpRILAS5i_UUUYPaIhLIXg0FXelv9zsGJOVpLW62A6krM4vNsQ",
     "assistant_manager": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwNjY3LCJleHAiOjE1OTc4ODcwNjcsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.mmh-UKWgoFs0ciZlgkgRFLQ2uo93hBTP1-LiOl2TV6p6ycBpFP4LtAwgQS1iB-hJsNIBytpR8V7NxB_HmoD3s14_MxT0I6uAtg8O4rRyuuTUeTcMVi5Bc-6emHcioNp6KSV5YxtV3lqPkcSe1OPkNlTvTtDb-RDaKLrpO2aaFzZVHb8Cl04EBoTWcCAeYRepiK8z8NLWAH3OnFv0BVzmAL4lXwvA8by8Bh6A825MLKC67qnQsNetQ_-2hSj-fXeSyR_pl-SGjJZktllm8POWvvtFBJCjIKcgqLVTHZf9g6p7-GvroskxKtsoJpiE0eetykKiqXOP2QMsXhV546yOEA"
@@ -26,14 +35,11 @@ database_setup = {
     "port" : "localhost:5432"
 }
 
-# auth0_config = {
-#     "AUTH0_DOMAIN" : "",
-#     "ALGORITHMS" : ["RS256"],
-#     "API_AUDIENCE" : "image"
-# }
 
-
-
+#-------------------------------------------------------------------------------------------------------#
+#!                                          Used for unit testing
+#* Constants for Storing the JSON data used to initialized the database with data.
+#-------------------------------------------------------------------------------------------------------#
 jsonData= [{
 	"bay": "1" ,
 	"data" : [
@@ -207,6 +213,10 @@ jsonData= [{
  }
 ]
 
+#-------------------------------------------------------------------------------------------------------#
+#!                                          Used for unit testing
+#* Constants for Storing the JSON data used to create new BAY objects when testing.
+#-------------------------------------------------------------------------------------------------------#
 new_bay_data ={
   'new_bay':  {
             "bay": "12",
