@@ -29,16 +29,16 @@ As we should all know, the more time spent being confused when helping a custome
 
 - Bay management
     - As a manager, you can:
-        1) log in and manage the bay system database.
-            - ![Example: How to log in.](./pictures/manager_login.png) 
-        2) View any and or all bays in your database.
-            - ![Example: View selected bays.](./pictures/manager_get.png)
-        3) Create a bay and populate it with shoes.
-            - ![Example: Create a new bay.](./pictures/manager_create.png) 
-        4) Edit an existing bay repopulating it with data.
-            - ![Example:Edit an existing bay.](./pictures/manager_edit.png) 
-        5) Delete bays no longer in use along with all its data.
-            - ![Example: Delete a bay.](./pictures/manager_delete.png) 
+      1) log in and manage the bay system database.
+          - ![Example: How to log in.](./pictures/manager_login.png) 
+      2) View any and or all bays in your database.
+          - ![Example: View selected bays.](./pictures/manager_get.png)
+      3) Create a bay and populate it with shoes.
+          - ![Example: Create a new bay.](./pictures/manager_create.png) 
+      4) Edit an existing bay repopulating it with data.
+          - ![Example:Edit an existing bay.](./pictures/manager_edit.png) 
+      5) Delete bays no longer in use along with all its data.
+          - ![Example: Delete a bay.](./pictures/manager_delete.png) 
 
 # Getting Started
 Here is how you can get started.
