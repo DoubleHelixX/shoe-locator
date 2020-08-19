@@ -21,11 +21,11 @@ As we should all know, the more time spent being confused when helping a custome
 
 **Using Shoe Locate will give you the ability to automate bay management and help save time for finding shoes!**
 - Shoe finder
-**` As an associate you can:`**
-1. Click the Associate button to get reidrected to the shoe-locate assistance view.
-  - ![Button](./pictures/associate_btn.png)
-2. Type in the style code number and the app will direct you exactly where to go.
-  - ![Example: Bay 5, Row 4, Col 2.](./pictures/associate_get.png) 
+  - **` As an associate you can:`**
+    1. Click the Associate button to get reidrected to the shoe-locate assistance view.
+      - ![Button](./pictures/associate_btn.png)
+    2. Type in the style code number and the app will direct you exactly where to go.
+      - ![Example: Bay 5, Row 4, Col 2.](./pictures/associate_get.png) 
 
 - Bay management
 **'As a manager, you can:'**
