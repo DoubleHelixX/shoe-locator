@@ -4,7 +4,6 @@ from sqlalchemy.orm import column_property
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask import Flask
-import manage as m
 from constants import database_setup, jsonData
 import pandas as pd
 
@@ -14,7 +13,7 @@ import pandas as pd
 database_path =  "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
 # engine = create_engine(database_path)
 db = SQLAlchemy()
-migration=None
+
 
 
 def setup_db(app, database_path=database_path):
@@ -24,8 +23,6 @@ def setup_db(app, database_path=database_path):
     db.app = app
     db.init_app(app)
     db.create_all()
-    #* BOOTSTRAP DB migration command with migration file
-    migration = m.migration(app, db)
     return True
   except:
     return False
@@ -33,6 +30,7 @@ def setup_db(app, database_path=database_path):
 #------------------------------------------------------------------------------------------------------#
 #*              Functions for dropping, creating, and initializing data within the database
 #------------------------------------------------------------------------------------------------------#
+#*Drops and creates tables
 def db_drop_and_create_all():
   db.drop_all()
   db.create_all()
@@ -70,21 +68,9 @@ def db_initialize_tables_json():
       new_bay.insert()
       
       
-      
-      
-
-   
-
-
-  
-    
-    
-
-
-
-#----------------------------------------------------------------------------#
-# Models.
-#----------------------------------------------------------------------------#
+#*----------------------------------------------------------------------------#
+#*                            Models - ORM
+#*----------------------------------------------------------------------------#
 
 
 class Bay(db.Model):
