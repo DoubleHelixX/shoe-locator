@@ -35,6 +35,11 @@ import constants
 # AUTH0_BASE_URL = 'https://' + AUTH0_DOMAIN
 # AUTH0_AUDIENCE = env.get(constants.AUTH0_AUDIENCE)
 
+
+   
+#*----------------------------------------------------------------------------#
+#*                                 Create App
+#*----------------------------------------------------------------------------#
 def create_app(test_config=None):
     app = Flask(__name__)
     
@@ -583,8 +588,8 @@ def create_app(test_config=None):
     
     return app
  
-APP = create_app()
+app = create_app()
 # run the app
 if __name__ == '__main__':
-  APP.run(host='0.0.0.0', port=8080, debug=True)
+  app.run(host='0.0.0.0', port=8080, debug=True)
   
