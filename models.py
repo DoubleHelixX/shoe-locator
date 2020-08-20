@@ -6,7 +6,7 @@ import json
 from flask import Flask
 from constants import database_setup, jsonData
 import pandas as pd
-from manage import migration
+#from manage import migration
 #------------------------------------------------------------------------------------------------------#
 #*              Configures DB connection and binds flask application and a SQLAlchemy service
 #------------------------------------------------------------------------------------------------------#
@@ -17,6 +17,7 @@ database_path = os.environ.get('DATABASE_URL', "postgres://{}:{}@{}/{}".format(d
 # #database_path ="postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
 
 # engine = create_engine(database_path)
+
 db = SQLAlchemy()
 
 
@@ -28,7 +29,7 @@ def setup_db(app, database_path=database_path):
     db.app = app
     db.init_app(app)
     db.create_all()
-    migration(app,db)
+    #migration(app,db)
     return True
   except:
     return False
