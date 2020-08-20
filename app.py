@@ -325,7 +325,7 @@ def create_app(test_config=None):
                             updated_bay.append(Bay.format(updatedShoe))
                             #print('@ updated_bay: ',   updated_bay )
                         else:  
-                            print('@>>> no such Bay.')
+                            #print('@>>> no such Bay.')
                             searchFailure=True
             else:
                 unprocessable=True
@@ -374,7 +374,7 @@ def create_app(test_config=None):
                             deleted_bay.append(Bay.format(gone))
                             gone.delete()        
                     else:  
-                        print('@>>> no such Bay.')
+                        #print('@>>> no such Bay.')
                         searchFailure=True
                     
         except:
