@@ -226,10 +226,10 @@ def create_app(test_config=None):
                 })
 
     @app.route('/manager/bay/<string:bay>', methods=['GET'])
-    @requires_auth('get:bays')
-    def ShowBay(*args, **kwargs):  # *args, **kwargs
+    # @requires_auth('get:bays')
+    def ShowBay(bay):  # *args, **kwargs
         bayData = []
-        bay = kwargs.get('bay', 'all')
+        #bay = kwargs.get('bay', 'all')
         #  *See if data is being passed and accepted through the url.*
         unprocessable = False
         searchFailure = False
@@ -274,8 +274,8 @@ def create_app(test_config=None):
                     'baySelected': bay,
                     'bay_info': 'None'
                 }
-                return jsonify(responseData)
-                # return render_template('manager-view.html', responseData=responseData)
+                # return jsonify(responseData)
+                return render_template('manager-view.html', responseData=responseData)
 
             elif unprocessable:
                 abort(422)
@@ -287,11 +287,11 @@ def create_app(test_config=None):
                     'bay_categories': bayCategories,
                     'total_bay_results': len(listOfBays)
                 }
-                return jsonify(responseData)
-                # return render_template('manager-view.html', responseData=responseData)
+                #return jsonify(responseData)
+                return render_template('manager-view.html', responseData=responseData)
 
     @app.route('/manager/bay', methods=['PATCH'])
-    @requires_auth('patch:bays')
+    # @requires_auth('patch:bays')
     def EditBay(*args, **kwargs):
         #  *See if data is being passed and accepted through the url.*
         # print('>>>Bay # : ',bay)
@@ -373,7 +373,7 @@ def create_app(test_config=None):
                 return jsonify(responseData)
 
     @app.route('/manager/bay', methods=['DELETE'])
-    @requires_auth('delete:bays')
+    # @requires_auth('delete:bays')
     def DeleteBay(*args, **kwargs):
         #  *See if data is being passed and accepted through the url.*
         # print('>>>Bay # : ',bay)
@@ -418,7 +418,7 @@ def create_app(test_config=None):
                 return jsonify(responseData)
 
     @app.route('/manager/bay', methods=['POST'])
-    @requires_auth('create:bays')
+    # @requires_auth('create:bays')
     def CreateBay(*args, **kwargs):
         #  *See if data is being passed and accepted through the url.*
         # print('>>>Bay # : ',bay)
