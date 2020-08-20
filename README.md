@@ -64,24 +64,24 @@ Shoe Locate is a full stack application implementing these technologies:
 
 Please refer to the readme files
 
-1. [`frontend.md`](./backend/templates/README.md)
+1. [`frontend.md`](./templates/README.md)
 
-2. [`backend.md`](./backend/README.md)
+2. [`backend.md`](./README_BACKEND.md)
 
 I recommend following the instructions in those files in order.
 
 ### Frontend
-The `./templates` directory contains the frontend logic. I am using Jinja2 to pass data and render the manager pages. Please read [`frontend.md`](./backend/templates/README.md) for more information.
+The `./templates` directory contains the frontend logic. I am using Jinja2 to pass data and render the manager pages. Please read [`frontend.md`](./templates/README.md) for more information.
 
 ### Backend
-The `./backend` directory contains a  completed Flask and SQLAlchemy server. Within the app.py are defined endpoints which uses models.py for the database and SQLAlchemy setup. Please read [`backend.md`](./backend/README.md) for more information.
+The `./shoe-locator` directory contains a  completed Flask and SQLAlchemy server. Within the app.py are defined endpoints which uses models.py for the database and SQLAlchemy setup. Please read [`backend.md`](./README_BACKEND.md) for more information.
 
 ## Authorization/Authentication
 _Depreciated until further notice_:
 ~~The `./backend` directory contains a auth.py file which uses Flask.oauth with utilities library to handle the auth0 login request for authentication and then check for authorization for accessing endpoints pertaining for a manager to access.~~
 
 _In use_:
-The `./backend` directory contains a [`constants.py`](./backend/constants.py) file that supplies the Bearer tokens to the [`auth.py`](./backend/auth.py) file which checks for authorization for accessing endpoints pertaining for a manager to access. [View the README.md within ./backend for more details.](./backend/README.md).
+The `./shoe-locator` directory contains a [`constants.py`](./backend/constants.py) file that supplies the Bearer tokens to the [`auth.py`](./auth.py) file which checks for authorization for accessing endpoints pertaining for a manager to access. [View the README.md within ./backend for more details.](./backend/README.md).
 
 ## Run & Test
 
@@ -117,15 +117,18 @@ python test_api.py
 ```
 - The test is coded so that it drops, creates, and initializes the databases tables with data upon running. 
 - The **db_drop_and_create_all()** method located in the [`models.py`](./backend/models.py) file drops and create the tables in the database.
-- The data is supplied by the [`constants.py`](./backend/constants.py) file which holds a dictionary of data within a variable. 
-- The **db_initialize_tables_json()**method  located in the [`models.py`](./backend/models.py) file uses that constant variable to insert all that data to the datatables respectivly.
+- The data is supplied by the [`constants.py`](./constants.py) file which holds a dictionary of data within a variable. 
+- The **db_initialize_tables_json()**method  located in the [`models.py`](./models.py) file uses that constant variable to insert all that data to the datatables respectivly.
 
 **`All tests are kept in that file and should be maintained as updates are made to app functionality.`**
 - **Alternatively you can use Postman to test the endpoints as well.** 
 - **`Make sure to initialize data in the database first as mentioned earlier before testing.`**
-  - **The Postman collection `"shoe_locate.postman_collection.json"` is located within the `./shoe_locate directory`**    
-      - [LOCATED HERE](shoe_locate.postman_collection.json).
-
+  - **The Postman collection `"shoe_locate.postman_collection.json"` is located within the `./shoe_locate directory`**
+      - Local Collection
+        - [LOCATED HERE](shoe_locate_local.postman_collection.json).
+      - Global Collection
+        - [LOCATED HERE](shoe_locate_global.postman_collection.json).
+     
 ## API Reference
 
 ### Getting Started
@@ -133,7 +136,7 @@ python test_api.py
 - Locally:
     - The backend app is hosted at the default, `http://127.0.0.1:5000/`
 - Globally
-    - The backend app is hosted at the default, `SOME URL HERE`
+    - The backend app is hosted at the default, `https://shoe-locate.herokuapp.com`
 
 - _Depreciated until further notice_:
     - Authentication: 
@@ -178,7 +181,7 @@ The API will return three error types when requests fail:
     - Should return:
         - an ARRAY containing the shoe_info of the shoe that was selected
         - a NUMBER of the amount of bays that shoe is located  
-- **Sample: `curl https://{yourprojecturi}/associate/shoe/2759`**
+- **Sample: `curl https://shoe-locate.herokuapp.com/associate/shoe/2759`**
 - **Sample Response**
 ``` 
 {
@@ -213,7 +216,7 @@ The API will return three error types when requests fail:
         - an ARRAYY of the bay_categories
         - a NUMBER of the total_bay_results of shoes
         - a STRING of the BAYID that was selected
-- **Sample 1: `curl https://{yourprojecturi}/manager/bay/all`**
+- **Sample 1: `curl https://shoe-locate.herokuapp.com/manager/bay/all`**
 - **Sample 1 Response:**
 ``` {
   "baySelected": "all",
@@ -301,7 +304,7 @@ The API will return three error types when requests fail:
 }
 ```
 
-- **Sample 2: `curl https://{yourprojecturi}/manager/bay/1`**
+- **Sample 2: `curl https://shoe-locate.herokuapp.com/manager/bay/1`**
 - **Sample 2 Response:**
 ```
 {
@@ -402,7 +405,7 @@ The API will return three error types when requests fail:
         - an ARRAY of the outdated_shoes that were selected for edit.
         - a NUMBER of the total bays that were altered
         - a NUMBER of the Bay that was selected for editing
-- **Sample 1: `curl https://{yourprojecturi}manager/bay -X PATCH`** 
+- **Sample 1: `curl https://shoe-locate.herokuapp.com/manager/bay -X PATCH`** 
 - **Example response:**
 ``` 
 {
@@ -452,7 +455,7 @@ The API will return three error types when requests fail:
         1. **String** `bay` 
         2. **Array:Dictionaries** `data` 
     - Requires permission: `post:bays`
-- **sample: `curl https://{yourprojecturi}manager/bay -X POST`**
+- **sample: `curl https://shoe-locate.herokuapp.com/manager/bay -X POST`**
 - **Example response:**
 ```
 {
@@ -488,7 +491,7 @@ The API will return three error types when requests fail:
     - Request Headers: (_application/json_)
         1. **String** `bay` 
     - Requires permission: `delete:bays`
-- **sample: `curl https://{yourprojecturi}manager/bay -X DELETE`**
+- **sample: `curl https://shoe-locate.herokuapp.com/manager/bay -X DELETE`**
 - **Example response:**
 ```
 {
