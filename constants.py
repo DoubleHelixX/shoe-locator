@@ -1,6 +1,14 @@
 
 #!!!                                    THIS PAGE CONTAINS CONSTANT VARIABLES THAT ARE VERY IMPORTANT       
 
+
+import os
+SECRET_KEY = os.urandom(32)
+
+# Grabs the folder where the script runs.
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+
 #----------------------------------------------------------------------------#
 #               ! Future implementation - do not touch
 #*              Constants for Authlib.integrations implementation

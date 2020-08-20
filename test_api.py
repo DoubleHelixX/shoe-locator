@@ -21,7 +21,8 @@ class ShoeLocateTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_path= "postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
+        self.database_path= os.environ.get('DATABASE_URL', "postgres://{}:{}@{}/{}".format(database_setup["user_name"], database_setup["password"], database_setup["port"], database_setup["database_name"]))
+
         setup_db(self.app, self.database_path)
         #--------------------------------------------------------------------------------------------------------------------#
         #* Dropping, Creating, and initializing data in the database before testing.
