@@ -6,7 +6,7 @@ import json
 from flask import Flask
 from constants import database_setup, jsonData
 import pandas as pd
-
+# from manage import migration
 #------------------------------------------------------------------------------------------------------#
 #*              Configures DB connection and binds flask application and a SQLAlchemy service
 #------------------------------------------------------------------------------------------------------#
@@ -23,6 +23,7 @@ def setup_db(app, database_path=database_path):
     db.app = app
     db.init_app(app)
     db.create_all()
+    #migration(app,db)
     return True
   except:
     return False
