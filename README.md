@@ -66,12 +66,12 @@ Please refer to the readme files
 
 1. [`frontend.md`](./templates/README.md)
 
-2. [`backend.md`](.README_BACKEND.md)
+2. [`backend.md`](./README_BACKEND.md)
 
 I recommend following the instructions in those files in order.
 
 ### Frontend
-The `./templates` directory contains the frontend logic. I am using Jinja2 to pass data and render the manager pages. Please read [`frontend.md`](./backend/templates/README.md) for more information.
+The `./templates` directory contains the frontend logic. I am using Jinja2 to pass data and render the manager pages. Please read [`frontend.md`](./templates/README.md) for more information.
 
 ### Backend
 The `./shoe-locator` directory contains a  completed Flask and SQLAlchemy server. Within the app.py are defined endpoints which uses models.py for the database and SQLAlchemy setup. Please read [`backend.md`](./README_BACKEND.md) for more information.
