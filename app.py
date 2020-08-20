@@ -171,7 +171,7 @@ def create_app(test_config=None):
                     #!--------------------------------------------------------------------------------#
                     #flashOutput.append('Bay:' + Bay.bay + ' Row: '+ Bay.row + ' Col: '+ Bay.col)
             else:  
-                print('>>> no shoe results. Length is: ' , len(receivedShoe))
+                #print('>>> no shoe results. Length is: ' , len(receivedShoe))
                 searchFailure=True
             
             #!--------------------------------------------------------------------------------#
