@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "59875c4d-83a5-4c11-a960-110562d53b9f",
-		"name": "shoe_locate",
+		"_postman_id": "43facf6e-a62a-44e0-acea-0612f28325db",
+		"name": "shoe_locate_global",
 		"description": "This collection will test all the endpoints associated with the Shoe locate app",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "dcd99b68-bc2e-4330-b9d7-b2a57191cb12",
+								"id": "4508bbef-c37a-4003-9eaf-da4bc5382885",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -42,15 +42,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/associate/shoe/2759",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/associate/shoe/2759",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"associate",
 								"shoe",
@@ -66,7 +64,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "90c4c9e0-dfa4-439f-b35a-a371fe690fbf",
+								"id": "9de8c34e-42d3-4aba-aa17-7793f9a7f573",
 								"exec": [
 									"pm.test(\"Status code is 401\", function () {\r",
 									"    pm.response.to.have.status(401);\r",
@@ -83,15 +81,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay/all",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay/all",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay",
@@ -108,7 +104,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "139294fc-43c0-42fc-9996-65f192959429",
+								"id": "07fdd0f6-c5d2-4c65-a911-46232193b0c4",
 								"exec": [
 									"pm.test(\"Status code is 401\", function () {\r",
 									"    pm.response.to.have.status(401);\r",
@@ -125,15 +121,13 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay"
@@ -148,7 +142,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f4613b89-68c1-4eba-b097-538921b5b6f7",
+								"id": "0499dc28-5e45-437d-9066-1f48947170c1",
 								"exec": [
 									"pm.test(\"Status code is 401\", function () {\r",
 									"    pm.response.to.have.status(401);\r",
@@ -165,15 +159,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay"
@@ -188,7 +180,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e1032f5e-deef-4d9c-b9b6-bf71c1dbe6ff",
+								"id": "580447c8-9153-42ee-8d9c-f2442296a71d",
 								"exec": [
 									"pm.test(\"Status code is 401\", function () {\r",
 									"    pm.response.to.have.status(401);\r",
@@ -205,15 +197,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay"
@@ -228,7 +218,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "54fe045a-c4e0-41cf-bf26-2074fddb6e8e",
+								"id": "2836e0e1-6f1e-400e-b6b5-d292f10d9b5d",
 								"exec": [
 									"pm.test(\"Status code is 401\", function () {\r",
 									"    pm.response.to.have.status(401);\r",
@@ -245,15 +235,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay/1",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay/1",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay",
@@ -275,7 +263,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "34625097-b169-4b84-9376-908ad4c7212f",
+								"id": "548e1dbe-5669-4b5a-b673-f744536104af",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -302,15 +290,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/associate/shoe/2759",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/associate/shoe/2759",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"associate",
 								"shoe",
@@ -326,7 +312,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d7b18fc7-d54b-4d90-b0f8-280e441c1ab4",
+								"id": "005867e7-9bf1-4101-8c2a-695ee5af65b7",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -364,7 +350,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwNjY3LCJleHAiOjE1OTc4ODcwNjcsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.mmh-UKWgoFs0ciZlgkgRFLQ2uo93hBTP1-LiOl2TV6p6ycBpFP4LtAwgQS1iB-hJsNIBytpR8V7NxB_HmoD3s14_MxT0I6uAtg8O4rRyuuTUeTcMVi5Bc-6emHcioNp6KSV5YxtV3lqPkcSe1OPkNlTvTtDb-RDaKLrpO2aaFzZVHb8Cl04EBoTWcCAeYRepiK8z8NLWAH3OnFv0BVzmAL4lXwvA8by8Bh6A825MLKC67qnQsNetQ_-2hSj-fXeSyR_pl-SGjJZktllm8POWvvtFBJCjIKcgqLVTHZf9g6p7-GvroskxKtsoJpiE0eetykKiqXOP2QMsXhV546yOEA",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1OTA1LCJleHAiOjE1OTc5ODIzMDUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.oMSt-wCYMggdZkjD8PuguaGS3oY4e1SwgqGiKIbsTmBZ5TYlIW1pGfFwwdy4b1hUqdznzEiPLkaiXqtzVfP-NaaAcWVoom9uAR_eXQL3et3MdkJxnAC2RXusA-8V7-0ZzxttFpTorQEqr2PSGAUfmns0iRwQ-B-aZu1lHH_2Ip7TGfkErWKP6l8zP_--aZP8X8JnMRfe5rVmwZ9b2XJ9KjxhdJWd5GKEkRfnuCTOc0Cjv_o953BNSt1muhlm0CdrBLS8O1Tkc-D1xB9vGpbWaNAf2X1BrZR4x60dOAZX_IBCEPT_vN6NB_aIr_OLdHoMuMOOrHogPPupuuosfMfWOg",
 									"type": "string"
 								}
 							]
@@ -372,15 +358,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay/all",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay/all",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay",
@@ -396,7 +380,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d6ad8c8a-a140-4d30-9095-1e753a6fc22f",
+								"id": "6e31ad46-0866-483b-8f56-02384c30ce48",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -434,7 +418,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwNjY3LCJleHAiOjE1OTc4ODcwNjcsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.mmh-UKWgoFs0ciZlgkgRFLQ2uo93hBTP1-LiOl2TV6p6ycBpFP4LtAwgQS1iB-hJsNIBytpR8V7NxB_HmoD3s14_MxT0I6uAtg8O4rRyuuTUeTcMVi5Bc-6emHcioNp6KSV5YxtV3lqPkcSe1OPkNlTvTtDb-RDaKLrpO2aaFzZVHb8Cl04EBoTWcCAeYRepiK8z8NLWAH3OnFv0BVzmAL4lXwvA8by8Bh6A825MLKC67qnQsNetQ_-2hSj-fXeSyR_pl-SGjJZktllm8POWvvtFBJCjIKcgqLVTHZf9g6p7-GvroskxKtsoJpiE0eetykKiqXOP2QMsXhV546yOEA",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1OTA1LCJleHAiOjE1OTc5ODIzMDUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.oMSt-wCYMggdZkjD8PuguaGS3oY4e1SwgqGiKIbsTmBZ5TYlIW1pGfFwwdy4b1hUqdznzEiPLkaiXqtzVfP-NaaAcWVoom9uAR_eXQL3et3MdkJxnAC2RXusA-8V7-0ZzxttFpTorQEqr2PSGAUfmns0iRwQ-B-aZu1lHH_2Ip7TGfkErWKP6l8zP_--aZP8X8JnMRfe5rVmwZ9b2XJ9KjxhdJWd5GKEkRfnuCTOc0Cjv_o953BNSt1muhlm0CdrBLS8O1Tkc-D1xB9vGpbWaNAf2X1BrZR4x60dOAZX_IBCEPT_vN6NB_aIr_OLdHoMuMOOrHogPPupuuosfMfWOg",
 									"type": "string"
 								}
 							]
@@ -442,15 +426,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay/1",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay/1",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay",
@@ -467,7 +449,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6b75ed1f-5478-4745-89cf-2b3244ba8b2c",
+								"id": "fd5995ed-f049-46e0-818d-645c98cf247a",
 								"exec": [
 									"pm.test(\"Status code is 403\", function () {\r",
 									"    pm.response.to.have.status(403);\r",
@@ -483,7 +465,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwNjY3LCJleHAiOjE1OTc4ODcwNjcsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.mmh-UKWgoFs0ciZlgkgRFLQ2uo93hBTP1-LiOl2TV6p6ycBpFP4LtAwgQS1iB-hJsNIBytpR8V7NxB_HmoD3s14_MxT0I6uAtg8O4rRyuuTUeTcMVi5Bc-6emHcioNp6KSV5YxtV3lqPkcSe1OPkNlTvTtDb-RDaKLrpO2aaFzZVHb8Cl04EBoTWcCAeYRepiK8z8NLWAH3OnFv0BVzmAL4lXwvA8by8Bh6A825MLKC67qnQsNetQ_-2hSj-fXeSyR_pl-SGjJZktllm8POWvvtFBJCjIKcgqLVTHZf9g6p7-GvroskxKtsoJpiE0eetykKiqXOP2QMsXhV546yOEA",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1OTA1LCJleHAiOjE1OTc5ODIzMDUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.oMSt-wCYMggdZkjD8PuguaGS3oY4e1SwgqGiKIbsTmBZ5TYlIW1pGfFwwdy4b1hUqdznzEiPLkaiXqtzVfP-NaaAcWVoom9uAR_eXQL3et3MdkJxnAC2RXusA-8V7-0ZzxttFpTorQEqr2PSGAUfmns0iRwQ-B-aZu1lHH_2Ip7TGfkErWKP6l8zP_--aZP8X8JnMRfe5rVmwZ9b2XJ9KjxhdJWd5GKEkRfnuCTOc0Cjv_o953BNSt1muhlm0CdrBLS8O1Tkc-D1xB9vGpbWaNAf2X1BrZR4x60dOAZX_IBCEPT_vN6NB_aIr_OLdHoMuMOOrHogPPupuuosfMfWOg",
 									"type": "string"
 								}
 							]
@@ -491,15 +473,13 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay"
@@ -514,7 +494,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a1502fe7-6a2c-43d0-b2b7-3fc227b01ea6",
+								"id": "190db59e-e09a-4f91-a70a-24c7bffdb257",
 								"exec": [
 									"pm.test(\"Status code is 403\", function () {\r",
 									"    pm.response.to.have.status(403);\r",
@@ -530,7 +510,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwNjY3LCJleHAiOjE1OTc4ODcwNjcsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.mmh-UKWgoFs0ciZlgkgRFLQ2uo93hBTP1-LiOl2TV6p6ycBpFP4LtAwgQS1iB-hJsNIBytpR8V7NxB_HmoD3s14_MxT0I6uAtg8O4rRyuuTUeTcMVi5Bc-6emHcioNp6KSV5YxtV3lqPkcSe1OPkNlTvTtDb-RDaKLrpO2aaFzZVHb8Cl04EBoTWcCAeYRepiK8z8NLWAH3OnFv0BVzmAL4lXwvA8by8Bh6A825MLKC67qnQsNetQ_-2hSj-fXeSyR_pl-SGjJZktllm8POWvvtFBJCjIKcgqLVTHZf9g6p7-GvroskxKtsoJpiE0eetykKiqXOP2QMsXhV546yOEA",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1OTA1LCJleHAiOjE1OTc5ODIzMDUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.oMSt-wCYMggdZkjD8PuguaGS3oY4e1SwgqGiKIbsTmBZ5TYlIW1pGfFwwdy4b1hUqdznzEiPLkaiXqtzVfP-NaaAcWVoom9uAR_eXQL3et3MdkJxnAC2RXusA-8V7-0ZzxttFpTorQEqr2PSGAUfmns0iRwQ-B-aZu1lHH_2Ip7TGfkErWKP6l8zP_--aZP8X8JnMRfe5rVmwZ9b2XJ9KjxhdJWd5GKEkRfnuCTOc0Cjv_o953BNSt1muhlm0CdrBLS8O1Tkc-D1xB9vGpbWaNAf2X1BrZR4x60dOAZX_IBCEPT_vN6NB_aIr_OLdHoMuMOOrHogPPupuuosfMfWOg",
 									"type": "string"
 								}
 							]
@@ -538,15 +518,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay"
@@ -561,7 +539,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6dd47dcb-0c3d-4f32-a6f4-3021fe3b8ff4",
+								"id": "c0b14da9-20c0-458e-ae3f-562126ee529f",
 								"exec": [
 									"pm.test(\"Status code is 403\", function () {\r",
 									"    pm.response.to.have.status(403);\r",
@@ -577,7 +555,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwNjY3LCJleHAiOjE1OTc4ODcwNjcsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.mmh-UKWgoFs0ciZlgkgRFLQ2uo93hBTP1-LiOl2TV6p6ycBpFP4LtAwgQS1iB-hJsNIBytpR8V7NxB_HmoD3s14_MxT0I6uAtg8O4rRyuuTUeTcMVi5Bc-6emHcioNp6KSV5YxtV3lqPkcSe1OPkNlTvTtDb-RDaKLrpO2aaFzZVHb8Cl04EBoTWcCAeYRepiK8z8NLWAH3OnFv0BVzmAL4lXwvA8by8Bh6A825MLKC67qnQsNetQ_-2hSj-fXeSyR_pl-SGjJZktllm8POWvvtFBJCjIKcgqLVTHZf9g6p7-GvroskxKtsoJpiE0eetykKiqXOP2QMsXhV546yOEA",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMWM3MmViMzAzMDAxOWM4NzFkZSIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1OTA1LCJleHAiOjE1OTc5ODIzMDUsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6YmF5cyIsImdldDpkYXRhIiwiZ2V0OmRyaW5rcy1kZXRhaWwiXX0.oMSt-wCYMggdZkjD8PuguaGS3oY4e1SwgqGiKIbsTmBZ5TYlIW1pGfFwwdy4b1hUqdznzEiPLkaiXqtzVfP-NaaAcWVoom9uAR_eXQL3et3MdkJxnAC2RXusA-8V7-0ZzxttFpTorQEqr2PSGAUfmns0iRwQ-B-aZu1lHH_2Ip7TGfkErWKP6l8zP_--aZP8X8JnMRfe5rVmwZ9b2XJ9KjxhdJWd5GKEkRfnuCTOc0Cjv_o953BNSt1muhlm0CdrBLS8O1Tkc-D1xB9vGpbWaNAf2X1BrZR4x60dOAZX_IBCEPT_vN6NB_aIr_OLdHoMuMOOrHogPPupuuosfMfWOg",
 									"type": "string"
 								}
 							]
@@ -589,15 +567,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay"
@@ -618,7 +594,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ba3832d9-9cbe-4359-b35f-aa966ff02cf1",
+								"id": "4cdc0a4d-aba9-49e8-8e1c-dd77d2b2e043",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -645,15 +621,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/associate/shoe/2759",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/associate/shoe/2759",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"associate",
 								"shoe",
@@ -669,7 +643,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "92963367-2270-4385-88d5-7004130ab48f",
+								"id": "aa5edc14-7543-4082-9aa8-2eebc5ce54c3",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -707,7 +681,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwMjc5LCJleHAiOjE1OTc4ODY2NzksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.gtEmFKKpe1Dk_0SqXmr4tUoE_Xj5EBL9MpNn54EPUwEnpkmVut5fYD2mFn8hVUgkO_68NRdS1YPX6SPKJGE4J3TIdoeF6hjxu-_0OxGeUNczzAG_7lef0URb6dWS3HMN9DckzvBsXhwnF-QbCtMooIsNainOqMOHAPOIZ3-RmeAl-tmob-WrHcuLv1780o8vIwDDXdkJWEPCwzsD_EsSqb-o4cGT1AVD3D6lteX_PlKpqiI3MaBlTuuj6eCuVoOrRSk9_RQ60WsG-AN-fXHbEojoOEqEjxoFBq_BvpRILAS5i_UUUYPaIhLIXg0FXelv9zsGJOVpLW62A6krM4vNsQ",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1NzgzLCJleHAiOjE1OTc5ODIxODMsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d8YJ2STpNNKWkoyJyzOem5sfdF9zlXawZyv-mZHgVIrSgVEOrZJeTTMWoWIDy3JdRYHn6Gn00kRszAPLN_J3HxsYRQ2SwVJCHbBtfsgB5WcNiw6G3ljVpfeHXuiyb1Z5zXrjjTLxuBstkJdCZ5INQKfPhOBGk792F9f68v3L-PIyE_k5H9ZTQw7gtNyzYrOOe-ItoxcALAAc1g6WnCy4RIp5O9gPKU5cPx1yzpxmQhoJ-sIJeVMv6h3jN-0AeOkaT8LrqNHq3-YEs5cmRc1DbfdNIuEiWTSzQFiW9LlMloboJdt9d6rZr5YRfqt9QLUw48dhvpkVjPl64uIzncuwlw",
 									"type": "string"
 								}
 							]
@@ -715,15 +689,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay/all",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay/all",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay",
@@ -739,7 +711,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "44611a35-cd5f-481b-b742-18d1f450d2d5",
+								"id": "e6cc2861-421b-4be6-a708-16d1cf096c40",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -780,7 +752,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwMjc5LCJleHAiOjE1OTc4ODY2NzksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.gtEmFKKpe1Dk_0SqXmr4tUoE_Xj5EBL9MpNn54EPUwEnpkmVut5fYD2mFn8hVUgkO_68NRdS1YPX6SPKJGE4J3TIdoeF6hjxu-_0OxGeUNczzAG_7lef0URb6dWS3HMN9DckzvBsXhwnF-QbCtMooIsNainOqMOHAPOIZ3-RmeAl-tmob-WrHcuLv1780o8vIwDDXdkJWEPCwzsD_EsSqb-o4cGT1AVD3D6lteX_PlKpqiI3MaBlTuuj6eCuVoOrRSk9_RQ60WsG-AN-fXHbEojoOEqEjxoFBq_BvpRILAS5i_UUUYPaIhLIXg0FXelv9zsGJOVpLW62A6krM4vNsQ",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1NzgzLCJleHAiOjE1OTc5ODIxODMsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d8YJ2STpNNKWkoyJyzOem5sfdF9zlXawZyv-mZHgVIrSgVEOrZJeTTMWoWIDy3JdRYHn6Gn00kRszAPLN_J3HxsYRQ2SwVJCHbBtfsgB5WcNiw6G3ljVpfeHXuiyb1Z5zXrjjTLxuBstkJdCZ5INQKfPhOBGk792F9f68v3L-PIyE_k5H9ZTQw7gtNyzYrOOe-ItoxcALAAc1g6WnCy4RIp5O9gPKU5cPx1yzpxmQhoJ-sIJeVMv6h3jN-0AeOkaT8LrqNHq3-YEs5cmRc1DbfdNIuEiWTSzQFiW9LlMloboJdt9d6rZr5YRfqt9QLUw48dhvpkVjPl64uIzncuwlw",
 									"type": "string"
 								}
 							]
@@ -792,15 +764,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay/1",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay/1",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay",
@@ -816,7 +786,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4402bd52-0f7b-43bd-9b33-99a1dc7386a5",
+								"id": "edce6387-6f1a-445b-bf61-be3ba6b8434c",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -852,7 +822,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwMjc5LCJleHAiOjE1OTc4ODY2NzksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.gtEmFKKpe1Dk_0SqXmr4tUoE_Xj5EBL9MpNn54EPUwEnpkmVut5fYD2mFn8hVUgkO_68NRdS1YPX6SPKJGE4J3TIdoeF6hjxu-_0OxGeUNczzAG_7lef0URb6dWS3HMN9DckzvBsXhwnF-QbCtMooIsNainOqMOHAPOIZ3-RmeAl-tmob-WrHcuLv1780o8vIwDDXdkJWEPCwzsD_EsSqb-o4cGT1AVD3D6lteX_PlKpqiI3MaBlTuuj6eCuVoOrRSk9_RQ60WsG-AN-fXHbEojoOEqEjxoFBq_BvpRILAS5i_UUUYPaIhLIXg0FXelv9zsGJOVpLW62A6krM4vNsQ",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1NzgzLCJleHAiOjE1OTc5ODIxODMsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d8YJ2STpNNKWkoyJyzOem5sfdF9zlXawZyv-mZHgVIrSgVEOrZJeTTMWoWIDy3JdRYHn6Gn00kRszAPLN_J3HxsYRQ2SwVJCHbBtfsgB5WcNiw6G3ljVpfeHXuiyb1Z5zXrjjTLxuBstkJdCZ5INQKfPhOBGk792F9f68v3L-PIyE_k5H9ZTQw7gtNyzYrOOe-ItoxcALAAc1g6WnCy4RIp5O9gPKU5cPx1yzpxmQhoJ-sIJeVMv6h3jN-0AeOkaT8LrqNHq3-YEs5cmRc1DbfdNIuEiWTSzQFiW9LlMloboJdt9d6rZr5YRfqt9QLUw48dhvpkVjPl64uIzncuwlw",
 									"type": "string"
 								}
 							]
@@ -869,15 +839,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay"
@@ -892,7 +860,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "898a3412-338f-45cc-aed0-130250dbe78c",
+								"id": "221c95d3-2cd9-4105-beb5-fcf2558dee53",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -925,7 +893,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwMjc5LCJleHAiOjE1OTc4ODY2NzksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.gtEmFKKpe1Dk_0SqXmr4tUoE_Xj5EBL9MpNn54EPUwEnpkmVut5fYD2mFn8hVUgkO_68NRdS1YPX6SPKJGE4J3TIdoeF6hjxu-_0OxGeUNczzAG_7lef0URb6dWS3HMN9DckzvBsXhwnF-QbCtMooIsNainOqMOHAPOIZ3-RmeAl-tmob-WrHcuLv1780o8vIwDDXdkJWEPCwzsD_EsSqb-o4cGT1AVD3D6lteX_PlKpqiI3MaBlTuuj6eCuVoOrRSk9_RQ60WsG-AN-fXHbEojoOEqEjxoFBq_BvpRILAS5i_UUUYPaIhLIXg0FXelv9zsGJOVpLW62A6krM4vNsQ",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1NzgzLCJleHAiOjE1OTc5ODIxODMsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d8YJ2STpNNKWkoyJyzOem5sfdF9zlXawZyv-mZHgVIrSgVEOrZJeTTMWoWIDy3JdRYHn6Gn00kRszAPLN_J3HxsYRQ2SwVJCHbBtfsgB5WcNiw6G3ljVpfeHXuiyb1Z5zXrjjTLxuBstkJdCZ5INQKfPhOBGk792F9f68v3L-PIyE_k5H9ZTQw7gtNyzYrOOe-ItoxcALAAc1g6WnCy4RIp5O9gPKU5cPx1yzpxmQhoJ-sIJeVMv6h3jN-0AeOkaT8LrqNHq3-YEs5cmRc1DbfdNIuEiWTSzQFiW9LlMloboJdt9d6rZr5YRfqt9QLUw48dhvpkVjPl64uIzncuwlw",
 									"type": "string"
 								}
 							]
@@ -942,15 +910,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay"
@@ -965,7 +931,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "dd90fd0b-ac68-420c-aeb2-72c7d5add1f3",
+								"id": "86d729b8-9f93-4348-b16d-ceed1ea0db1a",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -1003,7 +969,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODAwMjc5LCJleHAiOjE1OTc4ODY2NzksImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.gtEmFKKpe1Dk_0SqXmr4tUoE_Xj5EBL9MpNn54EPUwEnpkmVut5fYD2mFn8hVUgkO_68NRdS1YPX6SPKJGE4J3TIdoeF6hjxu-_0OxGeUNczzAG_7lef0URb6dWS3HMN9DckzvBsXhwnF-QbCtMooIsNainOqMOHAPOIZ3-RmeAl-tmob-WrHcuLv1780o8vIwDDXdkJWEPCwzsD_EsSqb-o4cGT1AVD3D6lteX_PlKpqiI3MaBlTuuj6eCuVoOrRSk9_RQ60WsG-AN-fXHbEojoOEqEjxoFBq_BvpRILAS5i_UUUYPaIhLIXg0FXelv9zsGJOVpLW62A6krM4vNsQ",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJpZzd3T0p6dEo1MnZDMzFBN2FyNyJ9.eyJpc3MiOiJodHRwczovL2RvdWJsZS1oZWxpeHgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmMGNmMTI2MmViMzAzMDAxOWM4NzFkYyIsImF1ZCI6ImltYWdlIiwiaWF0IjoxNTk3ODk1NzgzLCJleHAiOjE1OTc5ODIxODMsImF6cCI6Imw2eW5nNUxGdEtaSUZaNkk1NmZnUHlKcWJmSjN5ZzhVIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YmF5cyIsImRlbGV0ZTpiYXlzIiwiZGVsZXRlOmRyaW5rcyIsImdldDpiYXlzIiwiZ2V0OmRhdGEiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmJheXMiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.d8YJ2STpNNKWkoyJyzOem5sfdF9zlXawZyv-mZHgVIrSgVEOrZJeTTMWoWIDy3JdRYHn6Gn00kRszAPLN_J3HxsYRQ2SwVJCHbBtfsgB5WcNiw6G3ljVpfeHXuiyb1Z5zXrjjTLxuBstkJdCZ5INQKfPhOBGk792F9f68v3L-PIyE_k5H9ZTQw7gtNyzYrOOe-ItoxcALAAc1g6WnCy4RIp5O9gPKU5cPx1yzpxmQhoJ-sIJeVMv6h3jN-0AeOkaT8LrqNHq3-YEs5cmRc1DbfdNIuEiWTSzQFiW9LlMloboJdt9d6rZr5YRfqt9QLUw48dhvpkVjPl64uIzncuwlw",
 									"type": "string"
 								}
 							]
@@ -1020,15 +986,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/manager/bay",
-							"protocol": "http",
+							"raw": "https://shoe-locate.herokuapp.com/manager/bay",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"shoe-locate",
+								"herokuapp",
+								"com"
 							],
-							"port": "5000",
 							"path": [
 								"manager",
 								"bay"
