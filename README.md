@@ -132,7 +132,7 @@ python test_api.py
 ## API Reference
 
 ### Getting Started
-- Base URL: This app can only be run locally and or by clicking this [URL]().
+- Base URL: This app can only be run locally and or by clicking this [URL](https://shoe-locate.herokuapp.com).
 - Locally:
     - The backend app is hosted at the default, `http://127.0.0.1:5000/`
 - Globally
