@@ -291,7 +291,7 @@ venv
 ehthumbs.db
 Thumbs.db
 
-migrations/
+
 .env
 .pyc
 *.iml
