@@ -58,7 +58,7 @@ def create_app(test_config=None):
     #app.secret_key = constants.SECRET_KEY
     
     app.debug = True
-    configedDB = setup_db(app)
+    setup_db(app)
     #?----------------------------------------------------------------------------#
                                     #?OPTIONAL
     #?               DROP, Create, and Initialize Database with Data 
@@ -67,8 +67,8 @@ def create_app(test_config=None):
     #db_initialize_tables_json()
     
     #*Checks that database configuration was processed correctly.
-    if not configedDB:
-      abort(500)
+    # if not configedDB:
+    #   abort(500)
   
 
     #* ----------------------- *CORS  (API configuration)  ----------------------#
