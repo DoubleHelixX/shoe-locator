@@ -93,7 +93,7 @@ In order to run the application:
 2) **Next navigate to the backend folder and run the following commands:**
     - **Install the requirements:**
         ```
-        pip install -r requirements.txt
+        pip3 install -r requirements.txt
         ``` 
     - **set Flask App:** `Set according to your path`
         ```

@@ -45,6 +45,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import json
 import constants
+import logging
 
 #  !----------------------------------------------------------------------------#
 #                ! Future implementation - do not touch
@@ -209,9 +210,10 @@ def create_app(test_config=None):
             # listToStr = ' '.join([str(value) for value in listOfShoes])
             # flash(flashListToStr)
 
-        except expression as identifier:
+        except Exception:
             # flash('Shoe not in Records')
             unprocessable = True
+            logging.error('unprocessable')
             print('except Expression: ', identifier)
         finally:
             if searchFailure:
@@ -262,8 +264,9 @@ def create_app(test_config=None):
             else:
                 print('>>> no such Bay. Length is: ', listOfBays)
                 searchFailure = True
-        except expression as identifier:
+        except Exception:
             unprocessable = True
+            logging.error('unprocessable')
             print('Error Message: ', sys.exc_info())
         finally:
             if searchFailure:
@@ -351,16 +354,21 @@ def create_app(test_config=None):
                         else:
                             # print('@>>> no such Bay.')
                             searchFailure = True
+                            
             else:
                 unprocessable = True
+                
 
-        except expression as identifier:
+        except Exception:
             unprocessable = true
+            logging.error('unprocessable')
             print('Error Message: ', sys.exc_info())
         finally:
             if searchFailure:
+                db.session.rollback()
                 abort(404)
             elif unprocessable:
+                db.session.rollback()
                 abort(422)
             else:
                 responseData = {
@@ -400,8 +408,9 @@ def create_app(test_config=None):
                         # print('@>>> no such Bay.')
                         searchFailure = True
 
-        except expression as identifier:
+        except Exception:
             unprocessable = True
+            logging.error('unprocessable')
             print('Error Message: ', sys.exc_info())
         finally:
             if searchFailure:
@@ -467,8 +476,9 @@ def create_app(test_config=None):
             else:
                 unprocessable = True
 
-        except expression as identifier:
+        except Exception:
             unprocessable = True
+            logging.error('unprocessable')
             print('Error Message: ', sys.exc_info())
         finally:
             if unprocessable:
@@ -520,7 +530,7 @@ def create_app(test_config=None):
     #          else:
     #              print('>>> no such Data for this Bay.')
     #              searchFailure=True
-    #      except expression as identifier:
+    #      except Exception:
     #          unprocessable = true
     #          print('Error Message: ', sys.exc_info())
     #      finally:
@@ -614,20 +624,19 @@ def create_app(test_config=None):
     #  Launch.
     # ----------------------------------------------------------------------------#
 
-    #  #  Default port:
-    #  if __name__ == '__main__':
-    #      app.run(host = '127.0.0.1')
-    #  Or specify port manually:
+     # *Local use:
+    if __name__ == '__main__':
+        app.run(host = '127.0.0.1')
     return app
 
 
 app = create_app()
 
-
-#  run the app
-if __name__ == '__main__':
-    app.run(
-        host='0.0.0.0',
-        port=8080,
-        debug=True
-    )
+# *For Hyroku use:
+# #  run the app and specify port manually:
+# if __name__ == '__main__':
+#     app.run(
+#         host='0.0.0.0',
+#         port=8080,
+#         debug=True
+#     )

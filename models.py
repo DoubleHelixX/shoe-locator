@@ -23,11 +23,11 @@ import pandas as pd
 # *                                  and
 # *               Binds flask application to SQLAlchemy service
 # ------------------------------------------------------------------------------------------------------#
-# *Global use
+# *Global use or Local use (defaults to local if global isn't found)
 database_path = os.environ.get('DATABASE_URL', "postgres://{}:{}@{}/{}".format(
     database_setup["user_name"], database_setup["password"], database_setup["port"], database_setup["database_name"]))
 
-# !Local use below
+# ! OR just Local use below:
 #  # database_path ="postgresql+psycopg2://{}:{}@{}/{}".format(database_setup['user_name'], database_setup['password'], database_setup['port'], database_setup['database_name'])
 
 # ! For intergrating PANDAS

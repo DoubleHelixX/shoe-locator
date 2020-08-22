@@ -26,16 +26,26 @@ In order to run the application:
 2) **Next navigate to the backend folder and run the following commands:**
     - **Install the requirements:**
         ```
-        pip install -r requirements.txt
+        pip3 install -r requirements.txt
         ``` 
-    - **set Flask App:** `Set according to your path`
-        ```
-        set FLASK_APP=app.py
-        ```   
-    - **Run Application:**
-        ```
-        flask run
-        ``` 
+    - On Linux : export
+        - **export Flask App:** `Set according to your path`
+            ```
+            export FLASK_APP=app.py;
+            ```
+        - **Run Application:**
+            ```
+            flask run
+            ``` 
+    - On Windows : set
+        - **set Flask App:** `Set according to your path`
+            ```
+            set FLASK_APP=app.py
+            ```   
+        - **Run Application:**
+            ```
+            flask run
+            ``` 
 3) This project uses the `Better Comments` Extension for showcasing comments. Install [Here](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
 4) Omit the  `db_drop_and_create_all()` & ` db_initialize_tables_json() ` methods to pump starter data in the database.
 
@@ -43,12 +53,13 @@ In order to run the application:
 #### CSV PSQL CMD
 1) Place the `[bays_csv](bays_.csv)` file located in the backend folder to a public directory similar to `C:\Users\Public\`
 2) within PSQL CMD, run these commands
-```
-COPY bays(id,bay, section, name, style, row, col, notes, img, gender)
-FROM 'C:\Users\Public\bays_.csv'
-DELIMITER ','
-CSV HEADER;
-```
+    - On Windows
+        ```
+        COPY bays(id,bay, section, name, style, row, col, notes, img, gender)
+        FROM 'C:\Users\Public\bays_.csv'
+        DELIMITER ','
+        CSV HEADER;
+        ```
 3) The response from the PSQL CMD should showcase something similar to `COPY 16`.
 
 #### CSV Pandas - programmingly
@@ -131,5 +142,5 @@ This file contains all the constant data that will be needed to run the app corr
         - etc
 
 ## test_api.py
-This is unit test for testing `app.py`.
+This is unit test for testing `app.py`. Read more in [Backend Readme](README_BACKEND.md)
 **` DO NOT TOUCH`**
