@@ -11,11 +11,7 @@ hr {
   background: url("/static/assets/img/cat.jpg") center / cover no-repeat; 
 }
 
-@media (min-width: 992px){
-header.masthead {
-  height: auto!important;
-}
-}
+
 
 @media (min-width: 1200px) {
   .container,
@@ -55,6 +51,8 @@ header.masthead {
 .btnDiv{
   margin-left: 21rem;
 }
+
+
 
 @media (max-width: 2000px) {
   .container-dropdown-btn {
@@ -261,10 +259,9 @@ span.overlay-text {
   /* background-color:rgba(255, 255, 255, 0.3);/*background color and opacity together*/
 }
 
+
 span.title-display-text {
   width: 7em;
-  position: relative;
-  top: 5em;
   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
   font-family: Open Sans;
   text-shadow: 2px 2px 1px rgb(0, 0, 0);
@@ -273,14 +270,23 @@ span.title-display-text {
   border-radius: 30%;
   border-color: rgb(233, 216, 216);
   display: flex;
-  margin: auto;
+  justify-content: center;
+  margin: transform;
+  position: relative;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 30%);
+    transform: translate(-50%, 50%);
+
+}
+
+.center{  
+  
+    -webkit-transform: translate(0%, 50%);
+    transform: translate(0%, 50%);
   justify-content: center;
 }
-@media screen and (max-width: 992px) {
-  span.title-display-text {
-    top: 2em;
-  }
-}
+
 
 h1.overlay-text {
   color: black;
@@ -299,6 +305,8 @@ section.masthead{padding-top:10rem;padding-bottom:0px}; */
   border-color: rgb(233, 216, 216);
   border-radius: 5em;
   margin: 2rem;
+  min-width: 350px;
+  
 }
 
 .container-add-on2, img {
@@ -491,6 +499,11 @@ th {
 
 } */
 
+.d-flex{
+ 
+  justify-content: center
+
+}
 
 
 @media screen and (max-width: 991px) {
@@ -743,8 +756,8 @@ td:hover .hover_img {
 }
 
 .my-auto{
-  margin-top: 0;
-  margin-bottom: 0!important;
+  margin-top: auto;
+  margin-bottom: auto!important;
 }
 
 
