@@ -58,7 +58,7 @@ Shoe Locate is a full stack application implementing these technologies:
 - Auth0 API 
 - HTML
 - JavaScript
-- Hyroku
+- Heroku
 
 ## README
 
