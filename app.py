@@ -7,6 +7,7 @@
 
 from models import (
     setup_db, Bay,
+    db,
     db_drop_and_create_all,
     db_initialize_tables_json
 )
@@ -619,19 +620,22 @@ def create_app(test_config=None):
         file_handler.setLevel(logging.INFO)
         app.logger.addHandler(file_handler)
         app.logger.info('errors')
-
-    # ----------------------------------------------------------------------------#
-    #  Launch.
-    # ----------------------------------------------------------------------------#
-
-     # *Local use:
-    if __name__ == '__main__':
-        app.run(host = '127.0.0.1')
+        
+    # * Return app Object
     return app
 
 
+# *----------------------------------------------------------------------------#
+# *  Deploy
+# *----------------------------------------------------------------------------#
+
+# * Create App object
 app = create_app()
 
+# *Local use:
+if __name__ == '__main__':
+    app.run(host = '127.0.0.1')
+    
 # *For Hyroku use:
 # #  run the app and specify port manually:
 # if __name__ == '__main__':
