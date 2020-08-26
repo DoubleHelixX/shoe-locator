@@ -1,16 +1,16 @@
 import os
 from sqlalchemy import (
-  Column,
-  String,
-  Integer,
-  create_engine,
-  select,
-  func,
-  DateTime
+    Column,
+    String,
+    Integer,
+    create_engine,
+    select,
+    func,
+    DateTime
 )
 from constants import (
-  database_setup,
-  jsonData
+    database_setup,
+    jsonData
 )
 from sqlalchemy.orm import column_property
 from flask_sqlalchemy import SQLAlchemy
