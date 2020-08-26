@@ -62,6 +62,40 @@ Shoe Locate is a full stack application implementing these technologies:
 - **Flask-Migrate** for creating and running schema migrations
 - **Heroku** our deployment service of choice for Deployment
 
+### Main Files: Project Structure
+
+  ```sh
+  ├── README.md
+  ├── README_BACKEND.md
+  ├── Profile *** For heroku deployment ***
+  ├── app.py *** the main driver of the app. Multiple Endpoints
+                    "python app.py" to run after installing dependences
+  ├── constants.py *** Database URLs, CSRF generation, etc
+  ├── auth.py *** auth0 config logic
+  ├── models.py ***  Includes your SQLAlchemy models ***
+  ├── manage.py *** database configuration and setup ***
+  ├── test_api.py *** python unit test for testing the endpoints ***
+  ├── setup.sh *** environment variables ***
+  ├── error.log
+  ├── requirements.txt *** The dependencies we need to install with "pip3 install -r requirements.txt"
+  ├── shoe_locate_global.postman.json *** postman testing for endpoints ***
+  ├── shoe_locate_local.postman.json *** postman testing for endpoints ***
+  ├── bays_.csv *** csv file to import Bay data ***
+  ├── static/assets
+  │   ├── bootstrap
+  │   │   │
+  │   │   ├── css
+  │   │   └── js
+  │   ├── css 
+  │   ├── img
+  │   └── js
+  └── templates
+      ├── associate-view.html
+      ├── home.html
+      ├── layout.html
+      └── manager-view.html
+      
+  ```
 ## README
 
 Please refer to the readme files
