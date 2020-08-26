@@ -52,13 +52,16 @@ Here is how you can get started.
 ## About the Stack
 
 Shoe Locate is a full stack application implementing these technologies: 
-- Flask
-- Jinja2
-- SQLAlchemy 
-- Auth0 API 
-- HTML
-- JavaScript
-- Heroku
+- **Flask** as our local server 
+- **Gunicorn** as our deploment server
+- **Jinja2** for itegrating our data to the frontend seamlessly 
+- **SQLAlchemy ORM** to be our ORM library of choice
+- **Python3** and **Flask** as our server language and server framework
+- **PostgreSQL** as our database of choice
+- **Auth0 API** as our authorization/authentification service 
+- **HTML**, **CSS**, and **Javascript** with [Bootstrap 3](https://getbootstrap.com/docs/3.4/customize/) for our website's frontend
+- **Flask-Migrate** for creating and running schema migrations
+- **Heroku** our deployment service of choice for Deployment
 
 ## README
 
@@ -131,7 +134,7 @@ python test_api.py
      
 ## API Reference
 
-### Getting Started
+### Deployment
 - Base URL: This app can only be run locally and or by clicking this [URL](https://shoe-locate.herokuapp.com).
 - Locally:
     - The backend app is hosted at the default, `http://127.0.0.1:5000/`
