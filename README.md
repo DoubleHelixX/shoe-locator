@@ -52,11 +52,10 @@ Here is how you can get started.
 ## About the Stack
 
 Shoe Locate is a full stack application implementing these technologies: 
-- **Flask** as our local server 
+- **Python3** and **Flask** as our server language and server framework
 - **Gunicorn** as our deploment server
 - **Jinja2** for itegrating our data to the frontend seamlessly 
 - **SQLAlchemy ORM** to be our ORM library of choice
-- **Python3** and **Flask** as our server language and server framework
 - **PostgreSQL** as our database of choice
 - **Auth0 API** as our authorization/authentification service 
 - **HTML**, **CSS**, and **Javascript** with [Bootstrap 3](https://getbootstrap.com/docs/3.4/customize/) for our website's frontend
