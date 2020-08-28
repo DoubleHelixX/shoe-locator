@@ -133,18 +133,18 @@ B) In order to run the application:
 #### `PIP Dependencies`
  
   2) **Next navigate to the backend folder and run the following commands:**
-    - **Install the requirements:**
-        ```
-        pip3 install -r requirements.txt
-        ``` 
-    - **set Flask App:** `Set according to your path`
-        ```
-        set FLASK_APP=app.py
-        ```   
-    - **Run Application:**
-        ```
-        flask run
-        ```  
+     - **Install the requirements:**
+          ```
+          pip3 install -r requirements.txt
+          ``` 
+     - **set Flask App:** `Set according to your path`
+          ```
+          set FLASK_APP=app.py
+          ```   
+     - **Run Application:**
+          ```
+          flask run
+          ```  
      
   3) This project uses the `Better Comments` Extension for showcasing comments. Install [Here](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
   4) Omit the  `db_drop_and_create_all()` & ` db_initialize_tables_json() ` methods to pump starter data in the database. 
