@@ -121,11 +121,17 @@ The `./shoe-locator` directory contains a [`constants.py`](./backend/constants.p
 
 ## Run & Test
 
-### Running
+### Running & Testing
+
+#### Python 3.7
+A) Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
+
 In order to run the application:
 1)  **First make sure your environment is active:**
     - [How to set up a python virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
-    
+
+#### PIP Dependencies
+ 
 2) **Next navigate to the backend folder and run the following commands:**
     - **Install the requirements:**
         ```
