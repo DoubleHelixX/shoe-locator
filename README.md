@@ -126,13 +126,13 @@ The `./shoe-locator` directory contains a [`constants.py`](./backend/constants.p
 #### Python 3.7
 A) Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
 
-In order to run the application:
-1)  **First make sure your environment is active:**
+B) In order to run the application:
+  1)  **First make sure your environment is active:**
     - [How to set up a python virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
 
 #### PIP Dependencies
  
-2) **Next navigate to the backend folder and run the following commands:**
+  2) **Next navigate to the backend folder and run the following commands:**
     - **Install the requirements:**
         ```
         pip3 install -r requirements.txt
@@ -146,8 +146,8 @@ In order to run the application:
      flask run
      ```  
      
-3) This project uses the `Better Comments` Extension for showcasing comments. Install [Here](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
-4) Omit the  `db_drop_and_create_all()` & ` db_initialize_tables_json() ` methods to pump starter data in the database. 
+  3) This project uses the `Better Comments` Extension for showcasing comments. Install [Here](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
+  4) Omit the  `db_drop_and_create_all()` & ` db_initialize_tables_json() ` methods to pump starter data in the database. 
 
 ### Testing
 In order to run tests:
