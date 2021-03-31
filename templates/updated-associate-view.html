@@ -1,0 +1,149 @@
+{% extends 'updated-layout.html' %}
+{% block title %}Search for a Shoe{% endblock %}
+{% block content %}
+    
+    <nav class="nav" id="mainNav">
+        <h1 class ="nav__header-title">Reebok Shoe Locate </h1>
+    </nav>
+        <!-- <span class = "  title-display-text  "> DASHBOARD</span> -->
+    <header >
+        <!-- <div class="" > -->
+            <div class="associate-body-container" >
+                <img  src="{{ url_for('static', filename='assets/img/reebok-logo-1.png') }} " alt=""/>                 
+                <form id ="form">
+                    <div class="associate-tf-container">
+                        <input class="effect-8" id="style_code"  type="text" placeholder="Enter Style Code #">
+                        <span class="focus-border">
+                            <i></i>
+                        </span>
+                    </div>   
+                    <div id="error" class="hidden" style="text-align: center; color: red;" ></div>
+                    <button class="" type="submit" value="submit" role="button" data-aos="zoom-in" data-aos-duration="400" data-aos-once="true"  id="searchButton">Search</button>
+                    <button class="" type="button" onclick="showCount()" id='countBtn' role="button" data-aos="zoom-in" data-aos-duration="400" data-aos-once="true" value ="">Count</button>
+                    
+                    </form>
+                    
+            
+            </div> 
+            </div>
+        <!-- </div> -->
+
+    </header>
+        
+
+ 
+   <script>
+    let countBtn =document.getElementById('countBtn');
+    function showCount(){
+    countBtn.classList.add("hidden");
+    if(!countBtn.value)
+        countBtn.value=0;
+
+    var myToast = Toastify({
+                    text: 'There are:  '+ countBtn.value + '  Shoes available.',
+                    duration: 4000,
+                    backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
+                    gravity: "bottom",
+                    position: "center",
+                    });
+    myToast.showToast();
+
+    }
+    // creates event handler for submit btn of form.
+    document.getElementById("form").onsubmit = function (e) {
+            
+            e.preventDefault();
+            searchShoeAsync(document.getElementById("style_code").value,'search')
+    }
+
+    function searchShoeAsync(inputValue=null){
+            let errorDiv = document.getElementById("error"); //Error block / debugger
+            //Validation check for input errors
+            if (
+                inputValue === undefined ||
+                inputValue === null ||
+                inputValue === "" ||
+                inputValue.length === 0 ||
+            !inputValue
+            ) {
+            errorDiv.innerHTML =
+                " Enter a Value";
+            errorDiv.className = "";
+            } 
+            // Validation for # symbols
+            else if (inputValue.includes("#")){
+            errorDiv.innerHTML =
+                " Remove any # Symbols";
+            errorDiv.className = "";
+            }
+            else {
+            errorDiv.className = "hidden";
+            errorDiv.innerHTML = "";
+            fetch("associate/shoe/" + inputValue, {method: "GET"},).then(function(response){
+                return response.json();
+            }).then(function(obj){
+                if (obj.success == false && obj.error == "404"){
+                var myToast = Toastify({
+                text: 'Shoe Not in our Database',
+                duration: 4000,
+                backgroundColor: "-webkit-linear-gradient(315deg,#FFFFFF, #E12626, #E12626,	#FFFFFF)",
+                gravity: "bottom",
+                position: "center"
+                })
+                myToast.showToast();
+                }
+                else if (obj.success == false && obj.error == "422"){
+                    var myToast = Toastify({
+                    text: 'Unprocessable: Try again if it repeats contact webmaster',
+                    duration: 4000,
+                    backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+                    gravity: "bottom",
+                    position: "center"
+                    })
+                    myToast.showToast();
+                    }
+                else{
+                //console.log(obj.total_shoe_results, obj.shoe_info[0]);
+                countBtn.value=obj.total_shoe_results;
+                
+                for(let i=0; i < obj.total_shoe_results; i++){
+                    console.log(i, obj.total_shoe_results, obj.shoe_info[i]);
+                    var myToast = Toastify({
+                    text: 'Bay:  '+ obj.shoe_info[i].bay + '  Row:  '+ obj.shoe_info[i].row +'  Col:  '+ obj.shoe_info[i].col,
+                    duration: 4000,
+                    backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
+                    gravity: "bottom",
+                    position: "center",
+                    
+                    });
+                    myToast.showToast();
+                    console.log('Here:' , ' Bay:  ', obj.shoe_info[i].bay, '  Row:  ', obj.shoe_info[i].row, ' Col: ', obj.shoe_info[i].col);
+
+                }
+                }
+            }).catch (function (error) {
+                errorDiv.innerHTML = "something went wrong with the  Fetch  error- POST method- "; //fill error div content with correct message
+                errorDiv.className = ""; //show the div element - unhidden
+                console.error(error);
+                
+            });
+            }
+        } 
+
+        //----------------------------------------------------------------------------------------------------------
+        //      * Depreciated function for retrieving the input field text value without using a form tag
+        //----------------------------------------------------------------------------------------------------------
+        /*  function tfSubmit(e,str){
+    
+        var keyCode = (window.Event) ? e.which : e.keyCode;
+        var keyCode2 = (window.event) ? e.which : e.keyCode;
+        if (keyCode == 13 || keyCode2==13){
+            //alert('sds', str.value);
+      
+            searchShoeAsync(str.value);
+            str.value='';
+        }
+        } */
+   </script>
+
+{% endblock  %}

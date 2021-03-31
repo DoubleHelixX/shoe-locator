@@ -155,15 +155,15 @@ def create_app(test_config=None):
     #  *----------------------------------------------------------------------------------------#
     @app.route('/')
     def index():
-        return render_template('home.html')
+        return render_template('updated-home.html')
 
     @app.route('/associate')
     def AssociateView():
-        return render_template('associate-view.html')
+        return render_template('updated-associate-view.html')
 
     @app.route('/manager')
     def ManagerView():
-        return render_template('manager-view.html')
+        return render_template('updated-manager-view.html')
 
     @app.route('/associate/shoe/<style_code>', methods=['GET'])
     def GetShoe(style_code):

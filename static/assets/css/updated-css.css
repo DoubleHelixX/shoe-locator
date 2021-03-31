@@ -1,0 +1,464 @@
+
+
+
+
+
+
+body{
+margin:0;
+position: relative;
+
+}
+
+                /*  *====================================================
+                    *               DASHBOARD PAGE
+                    *=================================================== */
+
+/*  ?===================================================  
+    ?                     NAV
+    ?===================================================  */
+
+
+.nav{
+    position:relative;
+    /* border: 2px green solid; */
+    width: 100%;
+    height: 56px;
+    padding: 8px 16px;
+    min-width: 392px;
+
+}
+
+    .nav__div{
+        /* border: 2px red solid; */
+        display: inline-block;
+        width: 50%;
+        height: 56px;
+        margin: auto;
+
+    }
+
+    .nav__header-title{
+        /* border: 2px blue solid; */
+        display: inline-block;
+        width: 75%;
+        height: 56px;
+        margin: auto;
+        text-align: center;
+        color: rgb(5, 0, 0);
+        font-family: Open Sans,Helvetica Neue,Arial,sans-serif;
+        margin-bottom: .5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        font-size: 2.5rem;
+    }
+
+/*  ?===================================================  
+    ?                 BODY ELEMENTS
+    ?===================================================  */
+
+.dashboard-title-container{
+    position: relative;
+    display: flex;
+    margin: 20px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px blue solid; */
+
+}
+
+    .dashboard-title{
+        width: 7em;
+        -webkit-text-fill-color: white;
+        font-family: Open Sans;
+        text-shadow: 2px 2px 1px rgb(0 0 0);
+        font-size: 50px;
+        border: outset;
+        border-radius: 30%;
+        border-color: rgb(233, 216, 216);
+        margin-right: 15px;
+        display: inline-block;
+        text-align: center;
+        margin: 0px 50px 0 0;
+        position: relative;
+        
+        /*
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%); */
+
+        /* margin: transform;
+        
+        -webkit-transform: translate(-50%, 30%);
+        transform: translate(-50%, 50%) */
+    }
+
+    .dashboard-cards-container{
+        /* border: 2px blue solid; */
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .animal-card{
+        position: relative;
+        border: outset;
+        border-color: rgb(233, 216, 216);
+        border-radius: 5em;
+        margin: 2rem;
+        width: 520px;
+        height:285px;
+        min-height: 285px;
+        min-width: 350px;
+    }
+
+    .animal-card__cat{
+    background: url("/static/assets/img/cat.jpg") center / cover no-repeat; 
+
+
+    }
+
+    .animal-card__owl{
+        background: url("/static/assets/img/owly.png") center / cover no-repeat; 
+
+    
+    }
+
+    .animal-card__title {
+        /* border: 2px blue solid; */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center; 
+   }
+
+        .animal-card__title > h1{
+            display: inline-block;
+            color: black;
+            -webkit-text-fill-color: white;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: black;
+            font-size: 3rem;
+            text-transform: uppercase!important;
+            font-family: Open Sans,Helvetica Neue,Arial,sans-serif;
+            justify-self: center;
+            text-align: center;
+            /* border: 2px blue solid; */
+
+        }  
+
+    .animal-card > hr{
+        max-width: 50px;
+        border: 0;
+        border-top: 3px solid #fff7f6;
+    }
+
+    .animal-card__body-container{
+        /* border: 2px blue solid; */
+        position: relative;
+        width: 85%;
+        margin: auto;
+        /* height: 88%; */
+        display: flex;
+    }
+
+    .animal-card__body{
+        -webkit-text-fill-color: white;
+        font-family: Open Sans;
+        font-size: 20px;
+        text-shadow: 2px 2px 1px rgb(0 0 0);
+        justify-self:center;
+        text-align: center;
+
+
+    }
+
+    .animal-card__btn-container{
+        position: relative;
+        /* border: 2px blue solid; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px;
+        /* height:100%; */
+    }
+
+    .animal-card__btn{
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        font-weight: 700;
+        text-transform: uppercase;
+        border: solid;
+   
+        border-radius: 320px;
+        /* border-top-right-radius: 8px ;
+        border-bottom-left-radius: 8px ; */
+        border: solid rgba(129, 129, 129, 0.781) 5px;
+        border-right: white 3px;
+        border-bottom: white 3px;
+        border-left: white 3px;
+        /* border-top-right-radius: 8px; */
+
+        
+        font-family: Open Sans,Helvetica Neue,Arial,sans-serif;
+        color: #212529;
+        background-color: #f8f9fa;
+        padding: 1rem 2rem;
+        cursor: pointer;
+        font-size: 1rem;
+        line-height: 1.5;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        -webkit-text-fill-color: rgb(0, 90, 173);
+        text-decoration: none;
+
+
+    }
+
+    @-webkit-keyframes slide-fwd-center {
+        0% {
+            border: solid rgba(129, 129, 129, 0.781) 5px;
+            border-right: white;
+            border-bottom: white;
+            border-left: white;
+        }
+        100% {
+            border:  solid rgba(129, 129, 129, 0.781) 3px;
+            }
+    }
+    @keyframes slide-fwd-center {
+            0% {
+                border: solid rgba(129, 129, 129, 0.781) 5px;
+                border-right: white;
+                border-bottom: white;
+                border-left: white;
+            }
+            100% {
+                border:  solid rgba(129, 129, 129, 0.781) 3px;
+                }
+    }
+
+    /* .animal-card__btn-container:hover{
+        -webkit-animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	    animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    } */
+
+    .animal-card__btn:active{
+        -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+        box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+        -webkit-box-shadow: 8px 0px 0px 0px #DCD0C0, 0px 8px 0px 0px #B1938B, -8px 0px 0px 0px #4E4E56, 0px 0px 0px 8px #DA635D, 5px 5px 15px 5px rgba(0,0,0,0); 
+        box-shadow: 8px 0px 0px 0px #DCD0C0, 0px 8px 0px 0px #B1938B, -8px 0px 0px 0px #4E4E56, 0px 0px 0px 8px #DA635D, 5px 5px 15px 5px rgba(0,0,0,0);
+    }
+
+    .animal-card__btn:hover{
+        -webkit-animation: slide-fwd-center .15s  ;
+                animation: slide-fwd-center .15s ;
+                animation-fill-mode: forwards;
+    }
+
+/*  ?===================================================  
+    ?            MEDIA QUERY BODY ELEMENTS
+    ?===================================================  */
+
+@media only screen and (max-width:1067px) and (min-width:949px){
+    .animal-card__cat > .animal-card__btn-container {
+        margin: 0px 15px;
+
+
+    }
+}
+@media only screen and (max-width: 948px){
+    .nav{
+        background: #797979;
+    }
+
+    .nav__header-title{
+        color: #fff;
+        /* text-shadow: none; */
+
+    }
+
+    .dashboard-cards-container{
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 794px){
+ .animal-card{
+     width: 314px;
+     height: 421px;
+     min-height: 421px;
+     min-width: 314px;
+ }
+
+ .animal-card__owl > .animal-card__body-container > .animal-card__body{
+    margin-top: 12%;
+    margin-bottom: 5%
+ }
+
+ .animal-card__cat > .animal-card__body-container >.animal-card__body{
+    margin-top: 18%;
+    margin-bottom: 9%
+ }
+
+ .animal-card__cat{
+    margin-bottom: .5rem;
+
+ }
+
+ .animal-card__owl{
+    margin-top: .5rem;
+
+ }
+
+ .associate-body-container > img{
+    height:200px;
+    width:400px;
+    object-fit: contain;
+
+}
+}
+
+@media only screen and (max-width: 550px){
+    .nav__header-title{
+    text-align: left;
+    width: 100%;
+    }
+    /* .animal-card__cat > .animal-card__title{
+        width: 80%;
+    } */
+}
+
+                    /* *===================================================  
+                                   * ASSOCIATE PAGE
+                    *===================================================  */
+.associate-body-container{
+    /* border: 2px blue solid; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+    .associate-body-container > img{
+        height:400px;
+        width:800px;
+        object-fit: contain;
+
+    }
+    .associate-tf-container{
+        position: relative;
+    }
+
+    .associate-body-container > form > button{
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        font-weight: 700;
+        text-transform: uppercase;
+        border: solid;
+        border-radius: 120px;
+        padding: .375rem .75rem;
+        font-family: Open Sans,Helvetica Neue,Arial,sans-serif;
+        color: #212529;
+        background-color: #f8f9fa;
+        cursor: pointer;
+        font-size: 1rem;
+        line-height: 1.5;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        -webkit-text-fill-color: #212529;
+        text-decoration: none;
+        margin-top: 15px;
+
+        border-style: outset;
+        /* border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133)); */
+
+        outline:none;
+
+    }
+
+    .associate-body-container > form > button:active{
+        outline:none;
+    }
+
+    .associate-body-container > form > button:hover{
+        /* border-color:  #363636; */
+        border-style: inset;
+    }
+    
+    /*  ?===================================================  
+    ?            SEARCH TEXTFIELD EFFECTS
+    ?===================================================  */
+    .effect-8{
+        text-align: center;
+    }
+    @import url('https://fonts.googleapis.com/css?family=Damion|Muli:400,600');
+
+
+    :focus{outline: none;}
+
+    /* necessary to give position: relative to parent. */
+
+    :focus{outline: none;}
+
+    .effect-8 input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;  border: none!important; }
+
+
+
+    .effect-8 ~ .focus-border:before,
+    .effect-8 ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px; background-color: #1e90b3; transition: 0.3s; left:8px;}
+    .effect-8 ~ .focus-border:after{top: auto; bottom: 0; left: auto; right: 0;}
+    .effect-8 ~ .focus-border i:before,
+    .effect-8 ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 0; background-color: #1e90b3; left:8px; transition: 0.4s;}
+    .effect-8 ~ .focus-border i:after{left: auto; right: 0; top: auto; bottom: 0;}
+    .effect-8:focus ~ .focus-border:before,
+    .effect-8:focus ~ .focus-border:after{width: 100%; transition: 0.3s;}
+    .effect-8:focus ~ .focus-border i:before,.effect-8:focus ~ .focus-border i:after{height: 100%; transition: 0.4s;}
+
+    input, textarea {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    }
+
+    /* Change the white to any color ;) */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active  {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+
+    .hidden {
+    display: none;
+    
+    
+    }
+
+    /*  ?===================================================  
+    ?            MEDIA QUERY BODY ELEMENTS
+    ?===================================================  */
+    @media only screen and (max-width: 794px){
+       
+        .associate-body-container > img{
+           height:300px;
+           width:700px;
+           object-fit: contain;
+       
+       }
+       }
+
+
+                    /* *===================================================  
+                                   * MANAGER PAGE
+                    *===================================================  */
+
+                    

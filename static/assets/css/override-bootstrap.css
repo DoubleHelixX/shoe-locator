@@ -261,7 +261,7 @@ span.overlay-text {
 
 
 span.title-display-text {
-  width: 7em;
+  width:310px;
   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
   font-family: Open Sans;
   text-shadow: 2px 2px 1px rgb(0, 0, 0);
@@ -269,28 +269,26 @@ span.title-display-text {
   border: outset;
   border-radius: 30%;
   border-color: rgb(233, 216, 216);
-  display: flex;
-  justify-content: center;
-  margin: transform;
-  position: relative;
+  display: block;
+  /* justify-content: center; */
+  margin: 120px 250px 0px 250px;
+  /* margin: transform; */
+  /* position: relative;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, 30%);
-    transform: translate(-50%, 50%);
-
+    transform: translate(-50%, 50%); */
 }
 
-.center{  
-  
-    -webkit-transform: translate(0%, 50%);
-    transform: translate(0%, 50%);
-  justify-content: center;
+.center{
+  width: 50%!important;
+  margin: auto!important;
 }
 
 
 h1.overlay-text {
   color: black;
-  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  /* -webkit-text-fill-color: white;  Will override color (regardless of order)  */
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
@@ -799,3 +797,27 @@ td:hover .hover_img {
   cursor: pointer;
 }
 
+@media only screen and (max-width: 910px) {
+  .d-flex{
+    display: inline-block!important;
+    flex-direction: column!important;
+  }
+  .container-add-on{
+    margin: 20px 0px 20px -75px!important;
+    /* position: relative!important;
+    top: 50%;
+    left: 50%!important;
+    -webkit-transform: translate(-50%, 30%)!important;
+    transform: translate(-50%, 0%)!important; */
+}
+  }
+
+@media (min-width: 992px){
+  header.masthead {
+    padding-top: 5rem !important;
+    padding-bottom: calc(10rem - 56px)!important;
+    background-position: 50%!important;
+    background-size: cover!important;
+    height: auto !important;
+  }
+  }

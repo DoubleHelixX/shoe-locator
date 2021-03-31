@@ -1,0 +1,680 @@
+
+{% extends 'updated-layout.html' %}
+{% block title %}Manage Shoe Bays{% endblock %}
+{% block content %}
+
+  <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+      <div class="container"><div><h1>Reebok Shoe Locate</div>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="nav navbar-nav ml-auto"> 
+                <button type="button" rel="tooltip" onclick="return popUpBay()"  class="btn btn-success">
+                  <i class="material-icons">Create Bay</i>
+                </button>
+                
+              </ul>
+          </div>
+          
+          <form style="display: inline; margin: 0;" class="" method="GET" action="/">
+            <button type="submit" class="btn">
+              <div style="font-size: 2.5em; color: rgb(47, 189, 194);" ><i class="fa fa-home"></i> </div>
+            </button>
+          </form>
+          <form style="display: inline; margin: 0;"  class="" method="GET" action="/associate">
+            <button type="submit" class="btn">  <div style="font-size: 2em; color: rgb(47, 189, 194); margin-bottom: 6px;" >👟</div> </button>
+            <!-- <a class="navbar-brand" onclick = " return window.location.replace('http://localhost:5000/') " >👟</a> -->
+          </form>
+          
+      </div>
+      
+  </nav>
+
+  
+  <div class="container-dropdown-btn d-flex masthead">
+    
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <!-- POP UP CONTENT -->
+        <div class="table-header my-auto">
+          <p contentEditable="true" id ="create_bay_name" class="table-title"> Type Bay # Here </p>
+          <div class = "buttons"> 
+            <button type="button" rel="tooltip" id = 'createBtn' onclick="return createBay()" class="btn btn-success " value='create'>
+
+            <i  id = "confirmTxt" class="material-icons">Confirm?</i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+        <div class=" my-auto">
+          <table id ="create_bay_table" class="table table-norm">
+            <thead class=" text-primary">
+              <th>Section</th>
+              <th>Name</th>
+              <th>Style# </th>
+              <th>Row</th>
+              <th>Coloumn</th>
+              <th>Notes</th>
+              <th>Gender</th>
+              <th>View</th>
+            </thead>
+            <tbody>
+              {% for i in range(8) %}
+                <tr data-id="" class="create_bay_tr">
+                  <td    class = "edit bay_new" contenteditable="true"> </td>
+                  <td    class = "edit bay_new" contenteditable="true">  </td>
+                  <td    class = "text-primary edit bay_new" contenteditable="true">  </td>
+                  <td    class = "edit bay_new " contenteditable="true">  </td>
+                  <td    class = "edit bay_new" contenteditable="true"></td>
+                  <td    class = "edit bay_new" contenteditable="true">  </td>
+                  <td    class = "edit bay_new" contenteditable="true">  </td>
+                  <td    class = "edit bay_new hover_img" data-img="None" contenteditable="true"></td>
+                </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="dd-button" data-toggle="dropdown">Bay Selection
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <!-- onclick="return getBays({{responseData.bay_info[0].bay}});" -->
+        <li class = "selected"><a href="all"  >All Bays</a></li>
+        <li class="divider"></li>
+  {% if responseData.bay_info!="None" %}
+    {% for bay in responseData.bay_categories %}
+        <li class = "nonselected"><a href="{{bay}}" >Bay: {{bay}} </a> </li>
+    {% endfor %}
+      </ul>
+    </div>
+  </div>
+      {% if responseData.baySelected == 'all' %}
+        {% for bay in responseData.bay_categories %}
+          {%if (loop.index%2 != 0) and (loop.index < 3) %}
+          <header class="masthead  text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+          {%elif (loop.index%2 != 0) and (loop.index > 2) %}
+          <section class="masthead  text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+          {%endif%}
+          
+  
+          <div class= "bayA container my-auto">
+            <div class="table-header my-auto">
+              <p class="table-title">BAY: {{bay}}
+               
+              </p>
+              <div class = "buttons"> 
+                <button type="button" rel="tooltip" id = 'editBtn{{bay}}' onclick="return editBay('{{bay}}')" class="btn btn-success " value='edit'>
+                <i  id = "editTxt{{bay}}" class="material-icons">Edit</i>
+                </button>
+              <button type="button" rel="tooltip" id = 'deleteBtn{{bay}}' onclick="return deleteBay('{{bay}}')" class="btn btn-danger" value='delete'>
+                  <i id = "deleteTxt{{bay}}" class="material-icons">Delete</i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class=" my-auto">
+                <table class="table table-norm {{bay}}">
+                  <thead class=" text-primary">
+                    <th>Section</th>
+                    <th>Name</th>
+                    <th>Style# </th>
+                    <th> Row</th>
+                    <th>Coloumn</th>
+                    <th>Notes</th>
+                    <th>Gender</th>
+                    <th>View</th>
+                  </thead>
+                  <tbody>
+          {% for shoe in responseData.bay_info  %}
+            {% if shoe.bay == bay|int %}
+                    <tr data-id="{{shoe.id}}" class = "row{{bay}}">
+                      
+                      <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
+                      <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
+                      <td  rowspan="1"  class="text-primary norm bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td> 
+                      <td  rowspan="1"  class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
+                      <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
+                      <td   rowspan="1" class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
+                      <td   rowspan="1" class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
+                      <td   rowspan="1" class = "norm bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                        👀 	
+                      {%if shoe.img%}
+                        <span class="hover_img">
+                          <img src= "{{shoe.img}}" alt="image"/>
+                        </span>
+                      {%endif%}
+                      </td>
+
+                    </tr>
+            {% endif %}
+          {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          {%if (loop.index%2 ==0) and (loop.index < 3) %}
+            </header> 
+          {%elif (loop.index%2 ==0) and (loop.index > 2)%}
+            </section> 
+          {%endif%}
+        {% endfor %}
+      {%else%}
+        <header class="masthead  text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+            <div class= "bayA container my-auto">
+              <div class="table-header my-auto">
+                <p class="table-title">BAY: {{responseData.baySelected}}
+                  
+                </p>
+                <div class = "buttons"> 
+                  <button type="button" rel="tooltip" id = 'editBtn{{responseData.baySelected}}' onclick="return editBay('{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
+
+                  <i  id = "editTxt{{responseData.baySelected}}" class="material-icons">Edit</i>
+                  </button>
+                  <button type="button" rel="tooltip" id = 'deleteBtn{{responseData.baySelected}}' onclick="return deleteBay('{{responseData.baySelected}}')" class="btn btn-danger" value='delete'>
+                    <i id = "deleteTxt{{responseData.baySelected}}" class="material-icons">Delete</i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class=" my-auto">
+                  <table class="table table-norm {{responseData.baySelected}}">
+                    <thead class=" text-primary">
+                      <th>Section</th>
+                      <th>Name</th>
+                      <th>Style# </th>
+                      <th> Row</th>
+                      <th>Coloumn</th>
+                      <th>Notes</th>
+                      <th>Gender</th>
+                      <th>View</th>
+                    </thead>
+                    <tbody>
+                      {% for shoe in responseData.bay_info  %}
+                        <tr data-id="{{shoe.id}}" class = "row{{responseData.baySelected}}">
+                          
+                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.section}} </td>
+                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.name}} </td>
+                          <td    class = "text-primary norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.style}} </td>
+                          <td    class = "norm bay_{{responseData.baySelected}} " contenteditable="false"> {{ shoe.row}} </td>
+                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">{{ shoe.col}} </td>
+                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.notes}} </td>
+                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.gender}} </td>
+                          <td    class = "norm bay_{{responseData.baySelected}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                          👀 	
+                        {%if (shoe.img) and (shoe.img !="None") %}
+                          <span class="hover_img">
+                            <img src= "{{shoe.img}}" alt="image"/>
+                          </span>
+                        {%endif%}
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            </header> 
+      {%endif%}
+  {% else %}
+    <li class = "nonselected"><a href="" > </a> </li> 
+        </ul>
+      </div>
+    </div>
+    <header class="masthead  text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+      <div class= "bayA container my-auto">
+        <div class="table-header my-auto">
+        </div>
+        <div class="card-body">
+          <div class=" my-auto">
+          </div>
+        </div>
+      </div>
+      </header> 
+  {% endif %}
+
+
+
+<script>
+  activeBay="";
+  activeCounter=0;
+  function editBay(bay){
+    console.log("activeBtnCount: " + activeBay)
+    if(((document.getElementById('editBtn'+bay).value == 'edit' && activeBay=="")) ||((document.getElementById('editBtn'+bay).value == 'save' && activeBay==bay)))
+    {
+      activeBay=bay;
+      let table = document.getElementsByClassName(bay);
+      
+      let editBtn = document.getElementById('editBtn'+bay);
+      let x = 'bay_' + bay;
+      let y = 'style_bay_'+bay;
+      let z = 'img_bay_'+bay
+      let td = document.getElementsByClassName(x);
+      
+      let editTxt = document.getElementById('editTxt'+bay);
+      let tableRow = document.getElementsByClassName('row'+bay);
+    
+      if (editBtn.value == 'edit' && activeCounter==0){
+
+        //alert('in here');
+        editTxt.textContent = 'save';
+        editBtn.value = 'save'
+        console.log(tableRow.length);
+
+        for (let j=0; j < table.length; j++) {
+          table[j].className = 'table table-edit ' + bay;
+        }
+
+        for (let j=0; j < tableRow.length; j++) {
+          for (let col =0; col<8; col++){
+            
+            td[col+ (8*j)].contentEditable= true;
+            if (col == 2)
+            td[col+ (8*j)].className= 'text-primary edit ' + x;
+            else if (col==7){
+              td[col+ (8*j)].className= 'hover_img edit ' + x;
+              td[col+ (8*j)].textContent="";
+              //td[col+ (8*j)].textContent=""
+
+            }
+            else 
+            td[col+ (8*j)].className= 'edit ' + x;
+          }
+        }
+
+        activeCounter++;
+      }
+      else if (editBtn.value == 'save'  && activeCounter==1){
+        // **** Set Table UI back to default Look ****//
+          let rowData=[];
+
+          //alert(editBtn.value);
+          editBtn.value = 'edit'
+          editTxt.textContent = 'edit';
+
+          for (let j=0; j < table.length; j++) {
+            table[j].className = 'table table-norm ' + bay;
+          }
+
+          for (let j=0; j < tableRow.length; j++) {
+
+            for (let col =0; col<8; col++){
+              //console.log(td[col+ (8*j)].textContent);
+              if (col == 2){
+              rowData.push(td[col+ (8*j)].textContent);
+              td[col+ (8*j)].className= 'text-primary norm ' + x;
+              }
+              else if (col==7){
+                if(td[col+ (8*j)].getAttribute('data-img') == td[col+ (8*j)].textContent || td[col+ (8*j)].textContent=="")
+                  rowData.push(td[col+ (8*j)].getAttribute('data-img'))
+                else
+                  rowData.push(td[col+ (8*j)].textContent);
+                td[col+ (8*j)].className= 'hover_img norm ' + x;
+                td[col+ (8*j)].textContent= '👀' ;
+              }
+              else {
+              rowData.push(td[col+ (8*j)].textContent);
+              td[col+ (8*j)].className= 'norm ' + x;  
+              }
+              
+              td[col+ (8*j)].contentEditable= false;
+
+            }
+        }
+
+        //**** Format Table Data ****//
+
+          let tableData= [{'bay': bay ,'data' : []}];
+          let incrementRow =0;
+          for (let i = 0; i < tableRow.length; i++){
+            tableData[0].data.push(
+              {
+                'shoe_id': tableRow[i].getAttribute('data-id'),
+                'section': ""  ,
+                'name':  "" ,
+                'style': ""  ,
+                'row': ""  ,
+                'col': ""  ,
+                'notes':  "" ,
+                'gender':  "" ,
+                'img':  "" 
+              }
+            );
+
+            tableData[0].data[i].section= rowData[i+incrementRow];
+            tableData[0].data[i].name= rowData[i+1+incrementRow];
+            tableData[0].data[i].style= rowData[i+2+incrementRow];
+            tableData[0].data[i].row= rowData[i+3+incrementRow];
+            tableData[0].data[i].col= rowData[i+4+incrementRow];
+            tableData[0].data[i].notes= rowData[i+5+incrementRow];
+            tableData[0].data[i].gender= rowData[i+6+incrementRow];
+            tableData[0].data[i].img= rowData[i+7+incrementRow];
+            incrementRow +=7;
+
+            //**** VALIDATE URL POSSBILE FUNCTIONALITY*****////
+            // from django.core.validators import URLValidator
+            // from django.core.exceptions import ValidationError
+
+            // val = URLValidator(verify_exists=False)
+            // try:
+            //     val('http://www.google.com')
+            // except ValidationError, e:
+            //     print e
+
+          }
+
+        //**** END****//
+        
+        //**** Send new table data to backend ****//
+        
+        console.log(tableData);
+        fetch("/manager/bay", {
+            method: "PATCH",
+            body: JSON.stringify({
+              bay:tableData[0]['bay'],
+              data: tableData[0]['data']
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },}).then(function(response){
+              return response.json();
+            }).then(function(obj){
+              if (obj.success == false && obj.error == "404"){
+                var myToast = Toastify({
+                text: 'Shoe Not in our Database',
+                duration: 4000,
+                backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+                gravity: "bottom",
+                position: "center"
+                });
+                myToast.showToast();
+              }
+              else if (obj.success == false && obj.error == "422"){
+                    var myToast = Toastify({
+                    text: 'Unprocessable: Try again if it repeats contact webmaster',
+                    duration: 4000,
+                    backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+                    gravity: "bottom",
+                    position: "center"
+                    });
+                    myToast.showToast();
+                  }
+              else{
+                  window.location.reload(false); 
+                  //console.log(obj.updated_shoes);
+            }
+              }).catch (function (error) {
+                  console.error(error);
+              });
+        
+              activeBay="";
+              activeCounter--;
+      }
+  }
+    else
+      alert('FINISH WITH ACTIVE BAY FIRST!');
+}
+
+// DELETE FUNCTIONALITY
+
+  function deleteBay(bay){
+    console.log("activeBtnCount: " + activeBay)
+    if(((document.getElementById('deleteBtn'+bay).value == 'delete' && activeBay=="")) ||((document.getElementById('deleteBtn'+bay).value == 'confirm' && activeBay==bay)))
+    {
+      activeBay=bay;
+      let table = document.getElementsByClassName(bay);
+      
+      let deleteBtn = document.getElementById('deleteBtn'+bay);
+      let deleteTxt = document.getElementById('deleteTxt'+bay);
+
+      
+    
+      if (deleteBtn.value == 'delete' && activeCounter==0){
+
+        //alert('in here');
+        deleteTxt.textContent = 'Confirm?';
+        deleteBtn.value = 'confirm'
+
+        for (let j=0; j < table.length; j++) {
+          table[j].className = 'table table-delete ' + bay;
+        }
+
+        activeCounter++;
+      }
+      else if (deleteBtn.value == 'confirm' && activeCounter==1){
+
+        // **** Set Table UI back to default Look ****//
+          deleteBtn.value = 'delete'
+          deleteTxt.textContent = 'delete';
+          for (let j=0; j < table.length; j++) {
+          //console.log('BEFORE: ' , table[j].className)
+          table[j].className = 'table table-norm ' + bay;
+          //console.log('AFTER: ' , table[j].className)
+          }
+                    
+        //**** Send bay data to backend ****//
+          fetch("/manager/bay", {
+              method: "DELETE",
+              body: JSON.stringify({
+                bay:bay
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },}).then(function(response){
+                return response.json();
+              }).then(function(obj){
+                if (obj.success == false && obj.error == "404"){
+                  var myToast = Toastify({
+                  text: 'Shoe Not in our Database',
+                  duration: 4000,
+                  backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+                  gravity: "bottom",
+                  position: "center"
+                  });
+                  myToast.showToast();
+                }
+                else if (obj.success == false && obj.error == "422"){
+                      var myToast = Toastify({
+                      text: 'Unprocessable: Try again if it repeats contact webmaster',
+                      duration: 4000,
+                      backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+                      gravity: "bottom",
+                      position: "center"
+                      });
+                      myToast.showToast();
+                    }
+                else{
+                  window.location = "all";
+                  //console.log(obj.updated_shoes);
+              }
+                }).catch (function (error) {
+                    console.error(error);
+                });
+          
+                activeBay="";
+                activeCounter--;
+      }
+    }
+      else
+        alert('FINISH WITH ACTIVE BAY FIRST!');
+  }
+
+  // POPUP BAY FUNCTIONALITY //
+
+  function popUpBay(){
+  // Get the modal
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on the button, open the modal
+  modal.style.display = "block";
+  
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+
+  }
+  // CREATE BAY FUNCTIONALITY //
+
+  function createBay(){
+
+  if (!isNaN(document.getElementById('create_bay_name').textContent)){
+
+    let table = document.getElementById('create_bay_table');
+    
+    let createBtn = document.getElementById('createBtn');
+    let x = 'bay_new';
+    let td = document.getElementsByClassName(x);
+    let bayID = document.getElementById('create_bay_name');
+    let editTxt = document.getElementById('confirmTxt');
+    let tableRow = document.getElementsByClassName('create_bay_tr');
+    console.log('bay# ', bayID, 'num? ', isNaN(bayID.textContent));
+
+  
+    // **** Set Table UI back to default Look ****//
+    let rowData=[];
+
+
+  //**** Format Table Data ****//
+  
+
+    let tableData= [{'bay': "", 'data' : []}];
+    incrementRow =0;
+    tableData[0].bay = bayID.textContent;
+    
+    for (let i = 0; i < tableRow.length; i++){
+      for (let col =0; col<8; col++){
+        if (td[col+(8*i)].textContent.length>0){
+          rowData.push(td[col+(8*i)].textContent);
+        }
+        else
+          rowData.push(" ");
+
+        
+      }
+
+      tableData[0].data.push(
+        {
+          'section': rowData[i+incrementRow],
+          'name':  rowData[i+1+incrementRow],
+          'style': rowData[i+2+incrementRow]  ,
+          'row': rowData[i+3+incrementRow]  ,
+          'col': rowData[i+4+incrementRow]  ,
+          'notes': rowData[i+5+incrementRow],
+          'gender':rowData[i+6+incrementRow] ,
+          'img': rowData[i+7+incrementRow]
+        }
+      );
+      incrementRow +=7;
+    }
+    //console.log('tableData', tableData);
+
+  //**** END****//
+
+  //**** Send new table data to backend ****//
+
+  fetch("/manager/bay", {
+      method: "POST",
+      body: JSON.stringify({
+        bay: tableData[0]['bay'],
+        data: tableData[0]['data']
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },}).then(function(response){
+        return response.json();
+      }).then(function(obj){
+        if (obj.success == false && obj.error == "404"){
+          var myToast = Toastify({
+          text: 'Shoe Not in our Database',
+          duration: 4000,
+          backgroundColor: "-webkit-linear-gradient(315deg,#F0F715, #E12626, #E12626,#F0F715)",
+          gravity: "bottom",
+          position: "center"
+          });
+          myToast.showToast();
+        }
+        else if (obj.success == false && obj.error == "422"){
+              var myToast = Toastify({
+              text: 'Unprocessable: Try again if it repeats contact webmaster',
+              duration: 4000,
+              backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+              gravity: "bottom",
+              position: "center"
+              });
+              myToast.showToast();
+            }
+        else if (obj.success == false && obj.exist == true){
+              var myToast = Toastify({
+              text: 'Unsuccessful: Bay Already Exist - Change Bay Name',
+              duration: 4000,
+              backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+              gravity: "bottom",
+              position: "center"
+              });
+              myToast.showToast();
+            }
+        else{
+            //window.location.reload(false); 
+      //       console.log(obj.created_bay);
+      //       var myToast = Toastify({
+      //         text: 'successful !',
+      //         duration: 4000,
+      //         backgroundColor: "-webkit-linear-gradient(315deg,#3DBB59, #3DBB59, #3DBB59,#3DBB59)",
+      //         gravity: "bottom",
+      //         position: "center"
+      //         });
+      //         myToast.showToast();
+      window.location = obj.bay;
+
+      }
+        }).catch (function (error) {
+            console.error(error);
+        });
+    }
+  else{
+    var myToast = Toastify({
+            text: 'Bay ID must be a number only!',
+            duration: 4000,
+            backgroundColor: "-webkit-linear-gradient(315deg,#E12626, #E12626, #E12626,#E12626)",
+            gravity: "bottom",
+            position: "center"
+            });
+            myToast.showToast();
+            
+  }
+}
+
+
+
+</script>
+
+
+
+
+    {% endblock  %}
+
+  
+
