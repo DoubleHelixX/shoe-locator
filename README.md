@@ -4,7 +4,7 @@ ____
 Upon working in the retail industry for some time I have notice that searching for shoes by using your eyes to find the style code written a posted note thats placed on a bay can be inefficient and cost valuable time. 
 
 ### Why it's important
-As well all should know time is key when showcasing professional salesmanship. The faster you can service the customer with retrieving the item they potentially want to purchase then the faster you can have them confirm that potential purchase. Customers want three things when leaving your store; to be heard, to recieve solutions to their problems, and have an expereience. If you can provide all three of these needs then you build loyalty and trust which leads to returning customers who continue to seek your salesmanship. However, as stated above finding a shoe within a collection of bays can be trivial.
+As any great salesman knows, time is key when showcasing professional salesmanship. The faster you can service the customer with retrieving the item they potentially want to purchase -  the faster you can have them confirm that potential purchase. Customers want three things when leaving your store; to be heard, to recieve solutions to their problems, and to have a unique expereience. If you can provide all three of these needs then you build loyalty and trust which leads to returning customers who continue to seek your salesmanship. However, as stated above finding a shoe within a collection of bays can be trivial.
 
 ### The old solution
 Normally one way to become faster at this was to remember where certain shoes were ahead of time. However, every retail season means a change in product for the store. In our case this means the bays will get populated with new shoes. This rearragnement of shoes means that remembering where a shoe is becomes remembering where a shoe was. Remembering becomes inefficent after a couple months. This leads the sales team to constanly repeat the cycle of remembering where a shoe is all over again. Whats worse is that your old memeories of where a shoe was can someitmes confuse you.
@@ -52,14 +52,50 @@ Here is how you can get started.
 ## About the Stack
 
 Shoe Locate is a full stack application implementing these technologies: 
-- Flask
-- Jinja2
-- SQLAlchemy 
-- Auth0 API 
-- HTML
-- JavaScript
-- Heroku
+- **Python3** and **Flask** as our server language and server framework
+- **Gunicorn** as our deploment server
+- **Jinja2** for itegrating our data to the frontend seamlessly 
+- **SQLAlchemy ORM** to be our ORM library of choice
+- **PostgreSQL** as our database of choice
+- **Auth0 API** as our authorization/authentification service 
+- **HTML**, **CSS**, and **Javascript** with [Bootstrap 3](https://getbootstrap.com/docs/3.4/customize/) for our website's frontend
+- **Flask-Migrate** for creating and running schema migrations
+- **Heroku** our deployment service of choice for Deployment
 
+### Main Files: Project Structure
+
+  ```sh
+  ├── README.md
+  ├── README_BACKEND.md
+  ├── Profile *** For heroku deployment ***
+  ├── app.py *** the main driver of the app. Multiple Endpoints
+                    "python app.py" to run after installing dependences
+  ├── constants.py *** Database URLs, CSRF generation, etc
+  ├── auth.py *** auth0 config logic
+  ├── models.py ***  Includes your SQLAlchemy models ***
+  ├── manage.py *** database configuration and setup ***
+  ├── test_api.py *** python unit test for testing the endpoints ***
+  ├── setup.sh *** environment variables ***
+  ├── error.log
+  ├── requirements.txt *** The dependencies we need to install with "pip3 install -r requirements.txt"
+  ├── shoe_locate_global.postman.json *** postman testing for endpoints ***
+  ├── shoe_locate_local.postman.json *** postman testing for endpoints ***
+  ├── bays_.csv *** csv file to import Bay data ***
+  ├── static/assets
+  │   ├── bootstrap
+  │   │   │
+  │   │   ├── css
+  │   │   └── js
+  │   ├── css 
+  │   ├── img
+  │   └── js
+  └── templates
+      ├── associate-view.html
+      ├── home.html
+      ├── layout.html
+      └── manager-view.html
+      
+  ```
 ## README
 
 Please refer to the readme files
@@ -85,27 +121,33 @@ The `./shoe-locator` directory contains a [`constants.py`](./backend/constants.p
 
 ## Run & Test
 
-### Running
-In order to run the application:
-1)  **First make sure your environment is active:**
+### Running & Testing
+
+#### `Python 3.7`
+A) Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
+
+B) In order to run the application:
+  1)  **First make sure your environment is active:**
     - [How to set up a python virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
-    
-2) **Next navigate to the backend folder and run the following commands:**
-    - **Install the requirements:**
-        ```
-        pip3 install -r requirements.txt
-        ``` 
-    - **set Flask App:** `Set according to your path`
-        ```
-        set FLASK_APP=app.py
-        ```   
-    - **Run Application:**
-     ```
-     flask run
-     ```  
+
+#### `PIP Dependencies`
+ 
+  2) **Next navigate to the backend folder and run the following commands:**
+     - **Install the requirements:**
+          ```
+          pip3 install -r requirements.txt
+          ``` 
+     - **set Flask App:** `Set according to your path`
+          ```
+          set FLASK_APP=app.py
+          ```   
+     - **Run Application:**
+          ```
+          flask run
+          ```  
      
-3) This project uses the `Better Comments` Extension for showcasing comments. Install [Here](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
-4) Omit the  `db_drop_and_create_all()` & ` db_initialize_tables_json() ` methods to pump starter data in the database. 
+  3) This project uses the `Better Comments` Extension for showcasing comments. Install [Here](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
+  4) Omit the  `db_drop_and_create_all()` & ` db_initialize_tables_json() ` methods to pump starter data in the database. 
 
 ### Testing
 In order to run tests:
@@ -131,7 +173,7 @@ python test_api.py
      
 ## API Reference
 
-### Getting Started
+### Deployment
 - Base URL: This app can only be run locally and or by clicking this [URL](https://shoe-locate.herokuapp.com).
 - Locally:
     - The backend app is hosted at the default, `http://127.0.0.1:5000/`
