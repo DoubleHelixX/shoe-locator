@@ -279,7 +279,7 @@ def create_app(test_config=None):
                     'bay_info': 'None'
                 }
                 # return jsonify(responseData)
-                return render_template('manager-view.html', responseData=responseData)
+                return render_template('updated-manager-view.html', responseData=responseData)
 
             elif unprocessable:
                 abort(422)
@@ -292,7 +292,7 @@ def create_app(test_config=None):
                     'total_bay_results': len(listOfBays)
                 }
                 #return jsonify(responseData)
-                return render_template('manager-view.html', responseData=responseData)
+                return render_template('updated-manager-view.html', responseData=responseData)
 
     @app.route('/manager/bay', methods=['PATCH'])
     # @requires_auth('patch:bays')

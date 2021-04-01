@@ -19,7 +19,7 @@ position: relative;
     ?===================================================  */
 
 
-.nav{
+._nav{
     position:relative;
     /* border: 2px green solid; */
     width: 100%;
@@ -272,7 +272,7 @@ position: relative;
     }
 }
 @media only screen and (max-width: 948px){
-    .nav{
+    ._nav{
         background: #797979;
     }
 
@@ -461,4 +461,56 @@ position: relative;
                                    * MANAGER PAGE
                     *===================================================  */
 
-                    
+.manager-nav{
+    display: inline-block;
+    /* flex-direction: row; */
+    /* align-items: right; */
+    /* border: blue solid 2px; */
+
+
+}
+
+.manager-ul{
+    /* position: absolute; */
+    display: inline-flex;
+    flex-direction: row;
+    justify-self: left;
+    align-items: space-between;
+    border: green solid 2px;
+    width:auto;
+    margin: 0;
+    padding:0;
+    right: 32vw;
+    
+}
+.manager-nav > .nav__header-title{
+
+width:auto;
+
+padding-left: 450px;
+}
+
+.manager-nav__home-form{
+    display: inline-block; 
+    margin: 0;
+    /* border: blue solid 2px; */
+
+}
+
+.manager-nav__home-form > button{
+    border: none;
+    background:  none;
+}
+
+.manager-nav__create-bay-form{
+    display: inline-block; 
+    margin: 0;
+    /* border: blue solid 2px; */
+
+}
+
+.manager-nav__create-bay-form > button{
+    border: none;
+    background: none ;
+
+}

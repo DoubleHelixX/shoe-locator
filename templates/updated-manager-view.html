@@ -3,29 +3,35 @@
 {% block title %}Manage Shoe Bays{% endblock %}
 {% block content %}
 
-  <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
-      <div class="container"><div><h1>Reebok Shoe Locate</div>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="nav navbar-nav ml-auto"> 
+        <nav class="_nav manager-nav" >
+            <h1 class ="nav__header-title">Reebok Shoe Locate </h1>
+
+              <ul class="manager-ul"> 
+                
                 <button type="button" rel="tooltip" onclick="return popUpBay()"  class="btn btn-success">
-                  <i class="material-icons">Create Bay</i>
+                <i class="material-icons">Create Bay</i>
                 </button>
+
+                <form class="manager-nav__home-form" method="GET" action="/">
+                    <button type="submit" class="">
+                      <div style="font-size: 2.7em; color: rgb(47, 189, 194);" >
+                        <i class="fa fa-home"></i> 
+                     </div>
+                    </button>
+                </form>
+                
+                <form class="manager-nav__create-bay-form"  method="GET" action="/associate">
+                <button type="submit" class="">  
+                    <div style="font-size: 2em; color: rgb(47, 189, 194); " >
+                        👟
+                    </div> 
+                </button>
+                <!-- <a class="navbar-brand" onclick = " return window.location.replace('http://localhost:5000/') " >👟</a> -->
+                </form>
                 
               </ul>
-          </div>
-          
-          <form style="display: inline; margin: 0;" class="" method="GET" action="/">
-            <button type="submit" class="btn">
-              <div style="font-size: 2.5em; color: rgb(47, 189, 194);" ><i class="fa fa-home"></i> </div>
-            </button>
-          </form>
-          <form style="display: inline; margin: 0;"  class="" method="GET" action="/associate">
-            <button type="submit" class="btn">  <div style="font-size: 2em; color: rgb(47, 189, 194); margin-bottom: 6px;" >👟</div> </button>
-            <!-- <a class="navbar-brand" onclick = " return window.location.replace('http://localhost:5000/') " >👟</a> -->
-          </form>
-          
-      </div>
-      
+        
+                
   </nav>
 
   
