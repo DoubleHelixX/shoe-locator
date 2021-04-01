@@ -3,54 +3,92 @@
 {% block title %}Manage Shoe Bays{% endblock %}
 {% block content %}
 
-        <nav class="_nav manager-nav" >
-            <h1 class ="nav__header-title">Reebok Shoe Locate </h1>
+  <nav class="_nav manager-nav" >
+    <ul class="manager-ul"> 
 
-              <ul class="manager-ul"> 
-                
-                <button type="button" rel="tooltip" onclick="return popUpBay()"  class="btn btn-success">
-                <i class="material-icons">Create Bay</i>
-                </button>
-
-                <form class="manager-nav__home-form" method="GET" action="/">
-                    <button type="submit" class="">
-                      <div style="font-size: 2.7em; color: rgb(47, 189, 194);" >
-                        <i class="fa fa-home"></i> 
-                     </div>
-                    </button>
-                </form>
-                
-                <form class="manager-nav__create-bay-form"  method="GET" action="/associate">
-                <button type="submit" class="">  
-                    <div style="font-size: 2em; color: rgb(47, 189, 194); " >
-                        👟
-                    </div> 
-                </button>
-                <!-- <a class="navbar-brand" onclick = " return window.location.replace('http://localhost:5000/') " >👟</a> -->
-                </form>
-                
-              </ul>
+      <h1 class ="nav__header-title">Reebok Shoe Locate </h1>
+      
+      <div id="menuToggle">
+        <!--
+        A fake / hidden checkbox is used as click reciever,
+        so you can use the :checked selector on it.
+        -->
+        <input type="checkbox" />
         
-                
+        <!--
+        Some spans to act as a hamburger.
+        
+        They are acting like a real hamburger,
+        not that McDonalds stuff.
+        -->
+        <span></span>
+        <span></span>
+        <span></span>
+        
+        <!--
+        Too bad the menu has to be inside of the button
+        but hey, it's pure CSS magic.
+        -->
+        <ul id="menu">
+          <button type="button" rel="tooltip" onclick="return popUpBay()"  class="btn btn-success">
+          <i class="material-icons">Create Bay</i>
+          </button>
+          <form class="manager-nav__home-form" method="GET" action="/">
+            <button type="submit" class="">
+              <div style="font-size: 2.7em; color: rgb(47, 189, 194);" >
+                <i class="fa fa-home"></i> 
+              </div>
+            </button>
+        </form>
+          <a href="#"><li>Info</li></a>
+          <a href="#"><li>Contact</li></a>
+          <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
+        </ul>
+      </div>
+          
+          <button type="button" rel="tooltip" onclick="return popUpBay()"  class="btn btn-success">
+          <i class="material-icons">Create Bay</i>
+          </button>
+
+          <form class="manager-nav__home-form" method="GET" action="/">
+              <button type="submit" class="">
+                <div style="font-size: 2.7em; color: rgb(47, 189, 194);" >
+                  <i class="fa fa-home"></i> 
+                </div>
+              </button>
+          </form>
+          
+          <form class="manager-nav__create-bay-form"  method="GET" action="/associate">
+          <button type="submit" class="">  
+              <div style="font-size: 2em; color: rgb(47, 189, 194); " >
+                  👟
+              </div> 
+          </button>
+          <!-- <a class="navbar-brand" onclick = " return window.location.replace('http://localhost:5000/') " >👟</a> -->
+          </form>
+          
+        </ul>                       
   </nav>
 
   
-  <div class="container-dropdown-btn d-flex masthead">
+  <div class="manager-create-body-container">
     
     <div id="myModal" class="modal">
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
         <!-- POP UP CONTENT -->
-        <div class="table-header my-auto">
-          <p contentEditable="true" id ="create_bay_name" class="table-title"> Type Bay # Here </p>
-          <div class = "buttons"> 
+        <div class="table-header">
+          <div class = "buttons">
+            <p contentEditable="true" id ="create_bay_name" class="table-title"> Type Bay # Here </p>
+
             <button type="button" rel="tooltip" id = 'createBtn' onclick="return createBay()" class="btn btn-success " value='create'>
 
             <i  id = "confirmTxt" class="material-icons">Confirm?</i>
             </button>
           </div>
         </div>
+
         <div class="card-body">
         <div class=" my-auto">
           <table id ="create_bay_table" class="table table-norm">
@@ -59,7 +97,7 @@
               <th>Name</th>
               <th>Style# </th>
               <th>Row</th>
-              <th>Coloumn</th>
+              <th>Col</th>
               <th>Notes</th>
               <th>Gender</th>
               <th>View</th>
@@ -85,166 +123,167 @@
       </div>
     </div>
 
+    {% if responseData.baySelected == 'all' %}
 
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="dd-button" data-toggle="dropdown">Bay Selection
-      <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <!-- onclick="return getBays({{responseData.bay_info[0].bay}});" -->
-        <li class = "selected"><a href="all"  >All Bays</a></li>
-        <li class="divider"></li>
-  {% if responseData.bay_info!="None" %}
-    {% for bay in responseData.bay_categories %}
-        <li class = "nonselected"><a href="{{bay}}" >Bay: {{bay}} </a> </li>
-    {% endfor %}
-      </ul>
-    </div>
-  </div>
-      {% if responseData.baySelected == 'all' %}
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="dd-button" data-toggle="dropdown">Bay Selection
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <!-- onclick="return getBays({{responseData.bay_info[0].bay}});" -->
+          <li class = "selected"><a href="all"  >All Bays</a></li>
+          <li class="divider"></li>
+
+      {% if responseData.bay_info!="None" %}
         {% for bay in responseData.bay_categories %}
-          {%if (loop.index%2 != 0) and (loop.index < 3) %}
-          <header class="masthead  text-center text-white d-flex " style="box-shadow: 0px 0px;">  
-          {%elif (loop.index%2 != 0) and (loop.index > 2) %}
-          <section class="masthead  text-center text-white d-flex " style="box-shadow: 0px 0px;">  
+            <li class = "nonselected"><a href="{{bay}}" >Bay: {{bay}} </a> </li>
+        {% endfor %}
+          </ul>
+      </div>
+    
+          <div class= "manager-body-container">
+          {% for bay in responseData.bay_categories %}
+              <div class='table-container'> 
+                <div class="table-header">
+                  <div class = "buttons"> 
+                  <p class="table-title">BAY: {{bay}}</p>
+
+                    <button type="button" rel="tooltip" id = 'editBtn{{bay}}' onclick="return editBay('{{bay}}')" class="btn btn-success " value='edit'>
+                    <i  id = "editTxt{{bay}}" class="material-icons">Edit</i>
+                    </button>
+                    <button type="button" rel="tooltip" id = 'deleteBtn{{bay}}' onclick="return deleteBay('{{bay}}')" class="btn btn-danger" value='delete'>
+                      <i id = "deleteTxt{{bay}}" class="material-icons">Delete</i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="card-body">
+                  <div class=" my-auto">
+                    <table class="table table-norm {{bay}}">
+                      <thead class=" text-primary">
+                        <th>Section</th>
+                        <th>Name</th>
+                        <th>Style# </th>
+                        <th>Row</th>
+                        <th>Col</th>
+                        <th>Notes</th>
+                        <th>Gender</th>
+                        <th>View</th>
+                      </thead>
+                      <tbody>
+                        {% for shoe in responseData.bay_info  %}
+                          {% if shoe.bay == bay|int %}
+                            <tr data-id="{{shoe.id}}" class = "row{{bay}}">
+                          
+                              <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
+                              <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
+                              <td  rowspan="1"  class="text-primary norm bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td> 
+                              <td  rowspan="1"  class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
+                              <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
+                              <td   rowspan="1" class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
+                              <td   rowspan="1" class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
+                              <td   rowspan="1" class = "norm bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                                👀 	
+                                {%if shoe.img%}
+                                <span class="hover_img">
+                                  <img src= "{{shoe.img}}" alt="image"/>
+                                </span>
+                                {%endif%}
+                              </td>
+                            </tr>
+                          {% endif %}
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div> 
+              </div>
+          {% endfor %}
+          </div>
+          {% endif %}
+
+    {% elif responseData.baySelected|int != 0 %}
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="dd-button" data-toggle="dropdown">Bay Selection
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+
+      {% if responseData.bay_info!="None" %}
+        <!-- onclick="return getBays({{responseData.bay_info[0].bay}});" -->
+        <li class = "nonselected"><a href="all"  >All Bays</a></li>
+        <li class="divider"></li>
+        {% for bay in responseData.bay_categories %}
+          {% if bay == responseData.baySelected %}
+            <li class = "selected"><a href="{{bay}}"  >Bay: {{bay}}</a></li>
+          {%else%}
+            <li class = "nonselected"><a href="{{bay}}" >Bay: {{bay}} </a> </li>
           {%endif%}
-          
-  
-          <div class= "bayA container my-auto">
-            <div class="table-header my-auto">
-              <p class="table-title">BAY: {{bay}}
-               
-              </p>
+        {% endfor %}
+          </ul>
+      </div>
+
+      <div class= "manager-body-container">
+          <div class='table-container'> 
+            <div class="table-header">
               <div class = "buttons"> 
-                <button type="button" rel="tooltip" id = 'editBtn{{bay}}' onclick="return editBay('{{bay}}')" class="btn btn-success " value='edit'>
-                <i  id = "editTxt{{bay}}" class="material-icons">Edit</i>
+              <p class="table-title">BAY: {{responseData.baySelected}}</p>
+
+                <button type="button" rel="tooltip" id = 'editBtn{{responseData.baySelected}}' onclick="return editBay('{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
+                <i  id = "editTxt{{responseData.baySelected}}" class="material-icons">Edit</i>
                 </button>
-              <button type="button" rel="tooltip" id = 'deleteBtn{{bay}}' onclick="return deleteBay('{{bay}}')" class="btn btn-danger" value='delete'>
-                  <i id = "deleteTxt{{bay}}" class="material-icons">Delete</i>
+                <button type="button" rel="tooltip" id = 'deleteBtn{{responseData.baySelected}}' onclick="return deleteBay('{{responseData.baySelected}}')" class="btn btn-danger" value='delete'>
+                  <i id = "deleteTxt{{responseData.baySelected}}" class="material-icons">Delete</i>
                 </button>
               </div>
             </div>
+            
             <div class="card-body">
               <div class=" my-auto">
-                <table class="table table-norm {{bay}}">
+                <table class="table table-norm {{responseData.baySelected}}">
                   <thead class=" text-primary">
                     <th>Section</th>
                     <th>Name</th>
                     <th>Style# </th>
-                    <th> Row</th>
-                    <th>Coloumn</th>
+                    <th>Row</th>
+                    <th>Col</th>
                     <th>Notes</th>
                     <th>Gender</th>
                     <th>View</th>
                   </thead>
                   <tbody>
-          {% for shoe in responseData.bay_info  %}
-            {% if shoe.bay == bay|int %}
-                    <tr data-id="{{shoe.id}}" class = "row{{bay}}">
+                    {% for shoe in responseData.bay_info  %}
+                        <tr data-id="{{shoe.id}}" class = "row{{responseData.baySelected}}">
                       
-                      <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.section}} </td>
-                      <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false"> {{ shoe.name}} </td>
-                      <td  rowspan="1"  class="text-primary norm bay_{{bay}}" contenteditable="false"> {{ shoe.style}} </td> 
-                      <td  rowspan="1"  class = "norm bay_{{bay}} " contenteditable="false"> {{ shoe.row}} </td>
-                      <td  rowspan="1"  class = "norm bay_{{bay}}" contenteditable="false">{{ shoe.col}} </td>
-                      <td   rowspan="1" class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.notes}} </td>
-                      <td   rowspan="1" class = "norm bay_{{bay}}" contenteditable="false">  {{shoe.gender}} </td>
-                      <td   rowspan="1" class = "norm bay_{{bay}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
-                        👀 	
-                      {%if shoe.img%}
-                        <span class="hover_img">
-                          <img src= "{{shoe.img}}" alt="image"/>
-                        </span>
-                      {%endif%}
-                      </td>
-
-                    </tr>
-            {% endif %}
-          {% endfor %}
+                          <td  rowspan="1"  class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.section}} </td>
+                          <td  rowspan="1"  class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.name}} </td>
+                          <td  rowspan="1"  class="text-primary norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.style}} </td> 
+                          <td  rowspan="1"  class = "norm bay_{{responseData.baySelected}} " contenteditable="false"> {{ shoe.row}} </td>
+                          <td  rowspan="1"  class = "norm bay_{{responseData.baySelected}}" contenteditable="false">{{ shoe.col}} </td>
+                          <td   rowspan="1" class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.notes}} </td>
+                          <td   rowspan="1" class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.gender}} </td>
+                          <td   rowspan="1" class = "norm bay_{{responseData.baySelected}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
+                            👀 	
+                            {%if shoe.img%}
+                            <span class="hover_img">
+                              <img src= "{{shoe.img}}" alt="image"/>
+                            </span>
+                            {%endif%}
+                          </td>
+                        </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div> 
           </div>
-          {%if (loop.index%2 ==0) and (loop.index < 3) %}
-            </header> 
-          {%elif (loop.index%2 ==0) and (loop.index > 2)%}
-            </section> 
-          {%endif%}
-        {% endfor %}
-      {%else%}
-        <header class="masthead  text-center text-white d-flex " style="box-shadow: 0px 0px;">  
-            <div class= "bayA container my-auto">
-              <div class="table-header my-auto">
-                <p class="table-title">BAY: {{responseData.baySelected}}
-                  
-                </p>
-                <div class = "buttons"> 
-                  <button type="button" rel="tooltip" id = 'editBtn{{responseData.baySelected}}' onclick="return editBay('{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
+      </div>
+    {% endif %}   
+    {% endif %}
 
-                  <i  id = "editTxt{{responseData.baySelected}}" class="material-icons">Edit</i>
-                  </button>
-                  <button type="button" rel="tooltip" id = 'deleteBtn{{responseData.baySelected}}' onclick="return deleteBay('{{responseData.baySelected}}')" class="btn btn-danger" value='delete'>
-                    <i id = "deleteTxt{{responseData.baySelected}}" class="material-icons">Delete</i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class=" my-auto">
-                  <table class="table table-norm {{responseData.baySelected}}">
-                    <thead class=" text-primary">
-                      <th>Section</th>
-                      <th>Name</th>
-                      <th>Style# </th>
-                      <th> Row</th>
-                      <th>Coloumn</th>
-                      <th>Notes</th>
-                      <th>Gender</th>
-                      <th>View</th>
-                    </thead>
-                    <tbody>
-                      {% for shoe in responseData.bay_info  %}
-                        <tr data-id="{{shoe.id}}" class = "row{{responseData.baySelected}}">
-                          
-                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.section}} </td>
-                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.name}} </td>
-                          <td    class = "text-primary norm bay_{{responseData.baySelected}}" contenteditable="false"> {{ shoe.style}} </td>
-                          <td    class = "norm bay_{{responseData.baySelected}} " contenteditable="false"> {{ shoe.row}} </td>
-                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">{{ shoe.col}} </td>
-                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.notes}} </td>
-                          <td    class = "norm bay_{{responseData.baySelected}}" contenteditable="false">  {{shoe.gender}} </td>
-                          <td    class = "norm bay_{{responseData.baySelected}} hover_img" data-img="{{shoe.img}}" contenteditable="false">
-                          👀 	
-                        {%if (shoe.img) and (shoe.img !="None") %}
-                          <span class="hover_img">
-                            <img src= "{{shoe.img}}" alt="image"/>
-                          </span>
-                        {%endif%}
-                          </td>
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            </header> 
-      {%endif%}
-  {% else %}
-    <li class = "nonselected"><a href="" > </a> </li> 
-        </ul>
-      </div>
-    </div>
-    <header class="masthead  text-center text-white d-flex " style="box-shadow: 0px 0px;">  
-      <div class= "bayA container my-auto">
-        <div class="table-header my-auto">
-        </div>
-        <div class="card-body">
-          <div class=" my-auto">
-          </div>
-        </div>
-      </div>
-      </header> 
-  {% endif %}
+
+
+    
+
+
 
 
 
