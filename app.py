@@ -239,9 +239,9 @@ def create_app(test_config=None):
         bayCategories = None
         listOfBays = None
         blankPage = False
-
+        print('hereeeeeeee',bay)
         try:
-            if bay == 'all':
+            if bay == 'all' or bay == 'y':
                 listOfBays = Bay.query.order_by(
                     Bay.bay, Bay.section, Bay.name).all()
                 # print('>>>', listOfBays)

@@ -153,7 +153,7 @@
                   <div class = "buttons"> 
                   <p class="table-title">BAY: {{bay}}</p>
 
-                    <button type="button" rel="tooltip" id = 'editBtn{{bay}}' onclick="return editBay('{{bay}}')" class="btn btn-success " value='edit'>
+                    <button type="button" rel="tooltip" id = 'editBtn{{bay}}' onclick="return editBay(event,'{{bay}}')" class="btn btn-success " value='edit'>
                     <i  id = "editTxt{{bay}}" class="material-icons">Edit</i>
                     </button>
                     <button type="button" rel="tooltip" id = 'deleteBtn{{bay}}' onclick="return deleteBay('{{bay}}')" class="btn btn-danger" value='delete'>
@@ -233,7 +233,9 @@
               <div class = "buttons"> 
               <p class="table-title">BAY: {{responseData.baySelected}}</p>
 
-                <button type="button" rel="tooltip" id = 'editBtn{{responseData.baySelected}}' onclick="return editBay('{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
+                <button type="button" rel="tooltip" id = 'editBtn{{responseData.baySelected}}' 
+                  onclick="return editBay(event,'{{responseData.baySelected}}')" class="btn btn-success " value='edit'>
+
                 <i  id = "editTxt{{responseData.baySelected}}" class="material-icons">Edit</i>
                 </button>
                 <button type="button" rel="tooltip" id = 'deleteBtn{{responseData.baySelected}}' onclick="return deleteBay('{{responseData.baySelected}}')" class="btn btn-danger" value='delete'>
@@ -299,26 +301,28 @@
 
   var checkbox = document.getElementById('cb');
   // alert(checkbox)
+  var dropdown = document.querySelectorAll('.dropdown');
   checkbox.addEventListener('change', function() {
     if (this.checked) {
       // alert("Checkbox is checked..");
-      var dropdown = document.getElementsByClassName('dropdown');
       
       for (const drop of dropdown){
-        drop.style.left="54%"
-        drop.style.top='13.5%'
+        drop.classList.remove("dropdown");
+        drop.classList.add("dropdown_2");
+
       }
 
     } else {
       // alert("Checkbox is not checked..");
-      var dropdown = document.getElementsByClassName('dropdown');
       for (const drop of dropdown){
-        drop.style.left="38%"
-        drop.style.top='12%'
+        drop.classList.remove("dropdown_2");
+        drop.classList.add("dropdown");
       }
   }});
 
-  function editBay(bay){
+  function editBay(e, bay){
+    // alert(e)
+    e.preventDefault();
     console.log("activeBtnCount: " + activeBay)
     if(((document.getElementById('editBtn'+bay).value == 'edit' && activeBay=="")) ||((document.getElementById('editBtn'+bay).value == 'save' && activeBay==bay)))
     {
@@ -493,6 +497,7 @@
   }
     else
       alert('FINISH WITH ACTIVE BAY FIRST!');
+    
 }
 
 // DELETE FUNCTIONALITY
