@@ -385,6 +385,10 @@ display:block
 
     }
 
+    .associate-body-container > form > .sub{
+        margin-left: 22px;
+    }
+
     .associate-body-container > form > button:active{
         outline:none;
     }
@@ -551,18 +555,22 @@ display:block
     position: absolute;
     top: -7px;
     left: -5px;
-    
     cursor: pointer;
-    
     opacity: 0; /* hide this */
     z-index: 2; /* and place it over the hamburger */
-    
     -webkit-touch-callout: none;
   }
   
   /*
    * Just a quick hamburger
    */
+
+   #menuToggle input[type='checkbox']{
+    margin: 0 0 0 20px;
+    justify-self: center;
+    justify-content:center;
+    align-items: center;
+   }
   #menuToggle span
   {
     display: block;
@@ -630,12 +638,12 @@ display:block
     position: absolute;
     width: auto;
     /* min-width: auto; */
-    margin: 14px auto auto -640px;
-    padding: 10px;
+    margin: 14px auto auto -25px;
+    padding: 5px;
     display:flex;
     justify-content: last baseline;
     align-items:center;
-    background: #ededed;
+    background: #ffffff;
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
     /* to stop flickering of text in safari */
@@ -897,7 +905,7 @@ display:block
     /* border: solid blue 2px; */
     margin-bottom: 0;
     flex: 2;
-    padding-left:150px;
+    padding-left:120px;
 
   }
 
@@ -947,6 +955,7 @@ th {
     border-radius: 4px
 
 }
+button:focus {outline:0;}
 
 
 @media only screen and (max-width: 948px){
@@ -957,15 +966,26 @@ th {
 
 
     }
-    .manager-ul button{
+    .manager-ul > button{
         display: none;
     }
+
     .manager-ul  form {
         display: none;
     }
     #menuToggle{
         display: block;
+        padding: 0 20px;
     }
+    #menu > button{
+        display: inline-block;
+        min-width:150px;
+        margin-left: 5px;
+    }
+    #menu form{
+        display: inline-block;
+    }
+    
     
 
    }
@@ -981,11 +1001,30 @@ th {
     .table{
         font-size:10px;
     }
+    .dropdown{
+        left:38%;
+        top:12%
+    }
+
+    /* .dropdown{
+        left:54%;
+        top:13.5%
+    } */
 
     }
 @media only screen and (max-width:676px){
     .table{
         font-size:8px;
+    }
+    .modal-content .table-title{
+        padding-left: 20px;
+    }
+    .modal-content .table-header{
+        width:100%;
+    }
+    .modal-content{
+        padding: 0;
+        width: 93%;
     }
 
     }

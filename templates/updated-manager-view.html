@@ -5,15 +5,12 @@
 
   <nav class="_nav manager-nav" >
     <ul class="manager-ul"> 
-
-      <h1 class ="nav__header-title">Reebok Shoe Locate </h1>
-      
       <div id="menuToggle">
         <!--
         A fake / hidden checkbox is used as click reciever,
         so you can use the :checked selector on it.
         -->
-        <input type="checkbox" />
+        <input id='cb' type="checkbox" />
         
         <!--
         Some spans to act as a hamburger.
@@ -39,35 +36,44 @@
                 <i class="fa fa-home"></i> 
               </div>
             </button>
-        </form>
-          <a href="#"><li>Info</li></a>
-          <a href="#"><li>Contact</li></a>
-          <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
+          </form>
+          <form class="manager-nav__create-bay-form"  method="GET" action="/associate">
+            <button type="submit" class="">  
+              <div style="font-size: 2em; color: rgb(47, 189, 194); " >
+                👟
+              </div> 
+            </button>
+          <!-- <a class="navbar-brand" onclick = " return window.location.replace('http://localhost:5000/') " >👟</a> -->
+          </form>
+       
         </ul>
       </div>
           
-          <button type="button" rel="tooltip" onclick="return popUpBay()"  class="btn btn-success">
-          <i class="material-icons">Create Bay</i>
-          </button>
+      <h1 class ="nav__header-title">Reebok Shoe Locate </h1>
+      
+      
+      <button type="button" rel="tooltip" onclick="return popUpBay()"  class="btn btn-success">
+      <i class="material-icons">Create Bay</i>
+      </button>
 
-          <form class="manager-nav__home-form" method="GET" action="/">
-              <button type="submit" class="">
-                <div style="font-size: 2.7em; color: rgb(47, 189, 194);" >
-                  <i class="fa fa-home"></i> 
-                </div>
-              </button>
-          </form>
-          
-          <form class="manager-nav__create-bay-form"  method="GET" action="/associate">
-          <button type="submit" class="">  
-              <div style="font-size: 2em; color: rgb(47, 189, 194); " >
-                  👟
-              </div> 
+      <form class="manager-nav__home-form" method="GET" action="/">
+          <button type="submit" class="">
+            <div style="font-size: 2.7em; color: rgb(47, 189, 194);" >
+              <i class="fa fa-home"></i> 
+            </div>
           </button>
-          <!-- <a class="navbar-brand" onclick = " return window.location.replace('http://localhost:5000/') " >👟</a> -->
-          </form>
-          
-        </ul>                       
+      </form>
+      
+      <form class="manager-nav__create-bay-form"  method="GET" action="/associate">
+      <button type="submit" class="">  
+          <div style="font-size: 2em; color: rgb(47, 189, 194); " >
+              👟
+          </div> 
+      </button>
+      <!-- <a class="navbar-brand" onclick = " return window.location.replace('http://localhost:5000/') " >👟</a> -->
+      </form>
+      
+    </ul>                       
   </nav>
 
   
@@ -290,6 +296,28 @@
 <script>
   activeBay="";
   activeCounter=0;
+
+  var checkbox = document.getElementById('cb');
+  // alert(checkbox)
+  checkbox.addEventListener('change', function() {
+    if (this.checked) {
+      // alert("Checkbox is checked..");
+      var dropdown = document.getElementsByClassName('dropdown');
+      
+      for (const drop of dropdown){
+        drop.style.left="54%"
+        drop.style.top='13.5%'
+      }
+
+    } else {
+      // alert("Checkbox is not checked..");
+      var dropdown = document.getElementsByClassName('dropdown');
+      for (const drop of dropdown){
+        drop.style.left="38%"
+        drop.style.top='12%'
+      }
+  }});
+
   function editBay(bay){
     console.log("activeBtnCount: " + activeBay)
     if(((document.getElementById('editBtn'+bay).value == 'edit' && activeBay=="")) ||((document.getElementById('editBtn'+bay).value == 'save' && activeBay==bay)))
