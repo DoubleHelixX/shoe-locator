@@ -447,6 +447,12 @@ display:block
     
     
     }
+    .toasty{
+        position: fixed!important;
+        top:550px;
+        /* right:50%; */
+        height:50px;
+    }
 
     /*  ?===================================================  
     ?            MEDIA QUERY BODY ELEMENTS
@@ -459,6 +465,10 @@ display:block
            object-fit: contain;
        
        }
+       .toasty{
+        top:450px;
+    
+    }
        }
 
 

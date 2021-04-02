@@ -52,7 +52,7 @@
       this.options.position = options.position || ''; // toast position - left or right
       this.options.backgroundColor = options.backgroundColor; // toast background color
       this.options.avatar = options.avatar || ""; // img element src - url or a path
-      this.options.className = options.className || ""; // additional class names for the toast
+      this.options.className = options.className || "toasty"; // additional class names for the toast
       this.options.stopOnFocus = options.stopOnFocus === undefined? true: options.stopOnFocus; // stop timeout on focus
       this.options.onClick = options.onClick; // Callback after click
 
